@@ -1,6 +1,6 @@
-eCryptfs: A stacked cryptographic filesystem for Linux
+Tse: A stacked cryptographic filesystem for Linux
 
-eCryptfs is free software. Please see the file COPYING for details.
+Tse is free software. Please see the file COPYING for details.
 For documentation, please see the files in the doc/ subdirectory.  For
 building and installation instructions please see the INSTALL file.
 
@@ -16,24 +16,24 @@ Contributors:
 Former maintainers:
 	Phillip Hellewell
 	Michael Halcrow
-Web Site: http://ecryptfs.org/
+Web Site: http://tse.org/
 
 As you should do with any filesystem, make sure to maintain a backup
-copy of any data you write into eCryptfs.  In addition, you should
-reliably store your secret keys in a secure location.  eCryptfs uses
+copy of any data you write into Tse.  In addition, you should
+reliably store your secret keys in a secure location.  Tse uses
 industry-standard cryptographic ciphers, key generation, and
 passphrase protection mechanisms; without your salt/passphrase or
 private key, nobody will be able to retrieve your data.
 
-eCryptfs requires the userspace tools available at:
+Tse requires the userspace tools available at:
 
-<http://ecryptfs.org/downloads.html>
+<http://tse.org/downloads.html>
 
 Requirements include:
  - Kernel version 2.6.19 or above
   - Build crypto API support with at least one symmetric key cipher
   - Build key retention support
-  - If you have an older kernel, try the latest eCryptfs full package
+  - If you have an older kernel, try the latest Tse full package
     release to build a stand-alone kernel module
  - Userspace tools obtainable from the site listed above; requirements
    for the userspace tools are:
@@ -65,11 +65,11 @@ File systems  --->
 
 NOTES
 
-eCryptfs is still in a developmental stage. When you upgrade the
-eCryptfs kernel module, it is possible that the eCryptfs file format
+Tse is still in a developmental stage. When you upgrade the
+Tse kernel module, it is possible that the Tse file format
 has been updated. For this reason you should copy your files to an
 unencrypted location and then copy the files back into the new
-eCryptfs mount point to migrate the files.  File format version 3
+Tse mount point to migrate the files.  File format version 3
 and beyond (in kernel version 2.6.24) is expected to remain readable,
 however.
 
@@ -86,27 +86,27 @@ BUILD AND INSTALL INSTRUCTIONS
 
 INTERACTIVE MOUNTING
 
-Create a new directory into which eCryptfs will write its encrypted
+Create a new directory into which Tse will write its encrypted
 files (i.e., /root/crypt).  Then, create the mount point directory
 (i.e., /mnt/crypt).  Here is an example of how you might mount
-eCryptfs:
+Tse:
 
-mount -t ecryptfs /root/crypt /mnt/crypt
+mount -t tse /root/crypt /mnt/crypt
 
 Note that you can also perform a layover mount (essentially,
-converting an existing path into an eCryptfs mount point) to reduce
-the likelihood of contention between eCryptfs and other applications
+converting an existing path into an Tse mount point) to reduce
+the likelihood of contention between Tse and other applications
 for access to the lower files; this is generally the recommended way
-to mount eCryptfs:
+to mount Tse:
 
-mount -t ecryptfs /secret /secret
+mount -t tse /secret /secret
 
 Navigate the menus to select your preferred mount options.
 
 
 NON-INTERACTIVE MOUNTING
 
-eCryptfs supports mounting through command-line options. You can do so
+Tse supports mounting through command-line options. You can do so
 by passing groups of name=value attribute pairs as a -o option to the
 mount helper.  Each key type has a set of name=value pairs associated
 with it.  For instance, the ``passphrase'' key type can accept a
@@ -161,9 +161,9 @@ Currently supported aliases and attributes parsed by the mount helper include:
      openssl_passwd_fd=<file descriptor>
 
 The following general attributes are valid kernel mount options,
-and may also be acted upon by the mount helper, mount.ecryptfs:
+and may also be acted upon by the mount helper, mount.tse:
 
- ecryptfs_cipher=<cipher>
+ tse_cipher=<cipher>
         Currently supported ciphers include:
          aes
          blowfish
@@ -172,46 +172,46 @@ and may also be acted upon by the mount helper, mount.ecryptfs:
          cast6
          twofish
 
- ecryptfs_key_bytes=<key bytes>
-	With the exception of AES-192, eCryptfs requires that the
+ tse_key_bytes=<key bytes>
+	With the exception of AES-192, Tse requires that the
 	keysize be a multiple of the block size.
 
- ecryptfs_sig=<hex signature>
+ tse_sig=<hex signature>
 	The signature for the FEKEK to use to encrypt the FEK for newly
 	created files.  A key with description <sig> should be in the
 	user's session keyring.  The mount helper, with its key modules,
 	should make sure that the key gets placed there.
 
- ecryptfs_passthrough
-	Allows for non-eCryptfs files to be read and written from within an
-	eCryptfs mount. This option is disabled by default.
+ tse_passthrough
+	Allows for non-Tse files to be read and written from within an
+	Tse mount. This option is disabled by default.
 
- ecryptfs_xattr_metadata
+ tse_xattr_metadata
 	When set, newly created files will have their cryptographic
 	metadata stored in the extended attribute region of the file rather
 	than the header (requires kernel support).
 
- ecryptfs_encrypted_view
-	When set, this option causes eCryptfs to present applications a
+ tse_encrypted_view
+	When set, this option causes Tse to present applications a
 	view of encrypted files as if the cryptographic metadata were
 	stored in the file header, whether the metadata is actually stored
 	in the header or in the extended attributes.
 
- ecryptfs_hmac
-        When set, eCryptfs will include HMAC integrity enforcement to
+ tse_hmac
+        When set, Tse will include HMAC integrity enforcement to
         its files (requires kernel support).
 
- ecryptfs_debug=<value>
+ tse_debug=<value>
 	A value greater than 0 enables kernel debug messages, see NOTES
 	below.
 
 The following general attributes are parsed only by the mount helper,
-mount.ecryptfs:
+mount.tse:
 
  no_sig_cache
         Do not perform any key signature cache checks. By default,
-        when mounting, the eCryptfs mount helper will look for the key
-        signature in <$HOME/.ecryptfs/sig-cache.txt>. If the key
+        when mounting, the Tse mount helper will look for the key
+        signature in <$HOME/.tse/sig-cache.txt>. If the key
         signature is not found, then the user will get a warning and
         will be prompted on whether to continue and whether to add the
         new key signature to the sig-cache.txt file. This behavior can
@@ -223,11 +223,11 @@ provide sufficient protection of the file itself), you can take the
 following steps:
 
 (Previous mount; specify passphrase on command line)
-mount -t ecryptfs /mnt/dev /mnt/dir -o key=passphrase:passphrase_passwd=my_passphrase
+mount -t tse /mnt/dev /mnt/dir -o key=passphrase:passphrase_passwd=my_passphrase
 
 (Next mount; have passphrase read from a file)
 echo "passphrase_passwd=my_passphrase" > /mnt/secureusb/my_passphrase
-mount -t ecryptfs /mnt/dev /mnt/dir -o key=passphrase:passphrase_passwd_file=/mnt/secureusb/my_passphrase
+mount -t tse /mnt/dev /mnt/dir -o key=passphrase:passphrase_passwd_file=/mnt/secureusb/my_passphrase
 
 Saving your unencrypted passphrase to a file on the same disk that
 contains your encrypted files defeats the purpose of using a
@@ -238,7 +238,7 @@ choose to store it to a file at all.
 
 In general, it is probably best to just type in your passphrase via
 stdin every time you need to perform a mount.  Future versions of
-eCryptfs will allow hardware token devices, such as a TPM chip, to
+Tse will allow hardware token devices, such as a TPM chip, to
 protect your secret keys.
 
 
@@ -248,7 +248,7 @@ Try writing a new file:
 
 echo "Hello, World" > /secret/hello.txt
 
-The operation will complete.  When you unmount eCryptfs, you will
+The operation will complete.  When you unmount Tse, you will
 Notice that there is a new file in /secret that is at least 12288
 bytes in size (depending on your host page size).  This is the
 encrypted underlying file for what you just wrote.  To test reading,
@@ -264,27 +264,27 @@ cat /secret/hello.txt
 PAM MODULE
 
 You can use the PAM module to automatically use a key based on your
-login passphrase, which can then be used to perform an eCryptfs mount
+login passphrase, which can then be used to perform an Tse mount
 non-interactively.
 
-Perform an eCryptfs mount as root, using your user login:
+Perform an Tse mount as root, using your user login:
 
-root# mount -t ecryptfs /secret /secret
+root# mount -t tse /secret /secret
 
 Then, grab your raw mount parameters from 
 
-root# grep "ecryptfs" /etc/mtab
+root# grep "tse" /etc/mtab
 
 You should get something like this:
 
 ---
-/secret /secret ecryptfs rw,ecryptfs_sig=deadbeefdeadbeef,ecryptfs_key_bytes=16,ecryptfs_cipher=aes 0 0
+/secret /secret tse rw,tse_sig=deadbeefdeadbeef,tse_key_bytes=16,tse_cipher=aes 0 0
 ---
 
 Add ``user'' and ``noauto'' to the mount options:
 
 ---
-/secret /secret ecryptfs user,noauto,rw,ecryptfs_sig=deadbeefdeadbeef,ecryptfs_key_bytes=16,ecryptfs_cipher=aes 0 0
+/secret /secret tse user,noauto,rw,tse_sig=deadbeefdeadbeef,tse_key_bytes=16,tse_cipher=aes 0 0
 ---
 
 Append your edited line to your /etc/fstab file. Now it's time to test
@@ -292,14 +292,14 @@ the mount.
 
 root# umount /secret
 
-Verify that eCryptfs is not mounted. Then, log in as the regular
+Verify that Tse is not mounted. Then, log in as the regular
 user. Manually add your passphrase to the user session keyring via the
-ecryptfs-manager utility. Then, perform the mount, while telling the
+tse-manager utility. Then, perform the mount, while telling the
 mount application to not call the mount helper:
 
 user# mount -i /secret
 
-Verify that eCryptfs mounted correctly. Then, unmount:
+Verify that Tse mounted correctly. Then, unmount:
 
 user# umount /secret
 
@@ -317,34 +317,34 @@ Finally, add this to the appropriate /etc/pam* file (e.g.,
 /etc/pam.d/login) after the call to pam_unix.so:
 
 ---
-auth required pam_ecryptfs.so
+auth required pam_tse.so
 ---
 
 You will need to insert this intelligently into your PAM stack so that
-PAM actually calls pam_ecryptfs.so. Depending on your distribution,
+PAM actually calls pam_tse.so. Depending on your distribution,
 this may involve, for instance, changing the context of pam_unix.so
 from ``sufficient'' to ``required'' and moving pam_deny.so to another
 location in the stack. Be mindful of the security implications of any
 changes you make to your PAM stack.
 
 From another window, try logging in as the user. If all went well, the
-eCryptfs PAM module will insert a key derived from your login
+Tse PAM module will insert a key derived from your login
 passphrase into the user session keyring. Then, the login script will
 perform the mount, using the parameters in your /etc/fstab.
 
-The script src/utils/ecryptfs-setup-pam.sh attempts to automate
+The script src/utils/tse-setup-pam.sh attempts to automate
 setting up PAM mounts on Red Hat-based distros. Use that for
-inspiration in setting up your own eCryptfs PAM mount.
+inspiration in setting up your own Tse PAM mount.
 
 
 NOTES
 
-eCryptfs shipping in kernel version 2.6.19 does not support public
+Tse shipping in kernel version 2.6.19 does not support public
 key.  To determine what your current kernel supports, load the
-ecryptfs module and view the contents of fs/ecryptfs/version_str under
+tse module and view the contents of fs/tse/version_str under
 your sysfs mount point.
 
-Do not run eCryptfs in higher verbosity levels unless you are doing so
+Do not run Tse in higher verbosity levels unless you are doing so
 for the sole purpose of development, since secret values will be written
 out to the system log in that case.
 
@@ -352,13 +352,13 @@ out to the system log in that case.
 TROUBLESHOOTING
 
 For the most up-to-date support resources, see
-<http://ecryptfs.org/support.html>.
+<http://tse.org/support.html>.
 
 
 BUGS
 
 Please send bug reports to the Launchpad bug tracker:
- * https://bugs.launchpad.net/ecryptfs/+filebug
+ * https://bugs.launchpad.net/tse/+filebug
 
 For kernel bugs, please follow the procedure
 detailed in the kernel documentation (Documentation/oops-tracing.txt)

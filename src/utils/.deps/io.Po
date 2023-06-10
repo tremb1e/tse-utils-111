@@ -21,8 +21,7 @@ io.o: io.c /usr/include/stdc-predef.h ../../config.h /usr/include/stdio.h \
  /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /usr/include/sys/mman.h /usr/include/bits/mman.h \
- ../../src/include/ecryptfs.h \
+ /usr/include/sys/mman.h /usr/include/bits/mman.h ../../src/include/tse.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/netdb.h \
  /usr/include/netinet/in.h /usr/include/sys/socket.h \
@@ -151,7 +150,7 @@ io.o: io.c /usr/include/stdc-predef.h ../../config.h /usr/include/stdio.h \
 
 /usr/include/bits/mman.h:
 
-../../src/include/ecryptfs.h:
+../../src/include/tse.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
 

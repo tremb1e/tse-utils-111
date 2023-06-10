@@ -1,7 +1,7 @@
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
 
-bin_PROGRAMS=ecryptfsd
+bin_PROGRAMS=tsed
 
-ecryptfsd_SOURCES = main.c
-ecryptfsd_CFLAGS = $(AM_CFLAGS) $(LIBGCRYPT_CFLAGS) $(KEYUTILS_CFLAGS)
-ecryptfsd_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
+tsed_SOURCES = main.c
+tsed_CFLAGS = $(AM_CFLAGS) $(LIBGCRYPT_CFLAGS) $(KEYUTILS_CFLAGS)
+tsed_LDADD = $(top_builddir)/src/libtse/libtse.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)

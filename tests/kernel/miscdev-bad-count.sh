@@ -30,7 +30,7 @@ test_cleanup()
 }
 trap test_cleanup 0 1 2 3 15
 
-etl_load_ecryptfs || exit
+etl_load_tse || exit
 ${test_script_dir}/miscdev-bad-count/test
 
 rc=$?

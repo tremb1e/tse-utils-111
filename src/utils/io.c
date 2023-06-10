@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/mman.h>
-#include "ecryptfs.h"
+#include "tse.h"
 #include "io.h"
 
 static int disable_echo(struct termios *saved_settings)
@@ -122,7 +122,7 @@ int get_string(char *val, int len, int echo)
 	int rc = 0;
 	int c;
 
-	if (echo == ECRYPTFS_ECHO_OFF) {
+	if (echo == TSE_ECHO_OFF) {
 		rc = disable_echo(&saved_settings);
 		if (rc)
 			goto out;
@@ -134,7 +134,7 @@ int get_string(char *val, int len, int echo)
 			val[count] = '\n';
 		count++;
 	} while(c != EOF && val[count-1] != '\n' && (count < len));
-	if (echo == ECRYPTFS_ECHO_OFF) {
+	if (echo == TSE_ECHO_OFF) {
 		printf("\n");
 		rc = enable_echo(&saved_settings);
 	}
@@ -163,7 +163,7 @@ int manager_menu(void)
 	char str[8];
 	int selection;
 
-	printf("\neCryptfs key management menu\n");
+	printf("\nTse key management menu\n");
 	printf("-------------------------------\n");
 	printf("\t%d. Add passphrase key to keyring\n", MME_MOUNT_PASSPHRASE);
 	printf("\t%d. Add public key to keyring\n", MME_MOUNT_PUBKEY);
@@ -196,15 +196,15 @@ int read_passphrase_salt(char *pass, char *salt)
 	char *confirmed_pass;
 	int rc = 0;
 
-	confirmed_pass = malloc(ECRYPTFS_MAX_PASSWORD_LENGTH);
+	confirmed_pass = malloc(TSE_MAX_PASSWORD_LENGTH);
 	if (!confirmed_pass) {
 		rc = -ENOMEM;
-		ecryptfs_syslog(LOG_ERR, "Failed to allocate memory\n");
+		tse_syslog(LOG_ERR, "Failed to allocate memory\n");
 		goto ret;
 	}
-	mlock(confirmed_pass, ECRYPTFS_MAX_PASSWORD_LENGTH);
+	mlock(confirmed_pass, TSE_MAX_PASSWORD_LENGTH);
 	printf("\n\tMount-wide passphrase: ");
-	rc = get_string(pass, ECRYPTFS_MAX_PASSWORD_LENGTH, ECRYPTFS_ECHO_OFF);
+	rc = get_string(pass, TSE_MAX_PASSWORD_LENGTH, TSE_ECHO_OFF);
 	if (rc)
 		goto out;
 	if (pass[0] == '\0') {
@@ -213,10 +213,10 @@ int read_passphrase_salt(char *pass, char *salt)
 		goto out;
 	}
 	printf("\tConfirm passphrase: ");
-	rc = get_string(confirmed_pass, ECRYPTFS_MAX_PASSWORD_LENGTH,
-			ECRYPTFS_ECHO_OFF);
+	rc = get_string(confirmed_pass, TSE_MAX_PASSWORD_LENGTH,
+			TSE_ECHO_OFF);
 	if (rc) {
-		ecryptfs_syslog(LOG_ERR, "Failed to read passphrase\n");
+		tse_syslog(LOG_ERR, "Failed to read passphrase\n");
 		goto out;
 	}
 	if (strcmp(pass, confirmed_pass) != 0) {
@@ -226,19 +226,19 @@ int read_passphrase_salt(char *pass, char *salt)
 	}
 	printf("\tUsing the default salt value\n");
 out:
-	memset(confirmed_pass, 0, ECRYPTFS_MAX_PASSWORD_LENGTH);
+	memset(confirmed_pass, 0, TSE_MAX_PASSWORD_LENGTH);
 	free(confirmed_pass);
 ret:
 	return rc;
 }
 
-int ecryptfs_select_key_mod(struct ecryptfs_key_mod **key_mod,
-			    struct ecryptfs_ctx *ctx)
+int tse_select_key_mod(struct tse_key_mod **key_mod,
+			    struct tse_ctx *ctx)
 {
         int rc;
         int key_mod_type;
         int count;
-        struct ecryptfs_key_mod *curr;
+        struct tse_key_mod *curr;
         char str[8];
 	int default_key_mod = 1;
 

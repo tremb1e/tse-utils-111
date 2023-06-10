@@ -71,10 +71,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/ecryptfs-utils
-pkgincludedir = $(includedir)/ecryptfs-utils
-pkglibdir = $(libdir)/ecryptfs-utils
-pkglibexecdir = $(libexecdir)/ecryptfs-utils
+pkgdatadir = $(datadir)/tse-utils
+pkgincludedir = $(includedir)/tse-utils
+pkglibdir = $(libdir)/tse-utils
+pkglibexecdir = $(libexecdir)/tse-utils
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -90,18 +90,16 @@ POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
 target_triplet = x86_64-pc-linux-gnu
-rootsbin_PROGRAMS = mount.ecryptfs$(EXEEXT) umount.ecryptfs$(EXEEXT) \
-	mount.ecryptfs_private$(EXEEXT)
-bin_PROGRAMS = ecryptfs-manager$(EXEEXT) \
-	ecryptfs-wrap-passphrase$(EXEEXT) \
-	ecryptfs-unwrap-passphrase$(EXEEXT) \
-	ecryptfs-insert-wrapped-passphrase-into-keyring$(EXEEXT) \
-	ecryptfs-rewrap-passphrase$(EXEEXT) \
-	ecryptfs-add-passphrase$(EXEEXT) ecryptfs-stat$(EXEEXT) \
-	$(am__EXEEXT_1)
+rootsbin_PROGRAMS = mount.tse$(EXEEXT) umount.tse$(EXEEXT) \
+	mount.tse_private$(EXEEXT)
+bin_PROGRAMS = tse-manager$(EXEEXT) tse-wrap-passphrase$(EXEEXT) \
+	tse-unwrap-passphrase$(EXEEXT) \
+	tse-insert-wrapped-passphrase-into-keyring$(EXEEXT) \
+	tse-rewrap-passphrase$(EXEEXT) tse-add-passphrase$(EXEEXT) \
+	tse-stat$(EXEEXT) $(am__EXEEXT_1)
 noinst_PROGRAMS = test$(EXEEXT)
 #TESTS = test$(EXEEXT)
-#am__append_1 = ecryptfs-generate-tpm-key
+#am__append_1 = tse-generate-tpm-key
 subdir = src/utils
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_pkg_swig.m4 \
@@ -117,97 +115,78 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-#am__EXEEXT_1 = ecryptfs-generate-tpm-key$(EXEEXT)
+#am__EXEEXT_1 = tse-generate-tpm-key$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(rootsbindir)" \
 	"$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS) $(rootsbin_PROGRAMS)
-am_ecryptfs_add_passphrase_OBJECTS =  \
-	ecryptfs_add_passphrase.$(OBJEXT)
-ecryptfs_add_passphrase_OBJECTS =  \
-	$(am_ecryptfs_add_passphrase_OBJECTS)
-ecryptfs_add_passphrase_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
+am_mount_tse_OBJECTS = mount_tse-mount.tse.$(OBJEXT) \
+	mount_tse-io.$(OBJEXT) mount_tse-gen_key.$(OBJEXT) \
+	mount_tse-plaintext_decision_graph.$(OBJEXT)
+mount_tse_OBJECTS = $(am_mount_tse_OBJECTS)
+am__DEPENDENCIES_1 =
+mount_tse_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la \
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-am_ecryptfs_generate_tpm_key_OBJECTS =  \
-	ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.$(OBJEXT)
-ecryptfs_generate_tpm_key_OBJECTS =  \
-	$(am_ecryptfs_generate_tpm_key_OBJECTS)
-am__DEPENDENCIES_1 =
-ecryptfs_generate_tpm_key_DEPENDENCIES = $(am__DEPENDENCIES_1)
-ecryptfs_generate_tpm_key_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(ecryptfs_generate_tpm_key_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
-	$(LDFLAGS) -o $@
-am_ecryptfs_insert_wrapped_passphrase_into_keyring_OBJECTS =  \
-	ecryptfs_insert_wrapped_passphrase_into_keyring.$(OBJEXT)
-ecryptfs_insert_wrapped_passphrase_into_keyring_OBJECTS =  \
-	$(am_ecryptfs_insert_wrapped_passphrase_into_keyring_OBJECTS)
-ecryptfs_insert_wrapped_passphrase_into_keyring_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
-am_ecryptfs_manager_OBJECTS = ecryptfs_manager-manager.$(OBJEXT) \
-	ecryptfs_manager-io.$(OBJEXT) \
-	ecryptfs_manager-gen_key.$(OBJEXT)
-ecryptfs_manager_OBJECTS = $(am_ecryptfs_manager_OBJECTS)
-ecryptfs_manager_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la \
-	$(am__DEPENDENCIES_1)
-ecryptfs_manager_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(ecryptfs_manager_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
-am_ecryptfs_rewrap_passphrase_OBJECTS =  \
-	ecryptfs_rewrap_passphrase.$(OBJEXT)
-ecryptfs_rewrap_passphrase_OBJECTS =  \
-	$(am_ecryptfs_rewrap_passphrase_OBJECTS)
-ecryptfs_rewrap_passphrase_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
-am_ecryptfs_stat_OBJECTS = ecryptfs-stat.$(OBJEXT)
-ecryptfs_stat_OBJECTS = $(am_ecryptfs_stat_OBJECTS)
-ecryptfs_stat_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
-am_ecryptfs_unwrap_passphrase_OBJECTS =  \
-	ecryptfs_unwrap_passphrase.$(OBJEXT)
-ecryptfs_unwrap_passphrase_OBJECTS =  \
-	$(am_ecryptfs_unwrap_passphrase_OBJECTS)
-ecryptfs_unwrap_passphrase_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
-am_ecryptfs_wrap_passphrase_OBJECTS =  \
-	ecryptfs_wrap_passphrase.$(OBJEXT)
-ecryptfs_wrap_passphrase_OBJECTS =  \
-	$(am_ecryptfs_wrap_passphrase_OBJECTS)
-ecryptfs_wrap_passphrase_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
-am_mount_ecryptfs_OBJECTS = mount_ecryptfs-mount.ecryptfs.$(OBJEXT) \
-	mount_ecryptfs-io.$(OBJEXT) mount_ecryptfs-gen_key.$(OBJEXT) \
-	mount_ecryptfs-plaintext_decision_graph.$(OBJEXT)
-mount_ecryptfs_OBJECTS = $(am_mount_ecryptfs_OBJECTS)
-mount_ecryptfs_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la \
-	$(am__DEPENDENCIES_1)
-mount_ecryptfs_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(mount_ecryptfs_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o \
-	$@
-am_mount_ecryptfs_private_OBJECTS = mount.ecryptfs_private.$(OBJEXT)
-mount_ecryptfs_private_OBJECTS = $(am_mount_ecryptfs_private_OBJECTS)
-mount_ecryptfs_private_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la \
+mount_tse_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(mount_tse_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+am_mount_tse_private_OBJECTS = mount.tse_private.$(OBJEXT)
+mount_tse_private_OBJECTS = $(am_mount_tse_private_OBJECTS)
+mount_tse_private_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la \
 	$(am__DEPENDENCIES_1)
 am_test_OBJECTS = test.$(OBJEXT) io.$(OBJEXT)
 test_OBJECTS = $(am_test_OBJECTS)
-test_DEPENDENCIES = $(top_builddir)/src/libecryptfs/libecryptfs.la
-am_umount_ecryptfs_OBJECTS =  \
-	umount_ecryptfs-umount.ecryptfs.$(OBJEXT)
-umount_ecryptfs_OBJECTS = $(am_umount_ecryptfs_OBJECTS)
-umount_ecryptfs_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la
-umount_ecryptfs_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+test_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la
+am_tse_add_passphrase_OBJECTS = tse_add_passphrase.$(OBJEXT)
+tse_add_passphrase_OBJECTS = $(am_tse_add_passphrase_OBJECTS)
+tse_add_passphrase_DEPENDENCIES =  \
+	$(top_builddir)/src/libtse/libtse.la
+am_tse_generate_tpm_key_OBJECTS =  \
+	tse_generate_tpm_key-tse_generate_tpm_key.$(OBJEXT)
+tse_generate_tpm_key_OBJECTS = $(am_tse_generate_tpm_key_OBJECTS)
+tse_generate_tpm_key_DEPENDENCIES = $(am__DEPENDENCIES_1)
+tse_generate_tpm_key_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(umount_ecryptfs_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
+	$(tse_generate_tpm_key_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+am_tse_insert_wrapped_passphrase_into_keyring_OBJECTS =  \
+	tse_insert_wrapped_passphrase_into_keyring.$(OBJEXT)
+tse_insert_wrapped_passphrase_into_keyring_OBJECTS =  \
+	$(am_tse_insert_wrapped_passphrase_into_keyring_OBJECTS)
+tse_insert_wrapped_passphrase_into_keyring_DEPENDENCIES =  \
+	$(top_builddir)/src/libtse/libtse.la
+am_tse_manager_OBJECTS = tse_manager-manager.$(OBJEXT) \
+	tse_manager-io.$(OBJEXT) tse_manager-gen_key.$(OBJEXT)
+tse_manager_OBJECTS = $(am_tse_manager_OBJECTS)
+tse_manager_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la \
+	$(am__DEPENDENCIES_1)
+tse_manager_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(tse_manager_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+am_tse_rewrap_passphrase_OBJECTS = tse_rewrap_passphrase.$(OBJEXT)
+tse_rewrap_passphrase_OBJECTS = $(am_tse_rewrap_passphrase_OBJECTS)
+tse_rewrap_passphrase_DEPENDENCIES =  \
+	$(top_builddir)/src/libtse/libtse.la
+am_tse_stat_OBJECTS = tse-stat.$(OBJEXT)
+tse_stat_OBJECTS = $(am_tse_stat_OBJECTS)
+tse_stat_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la
+am_tse_unwrap_passphrase_OBJECTS = tse_unwrap_passphrase.$(OBJEXT)
+tse_unwrap_passphrase_OBJECTS = $(am_tse_unwrap_passphrase_OBJECTS)
+tse_unwrap_passphrase_DEPENDENCIES =  \
+	$(top_builddir)/src/libtse/libtse.la
+am_tse_wrap_passphrase_OBJECTS = tse_wrap_passphrase.$(OBJEXT)
+tse_wrap_passphrase_OBJECTS = $(am_tse_wrap_passphrase_OBJECTS)
+tse_wrap_passphrase_DEPENDENCIES =  \
+	$(top_builddir)/src/libtse/libtse.la
+am_umount_tse_OBJECTS = umount_tse-umount.tse.$(OBJEXT)
+umount_tse_OBJECTS = $(am_umount_tse_OBJECTS)
+umount_tse_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la
+umount_tse_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(umount_tse_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -270,24 +249,20 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(ecryptfs_add_passphrase_SOURCES) \
-	$(ecryptfs_generate_tpm_key_SOURCES) \
-	$(ecryptfs_insert_wrapped_passphrase_into_keyring_SOURCES) \
-	$(ecryptfs_manager_SOURCES) \
-	$(ecryptfs_rewrap_passphrase_SOURCES) $(ecryptfs_stat_SOURCES) \
-	$(ecryptfs_unwrap_passphrase_SOURCES) \
-	$(ecryptfs_wrap_passphrase_SOURCES) $(mount_ecryptfs_SOURCES) \
-	$(mount_ecryptfs_private_SOURCES) $(test_SOURCES) \
-	$(umount_ecryptfs_SOURCES)
-DIST_SOURCES = $(ecryptfs_add_passphrase_SOURCES) \
-	$(ecryptfs_generate_tpm_key_SOURCES) \
-	$(ecryptfs_insert_wrapped_passphrase_into_keyring_SOURCES) \
-	$(ecryptfs_manager_SOURCES) \
-	$(ecryptfs_rewrap_passphrase_SOURCES) $(ecryptfs_stat_SOURCES) \
-	$(ecryptfs_unwrap_passphrase_SOURCES) \
-	$(ecryptfs_wrap_passphrase_SOURCES) $(mount_ecryptfs_SOURCES) \
-	$(mount_ecryptfs_private_SOURCES) $(test_SOURCES) \
-	$(umount_ecryptfs_SOURCES)
+SOURCES = $(mount_tse_SOURCES) $(mount_tse_private_SOURCES) \
+	$(test_SOURCES) $(tse_add_passphrase_SOURCES) \
+	$(tse_generate_tpm_key_SOURCES) \
+	$(tse_insert_wrapped_passphrase_into_keyring_SOURCES) \
+	$(tse_manager_SOURCES) $(tse_rewrap_passphrase_SOURCES) \
+	$(tse_stat_SOURCES) $(tse_unwrap_passphrase_SOURCES) \
+	$(tse_wrap_passphrase_SOURCES) $(umount_tse_SOURCES)
+DIST_SOURCES = $(mount_tse_SOURCES) $(mount_tse_private_SOURCES) \
+	$(test_SOURCES) $(tse_add_passphrase_SOURCES) \
+	$(tse_generate_tpm_key_SOURCES) \
+	$(tse_insert_wrapped_passphrase_into_keyring_SOURCES) \
+	$(tse_manager_SOURCES) $(tse_rewrap_passphrase_SOURCES) \
+	$(tse_stat_SOURCES) $(tse_unwrap_passphrase_SOURCES) \
+	$(tse_wrap_passphrase_SOURCES) $(umount_tse_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -492,18 +467,16 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp \
 	$(top_srcdir)/test-driver
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /root/ecryptfs-utils-111/missing aclocal-1.15
+ACLOCAL = ${SHELL} /root/tse-utils-111/missing aclocal-1.15
 ALL_LINGUAS = 
 AMTAR = $${TAR-tar}
 AM_CPPFLAGS = -include $(top_builddir)/config.h -I$(top_srcdir)/src/include
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /root/ecryptfs-utils-111/missing autoconf
-AUTOHEADER = ${SHELL} /root/ecryptfs-utils-111/missing autoheader
-AUTOMAKE = ${SHELL} /root/ecryptfs-utils-111/missing automake-1.15
+AUTOCONF = ${SHELL} /root/tse-utils-111/missing autoconf
+AUTOHEADER = ${SHELL} /root/tse-utils-111/missing autoheader
+AUTOMAKE = ${SHELL} /root/tse-utils-111/missing automake-1.15
 AWK = gawk
-CATALOGS = 
-CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -512,7 +485,6 @@ CPPFLAGS =
 CRYPTO_CFLAGS = -I/usr/include/nss3 -I/usr/include/nspr4   -DENABLE_NSS
 CRYPTO_LIBS = -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4 -lpthread -ldl  
 CYGPATH_W = echo
-DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DLLTOOL = false
@@ -525,21 +497,16 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 EXEEXT = 
 FGREP = /usr/bin/grep -F
-GETTEXT_PACKAGE = ecryptfs-utils
-GMOFILES = 
+GETTEXT_PACKAGE = tse-utils
 GMSGFMT = /usr/bin/msgfmt
 GPGME_CFLAGS = 
 GPGME_LIBS = 
 GREP = /usr/bin/grep
-GTK_CFLAGS = 
-GTK_LIBS = 
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-INSTOBJEXT = .mo
-INTLLIBS = 
 INTLTOOL_EXTRACT = /usr/bin/intltool-extract
 INTLTOOL_MERGE = /usr/bin/intltool-merge
 INTLTOOL_PERL = /usr/bin/perl
@@ -554,54 +521,39 @@ LATEX =
 LATEX2HTML = 
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
-LIBECRYPTFS_LT_AGE = 0
-LIBECRYPTFS_LT_CURRENT = 1
-LIBECRYPTFS_LT_REVISION = 0
 LIBOBJS = 
 LIBS = -ldl 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIBTSE_LT_AGE = 0
+LIBTSE_LT_CURRENT = 1
+LIBTSE_LT_REVISION = 0
 LIPO = 
 LN_S = ln -s
 LOCALEDIR = ${prefix}/${datadir}/locale
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /root/ecryptfs-utils-111/missing makeinfo
+MAKEINFO = ${SHELL} /root/tse-utils-111/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
-MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
-MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
 NM = /usr/bin/nm -B
 NMEDIT = 
-NSS_CFLAGS = -I/usr/include/nss3 -I/usr/include/nspr4   -DENABLE_NSS
-NSS_LIBS = -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4 -lpthread -ldl  
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSL_CFLAGS =  
-OPENSSL_LIBS = -lcrypto  
 OTOOL = 
 OTOOL64 = 
-PACKAGE = ecryptfs-utils
+PACKAGE = tse-utils
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = ecryptfs-utils
-PACKAGE_STRING = ecryptfs-utils 111
-PACKAGE_TARNAME = ecryptfs-utils
+PACKAGE_NAME = tse-utils
+PACKAGE_STRING = tse-utils 111
+PACKAGE_TARNAME = tse-utils
 PACKAGE_URL = 
 PACKAGE_VERSION = 111
 PAM_CFLAGS = 
 PAM_LIBS = -lpam  -lpam_misc
 PATH_SEPARATOR = :
-PKCS11_HELPER_CFLAGS = 
-PKCS11_HELPER_LIBS = 
-PKG_CONFIG = /usr/bin/pkg-config
-PKG_CONFIG_LIBDIR = 
-PKG_CONFIG_PATH = 
 POD2MAN = /usr/bin/pod2man
-POFILES = 
-POSUB = po
-PO_IN_DATADIR_FALSE = 
-PO_IN_DATADIR_TRUE = 
 PS2PDF = /usr/bin/ps2pdf
 PYTHON = /usr/bin/python
 PYTHON_CPPFLAGS = -I/usr/include/python2.7 -I/usr/include/python2.7
@@ -625,13 +577,12 @@ SWIG_PYTHON_OPT = -python
 TAR = /usr/bin/tar
 TSPI_CFLAGS = 
 TSPI_LIBS = 
-USE_NLS = yes
 VERSION = 111
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /root/ecryptfs-utils-111/src/utils
-abs_srcdir = /root/ecryptfs-utils-111/src/utils
-abs_top_builddir = /root/ecryptfs-utils-111
-abs_top_srcdir = /root/ecryptfs-utils-111
+abs_builddir = /root/tse-utils-111/src/utils
+abs_srcdir = /root/tse-utils-111/src/utils
+abs_top_builddir = /root/tse-utils-111
+abs_top_srcdir = /root/tse-utils-111
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -651,7 +602,6 @@ datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
-ecryptfskeymoddir = $(libdir)/ecryptfs
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
 host_alias = 
@@ -661,7 +611,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /root/ecryptfs-utils-111/install-sh
+install_sh = ${SHELL} /root/tse-utils-111/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 libdir = ${exec_prefix}/lib
@@ -675,15 +625,14 @@ pamdir = /lib/security
 pamlibdir = 
 pdfdir = ${docdir}
 pkgconfigdir = $(libdir)/pkgconfig
-pkgpyexecdir = ${pyexecdir}/ecryptfs-utils
-pkgpythondir = ${pythondir}/ecryptfs-utils
+pkgpyexecdir = ${pyexecdir}/tse-utils
+pkgpythondir = ${pythondir}/tse-utils
 prefix = /usr
 program_transform_name = s,x,x,
 psdir = ${docdir}
 pyexecdir = ${exec_prefix}/lib64/python2.7/site-packages
 pythondir = ${prefix}/lib/python2.7/site-packages
 rootsbindir = /sbin
-runstatedir = ${localstatedir}/run
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
@@ -696,47 +645,48 @@ target_vendor = pc
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
+tsekeymoddir = $(libdir)/tse
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
-EXTRA_DIST = ecryptfsrc ecryptfs-rewrite-file ecryptfs-setup-private ecryptfs-setup-swap ecryptfs-mount-private ecryptfs-umount-private ecryptfs-migrate-home ecryptfs-recover-private ecryptfs-find ecryptfs-verify
-bin_SCRIPTS = ecryptfs-setup-private \
-	      ecryptfs-setup-swap \
-	      ecryptfs-mount-private \
-	      ecryptfs-umount-private \
-	      ecryptfs-rewrite-file \
-	      ecryptfs-recover-private \
-	      ecryptfs-migrate-home \
-	      ecryptfs-find \
-	      ecryptfs-verify
+EXTRA_DIST = tserc tse-rewrite-file tse-setup-private tse-setup-swap tse-mount-private tse-umount-private tse-migrate-home tse-recover-private tse-find tse-verify
+bin_SCRIPTS = tse-setup-private \
+	      tse-setup-swap \
+	      tse-mount-private \
+	      tse-umount-private \
+	      tse-rewrite-file \
+	      tse-recover-private \
+	      tse-migrate-home \
+	      tse-find \
+	      tse-verify
 
 bin2dir = $(bindir)
-mount_ecryptfs_SOURCES = mount.ecryptfs.c io.c io.h gen_key.c plaintext_decision_graph.c
-mount_ecryptfs_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS) $(LIBGCRYPT_CFLAGS)
-mount_ecryptfs_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
-umount_ecryptfs_SOURCES = umount.ecryptfs.c
-umount_ecryptfs_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS)
-umount_ecryptfs_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
-ecryptfs_manager_SOURCES = manager.c io.c io.h gen_key.c
-ecryptfs_manager_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS) $(LIBGCRYPT_CFLAGS)
-ecryptfs_manager_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
-ecryptfs_wrap_passphrase_SOURCES = ecryptfs_wrap_passphrase.c
-ecryptfs_wrap_passphrase_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
-ecryptfs_unwrap_passphrase_SOURCES = ecryptfs_unwrap_passphrase.c
-ecryptfs_unwrap_passphrase_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
-ecryptfs_insert_wrapped_passphrase_into_keyring_SOURCES = ecryptfs_insert_wrapped_passphrase_into_keyring.c
-ecryptfs_insert_wrapped_passphrase_into_keyring_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
-ecryptfs_rewrap_passphrase_SOURCES = ecryptfs_rewrap_passphrase.c
-ecryptfs_rewrap_passphrase_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
-ecryptfs_add_passphrase_SOURCES = ecryptfs_add_passphrase.c
-ecryptfs_add_passphrase_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
-ecryptfs_generate_tpm_key_SOURCES = ecryptfs_generate_tpm_key.c
-ecryptfs_generate_tpm_key_CFLAGS = $(AM_CFLAGS) $(TSPI_CFLAGS)
-ecryptfs_generate_tpm_key_LDADD = $(TSPI_LIBS)
-mount_ecryptfs_private_SOURCES = mount.ecryptfs_private.c
-mount_ecryptfs_private_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS)
-ecryptfs_stat_SOURCES = ecryptfs-stat.c
-ecryptfs_stat_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
+mount_tse_SOURCES = mount.tse.c io.c io.h gen_key.c plaintext_decision_graph.c
+mount_tse_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS) $(LIBGCRYPT_CFLAGS)
+mount_tse_LDADD = $(top_builddir)/src/libtse/libtse.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
+umount_tse_SOURCES = umount.tse.c
+umount_tse_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS)
+umount_tse_LDADD = $(top_builddir)/src/libtse/libtse.la
+tse_manager_SOURCES = manager.c io.c io.h gen_key.c
+tse_manager_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS) $(LIBGCRYPT_CFLAGS)
+tse_manager_LDADD = $(top_builddir)/src/libtse/libtse.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
+tse_wrap_passphrase_SOURCES = tse_wrap_passphrase.c
+tse_wrap_passphrase_LDADD = $(top_builddir)/src/libtse/libtse.la
+tse_unwrap_passphrase_SOURCES = tse_unwrap_passphrase.c
+tse_unwrap_passphrase_LDADD = $(top_builddir)/src/libtse/libtse.la
+tse_insert_wrapped_passphrase_into_keyring_SOURCES = tse_insert_wrapped_passphrase_into_keyring.c
+tse_insert_wrapped_passphrase_into_keyring_LDADD = $(top_builddir)/src/libtse/libtse.la
+tse_rewrap_passphrase_SOURCES = tse_rewrap_passphrase.c
+tse_rewrap_passphrase_LDADD = $(top_builddir)/src/libtse/libtse.la
+tse_add_passphrase_SOURCES = tse_add_passphrase.c
+tse_add_passphrase_LDADD = $(top_builddir)/src/libtse/libtse.la
+tse_generate_tpm_key_SOURCES = tse_generate_tpm_key.c
+tse_generate_tpm_key_CFLAGS = $(AM_CFLAGS) $(TSPI_CFLAGS)
+tse_generate_tpm_key_LDADD = $(TSPI_LIBS)
+mount_tse_private_SOURCES = mount.tse_private.c
+mount_tse_private_LDADD = $(top_builddir)/src/libtse/libtse.la $(KEYUTILS_LIBS)
+tse_stat_SOURCES = tse-stat.c
+tse_stat_LDADD = $(top_builddir)/src/libtse/libtse.la
 test_SOURCES = test.c io.c
-test_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
+test_LDADD = $(top_builddir)/src/libtse/libtse.la
 all: all-am
 
 .SUFFIXES:
@@ -878,53 +828,53 @@ clean-rootsbinPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-ecryptfs-add-passphrase$(EXEEXT): $(ecryptfs_add_passphrase_OBJECTS) $(ecryptfs_add_passphrase_DEPENDENCIES) $(EXTRA_ecryptfs_add_passphrase_DEPENDENCIES) 
-	@rm -f ecryptfs-add-passphrase$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ecryptfs_add_passphrase_OBJECTS) $(ecryptfs_add_passphrase_LDADD) $(LIBS)
+mount.tse$(EXEEXT): $(mount_tse_OBJECTS) $(mount_tse_DEPENDENCIES) $(EXTRA_mount_tse_DEPENDENCIES) 
+	@rm -f mount.tse$(EXEEXT)
+	$(AM_V_CCLD)$(mount_tse_LINK) $(mount_tse_OBJECTS) $(mount_tse_LDADD) $(LIBS)
 
-ecryptfs-generate-tpm-key$(EXEEXT): $(ecryptfs_generate_tpm_key_OBJECTS) $(ecryptfs_generate_tpm_key_DEPENDENCIES) $(EXTRA_ecryptfs_generate_tpm_key_DEPENDENCIES) 
-	@rm -f ecryptfs-generate-tpm-key$(EXEEXT)
-	$(AM_V_CCLD)$(ecryptfs_generate_tpm_key_LINK) $(ecryptfs_generate_tpm_key_OBJECTS) $(ecryptfs_generate_tpm_key_LDADD) $(LIBS)
-
-ecryptfs-insert-wrapped-passphrase-into-keyring$(EXEEXT): $(ecryptfs_insert_wrapped_passphrase_into_keyring_OBJECTS) $(ecryptfs_insert_wrapped_passphrase_into_keyring_DEPENDENCIES) $(EXTRA_ecryptfs_insert_wrapped_passphrase_into_keyring_DEPENDENCIES) 
-	@rm -f ecryptfs-insert-wrapped-passphrase-into-keyring$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ecryptfs_insert_wrapped_passphrase_into_keyring_OBJECTS) $(ecryptfs_insert_wrapped_passphrase_into_keyring_LDADD) $(LIBS)
-
-ecryptfs-manager$(EXEEXT): $(ecryptfs_manager_OBJECTS) $(ecryptfs_manager_DEPENDENCIES) $(EXTRA_ecryptfs_manager_DEPENDENCIES) 
-	@rm -f ecryptfs-manager$(EXEEXT)
-	$(AM_V_CCLD)$(ecryptfs_manager_LINK) $(ecryptfs_manager_OBJECTS) $(ecryptfs_manager_LDADD) $(LIBS)
-
-ecryptfs-rewrap-passphrase$(EXEEXT): $(ecryptfs_rewrap_passphrase_OBJECTS) $(ecryptfs_rewrap_passphrase_DEPENDENCIES) $(EXTRA_ecryptfs_rewrap_passphrase_DEPENDENCIES) 
-	@rm -f ecryptfs-rewrap-passphrase$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ecryptfs_rewrap_passphrase_OBJECTS) $(ecryptfs_rewrap_passphrase_LDADD) $(LIBS)
-
-ecryptfs-stat$(EXEEXT): $(ecryptfs_stat_OBJECTS) $(ecryptfs_stat_DEPENDENCIES) $(EXTRA_ecryptfs_stat_DEPENDENCIES) 
-	@rm -f ecryptfs-stat$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ecryptfs_stat_OBJECTS) $(ecryptfs_stat_LDADD) $(LIBS)
-
-ecryptfs-unwrap-passphrase$(EXEEXT): $(ecryptfs_unwrap_passphrase_OBJECTS) $(ecryptfs_unwrap_passphrase_DEPENDENCIES) $(EXTRA_ecryptfs_unwrap_passphrase_DEPENDENCIES) 
-	@rm -f ecryptfs-unwrap-passphrase$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ecryptfs_unwrap_passphrase_OBJECTS) $(ecryptfs_unwrap_passphrase_LDADD) $(LIBS)
-
-ecryptfs-wrap-passphrase$(EXEEXT): $(ecryptfs_wrap_passphrase_OBJECTS) $(ecryptfs_wrap_passphrase_DEPENDENCIES) $(EXTRA_ecryptfs_wrap_passphrase_DEPENDENCIES) 
-	@rm -f ecryptfs-wrap-passphrase$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ecryptfs_wrap_passphrase_OBJECTS) $(ecryptfs_wrap_passphrase_LDADD) $(LIBS)
-
-mount.ecryptfs$(EXEEXT): $(mount_ecryptfs_OBJECTS) $(mount_ecryptfs_DEPENDENCIES) $(EXTRA_mount_ecryptfs_DEPENDENCIES) 
-	@rm -f mount.ecryptfs$(EXEEXT)
-	$(AM_V_CCLD)$(mount_ecryptfs_LINK) $(mount_ecryptfs_OBJECTS) $(mount_ecryptfs_LDADD) $(LIBS)
-
-mount.ecryptfs_private$(EXEEXT): $(mount_ecryptfs_private_OBJECTS) $(mount_ecryptfs_private_DEPENDENCIES) $(EXTRA_mount_ecryptfs_private_DEPENDENCIES) 
-	@rm -f mount.ecryptfs_private$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(mount_ecryptfs_private_OBJECTS) $(mount_ecryptfs_private_LDADD) $(LIBS)
+mount.tse_private$(EXEEXT): $(mount_tse_private_OBJECTS) $(mount_tse_private_DEPENDENCIES) $(EXTRA_mount_tse_private_DEPENDENCIES) 
+	@rm -f mount.tse_private$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(mount_tse_private_OBJECTS) $(mount_tse_private_LDADD) $(LIBS)
 
 test$(EXEEXT): $(test_OBJECTS) $(test_DEPENDENCIES) $(EXTRA_test_DEPENDENCIES) 
 	@rm -f test$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_OBJECTS) $(test_LDADD) $(LIBS)
 
-umount.ecryptfs$(EXEEXT): $(umount_ecryptfs_OBJECTS) $(umount_ecryptfs_DEPENDENCIES) $(EXTRA_umount_ecryptfs_DEPENDENCIES) 
-	@rm -f umount.ecryptfs$(EXEEXT)
-	$(AM_V_CCLD)$(umount_ecryptfs_LINK) $(umount_ecryptfs_OBJECTS) $(umount_ecryptfs_LDADD) $(LIBS)
+tse-add-passphrase$(EXEEXT): $(tse_add_passphrase_OBJECTS) $(tse_add_passphrase_DEPENDENCIES) $(EXTRA_tse_add_passphrase_DEPENDENCIES) 
+	@rm -f tse-add-passphrase$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tse_add_passphrase_OBJECTS) $(tse_add_passphrase_LDADD) $(LIBS)
+
+tse-generate-tpm-key$(EXEEXT): $(tse_generate_tpm_key_OBJECTS) $(tse_generate_tpm_key_DEPENDENCIES) $(EXTRA_tse_generate_tpm_key_DEPENDENCIES) 
+	@rm -f tse-generate-tpm-key$(EXEEXT)
+	$(AM_V_CCLD)$(tse_generate_tpm_key_LINK) $(tse_generate_tpm_key_OBJECTS) $(tse_generate_tpm_key_LDADD) $(LIBS)
+
+tse-insert-wrapped-passphrase-into-keyring$(EXEEXT): $(tse_insert_wrapped_passphrase_into_keyring_OBJECTS) $(tse_insert_wrapped_passphrase_into_keyring_DEPENDENCIES) $(EXTRA_tse_insert_wrapped_passphrase_into_keyring_DEPENDENCIES) 
+	@rm -f tse-insert-wrapped-passphrase-into-keyring$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tse_insert_wrapped_passphrase_into_keyring_OBJECTS) $(tse_insert_wrapped_passphrase_into_keyring_LDADD) $(LIBS)
+
+tse-manager$(EXEEXT): $(tse_manager_OBJECTS) $(tse_manager_DEPENDENCIES) $(EXTRA_tse_manager_DEPENDENCIES) 
+	@rm -f tse-manager$(EXEEXT)
+	$(AM_V_CCLD)$(tse_manager_LINK) $(tse_manager_OBJECTS) $(tse_manager_LDADD) $(LIBS)
+
+tse-rewrap-passphrase$(EXEEXT): $(tse_rewrap_passphrase_OBJECTS) $(tse_rewrap_passphrase_DEPENDENCIES) $(EXTRA_tse_rewrap_passphrase_DEPENDENCIES) 
+	@rm -f tse-rewrap-passphrase$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tse_rewrap_passphrase_OBJECTS) $(tse_rewrap_passphrase_LDADD) $(LIBS)
+
+tse-stat$(EXEEXT): $(tse_stat_OBJECTS) $(tse_stat_DEPENDENCIES) $(EXTRA_tse_stat_DEPENDENCIES) 
+	@rm -f tse-stat$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tse_stat_OBJECTS) $(tse_stat_LDADD) $(LIBS)
+
+tse-unwrap-passphrase$(EXEEXT): $(tse_unwrap_passphrase_OBJECTS) $(tse_unwrap_passphrase_DEPENDENCIES) $(EXTRA_tse_unwrap_passphrase_DEPENDENCIES) 
+	@rm -f tse-unwrap-passphrase$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tse_unwrap_passphrase_OBJECTS) $(tse_unwrap_passphrase_LDADD) $(LIBS)
+
+tse-wrap-passphrase$(EXEEXT): $(tse_wrap_passphrase_OBJECTS) $(tse_wrap_passphrase_DEPENDENCIES) $(EXTRA_tse_wrap_passphrase_DEPENDENCIES) 
+	@rm -f tse-wrap-passphrase$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tse_wrap_passphrase_OBJECTS) $(tse_wrap_passphrase_LDADD) $(LIBS)
+
+umount.tse$(EXEEXT): $(umount_tse_OBJECTS) $(umount_tse_DEPENDENCIES) $(EXTRA_umount_tse_DEPENDENCIES) 
+	@rm -f umount.tse$(EXEEXT)
+	$(AM_V_CCLD)$(umount_tse_LINK) $(umount_tse_OBJECTS) $(umount_tse_LDADD) $(LIBS)
 install-binSCRIPTS: $(bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
@@ -967,24 +917,24 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/ecryptfs-stat.Po
-include ./$(DEPDIR)/ecryptfs_add_passphrase.Po
-include ./$(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Po
-include ./$(DEPDIR)/ecryptfs_insert_wrapped_passphrase_into_keyring.Po
-include ./$(DEPDIR)/ecryptfs_manager-gen_key.Po
-include ./$(DEPDIR)/ecryptfs_manager-io.Po
-include ./$(DEPDIR)/ecryptfs_manager-manager.Po
-include ./$(DEPDIR)/ecryptfs_rewrap_passphrase.Po
-include ./$(DEPDIR)/ecryptfs_unwrap_passphrase.Po
-include ./$(DEPDIR)/ecryptfs_wrap_passphrase.Po
 include ./$(DEPDIR)/io.Po
-include ./$(DEPDIR)/mount.ecryptfs_private.Po
-include ./$(DEPDIR)/mount_ecryptfs-gen_key.Po
-include ./$(DEPDIR)/mount_ecryptfs-io.Po
-include ./$(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Po
-include ./$(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Po
+include ./$(DEPDIR)/mount.tse_private.Po
+include ./$(DEPDIR)/mount_tse-gen_key.Po
+include ./$(DEPDIR)/mount_tse-io.Po
+include ./$(DEPDIR)/mount_tse-mount.tse.Po
+include ./$(DEPDIR)/mount_tse-plaintext_decision_graph.Po
 include ./$(DEPDIR)/test.Po
-include ./$(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Po
+include ./$(DEPDIR)/tse-stat.Po
+include ./$(DEPDIR)/tse_add_passphrase.Po
+include ./$(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Po
+include ./$(DEPDIR)/tse_insert_wrapped_passphrase_into_keyring.Po
+include ./$(DEPDIR)/tse_manager-gen_key.Po
+include ./$(DEPDIR)/tse_manager-io.Po
+include ./$(DEPDIR)/tse_manager-manager.Po
+include ./$(DEPDIR)/tse_rewrap_passphrase.Po
+include ./$(DEPDIR)/tse_unwrap_passphrase.Po
+include ./$(DEPDIR)/tse_wrap_passphrase.Po
+include ./$(DEPDIR)/umount_tse-umount.tse.Po
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -1007,131 +957,131 @@ include ./$(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Po
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(LTCOMPILE) -c -o $@ $<
 
-ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.o: ecryptfs_generate_tpm_key.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_generate_tpm_key_CFLAGS) $(CFLAGS) -MT ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.o -MD -MP -MF $(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Tpo -c -o ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.o `test -f 'ecryptfs_generate_tpm_key.c' || echo '$(srcdir)/'`ecryptfs_generate_tpm_key.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Tpo $(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Po
-#	$(AM_V_CC)source='ecryptfs_generate_tpm_key.c' object='ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.o' libtool=no \
+mount_tse-mount.tse.o: mount.tse.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-mount.tse.o -MD -MP -MF $(DEPDIR)/mount_tse-mount.tse.Tpo -c -o mount_tse-mount.tse.o `test -f 'mount.tse.c' || echo '$(srcdir)/'`mount.tse.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-mount.tse.Tpo $(DEPDIR)/mount_tse-mount.tse.Po
+#	$(AM_V_CC)source='mount.tse.c' object='mount_tse-mount.tse.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_generate_tpm_key_CFLAGS) $(CFLAGS) -c -o ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.o `test -f 'ecryptfs_generate_tpm_key.c' || echo '$(srcdir)/'`ecryptfs_generate_tpm_key.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-mount.tse.o `test -f 'mount.tse.c' || echo '$(srcdir)/'`mount.tse.c
 
-ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.obj: ecryptfs_generate_tpm_key.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_generate_tpm_key_CFLAGS) $(CFLAGS) -MT ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.obj -MD -MP -MF $(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Tpo -c -o ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.obj `if test -f 'ecryptfs_generate_tpm_key.c'; then $(CYGPATH_W) 'ecryptfs_generate_tpm_key.c'; else $(CYGPATH_W) '$(srcdir)/ecryptfs_generate_tpm_key.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Tpo $(DEPDIR)/ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.Po
-#	$(AM_V_CC)source='ecryptfs_generate_tpm_key.c' object='ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.obj' libtool=no \
+mount_tse-mount.tse.obj: mount.tse.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-mount.tse.obj -MD -MP -MF $(DEPDIR)/mount_tse-mount.tse.Tpo -c -o mount_tse-mount.tse.obj `if test -f 'mount.tse.c'; then $(CYGPATH_W) 'mount.tse.c'; else $(CYGPATH_W) '$(srcdir)/mount.tse.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-mount.tse.Tpo $(DEPDIR)/mount_tse-mount.tse.Po
+#	$(AM_V_CC)source='mount.tse.c' object='mount_tse-mount.tse.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_generate_tpm_key_CFLAGS) $(CFLAGS) -c -o ecryptfs_generate_tpm_key-ecryptfs_generate_tpm_key.obj `if test -f 'ecryptfs_generate_tpm_key.c'; then $(CYGPATH_W) 'ecryptfs_generate_tpm_key.c'; else $(CYGPATH_W) '$(srcdir)/ecryptfs_generate_tpm_key.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-mount.tse.obj `if test -f 'mount.tse.c'; then $(CYGPATH_W) 'mount.tse.c'; else $(CYGPATH_W) '$(srcdir)/mount.tse.c'; fi`
 
-ecryptfs_manager-manager.o: manager.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -MT ecryptfs_manager-manager.o -MD -MP -MF $(DEPDIR)/ecryptfs_manager-manager.Tpo -c -o ecryptfs_manager-manager.o `test -f 'manager.c' || echo '$(srcdir)/'`manager.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_manager-manager.Tpo $(DEPDIR)/ecryptfs_manager-manager.Po
-#	$(AM_V_CC)source='manager.c' object='ecryptfs_manager-manager.o' libtool=no \
+mount_tse-io.o: io.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-io.o -MD -MP -MF $(DEPDIR)/mount_tse-io.Tpo -c -o mount_tse-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-io.Tpo $(DEPDIR)/mount_tse-io.Po
+#	$(AM_V_CC)source='io.c' object='mount_tse-io.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -c -o ecryptfs_manager-manager.o `test -f 'manager.c' || echo '$(srcdir)/'`manager.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
 
-ecryptfs_manager-manager.obj: manager.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -MT ecryptfs_manager-manager.obj -MD -MP -MF $(DEPDIR)/ecryptfs_manager-manager.Tpo -c -o ecryptfs_manager-manager.obj `if test -f 'manager.c'; then $(CYGPATH_W) 'manager.c'; else $(CYGPATH_W) '$(srcdir)/manager.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_manager-manager.Tpo $(DEPDIR)/ecryptfs_manager-manager.Po
-#	$(AM_V_CC)source='manager.c' object='ecryptfs_manager-manager.obj' libtool=no \
+mount_tse-io.obj: io.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-io.obj -MD -MP -MF $(DEPDIR)/mount_tse-io.Tpo -c -o mount_tse-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-io.Tpo $(DEPDIR)/mount_tse-io.Po
+#	$(AM_V_CC)source='io.c' object='mount_tse-io.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -c -o ecryptfs_manager-manager.obj `if test -f 'manager.c'; then $(CYGPATH_W) 'manager.c'; else $(CYGPATH_W) '$(srcdir)/manager.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
 
-ecryptfs_manager-io.o: io.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -MT ecryptfs_manager-io.o -MD -MP -MF $(DEPDIR)/ecryptfs_manager-io.Tpo -c -o ecryptfs_manager-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_manager-io.Tpo $(DEPDIR)/ecryptfs_manager-io.Po
-#	$(AM_V_CC)source='io.c' object='ecryptfs_manager-io.o' libtool=no \
+mount_tse-gen_key.o: gen_key.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-gen_key.o -MD -MP -MF $(DEPDIR)/mount_tse-gen_key.Tpo -c -o mount_tse-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-gen_key.Tpo $(DEPDIR)/mount_tse-gen_key.Po
+#	$(AM_V_CC)source='gen_key.c' object='mount_tse-gen_key.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -c -o ecryptfs_manager-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
 
-ecryptfs_manager-io.obj: io.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -MT ecryptfs_manager-io.obj -MD -MP -MF $(DEPDIR)/ecryptfs_manager-io.Tpo -c -o ecryptfs_manager-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_manager-io.Tpo $(DEPDIR)/ecryptfs_manager-io.Po
-#	$(AM_V_CC)source='io.c' object='ecryptfs_manager-io.obj' libtool=no \
+mount_tse-gen_key.obj: gen_key.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-gen_key.obj -MD -MP -MF $(DEPDIR)/mount_tse-gen_key.Tpo -c -o mount_tse-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-gen_key.Tpo $(DEPDIR)/mount_tse-gen_key.Po
+#	$(AM_V_CC)source='gen_key.c' object='mount_tse-gen_key.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -c -o ecryptfs_manager-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
 
-ecryptfs_manager-gen_key.o: gen_key.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -MT ecryptfs_manager-gen_key.o -MD -MP -MF $(DEPDIR)/ecryptfs_manager-gen_key.Tpo -c -o ecryptfs_manager-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_manager-gen_key.Tpo $(DEPDIR)/ecryptfs_manager-gen_key.Po
-#	$(AM_V_CC)source='gen_key.c' object='ecryptfs_manager-gen_key.o' libtool=no \
+mount_tse-plaintext_decision_graph.o: plaintext_decision_graph.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-plaintext_decision_graph.o -MD -MP -MF $(DEPDIR)/mount_tse-plaintext_decision_graph.Tpo -c -o mount_tse-plaintext_decision_graph.o `test -f 'plaintext_decision_graph.c' || echo '$(srcdir)/'`plaintext_decision_graph.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-plaintext_decision_graph.Tpo $(DEPDIR)/mount_tse-plaintext_decision_graph.Po
+#	$(AM_V_CC)source='plaintext_decision_graph.c' object='mount_tse-plaintext_decision_graph.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -c -o ecryptfs_manager-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-plaintext_decision_graph.o `test -f 'plaintext_decision_graph.c' || echo '$(srcdir)/'`plaintext_decision_graph.c
 
-ecryptfs_manager-gen_key.obj: gen_key.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -MT ecryptfs_manager-gen_key.obj -MD -MP -MF $(DEPDIR)/ecryptfs_manager-gen_key.Tpo -c -o ecryptfs_manager-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfs_manager-gen_key.Tpo $(DEPDIR)/ecryptfs_manager-gen_key.Po
-#	$(AM_V_CC)source='gen_key.c' object='ecryptfs_manager-gen_key.obj' libtool=no \
+mount_tse-plaintext_decision_graph.obj: plaintext_decision_graph.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -MT mount_tse-plaintext_decision_graph.obj -MD -MP -MF $(DEPDIR)/mount_tse-plaintext_decision_graph.Tpo -c -o mount_tse-plaintext_decision_graph.obj `if test -f 'plaintext_decision_graph.c'; then $(CYGPATH_W) 'plaintext_decision_graph.c'; else $(CYGPATH_W) '$(srcdir)/plaintext_decision_graph.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_tse-plaintext_decision_graph.Tpo $(DEPDIR)/mount_tse-plaintext_decision_graph.Po
+#	$(AM_V_CC)source='plaintext_decision_graph.c' object='mount_tse-plaintext_decision_graph.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfs_manager_CFLAGS) $(CFLAGS) -c -o ecryptfs_manager-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_tse_CFLAGS) $(CFLAGS) -c -o mount_tse-plaintext_decision_graph.obj `if test -f 'plaintext_decision_graph.c'; then $(CYGPATH_W) 'plaintext_decision_graph.c'; else $(CYGPATH_W) '$(srcdir)/plaintext_decision_graph.c'; fi`
 
-mount_ecryptfs-mount.ecryptfs.o: mount.ecryptfs.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-mount.ecryptfs.o -MD -MP -MF $(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Tpo -c -o mount_ecryptfs-mount.ecryptfs.o `test -f 'mount.ecryptfs.c' || echo '$(srcdir)/'`mount.ecryptfs.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Tpo $(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Po
-#	$(AM_V_CC)source='mount.ecryptfs.c' object='mount_ecryptfs-mount.ecryptfs.o' libtool=no \
+tse_generate_tpm_key-tse_generate_tpm_key.o: tse_generate_tpm_key.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_generate_tpm_key_CFLAGS) $(CFLAGS) -MT tse_generate_tpm_key-tse_generate_tpm_key.o -MD -MP -MF $(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Tpo -c -o tse_generate_tpm_key-tse_generate_tpm_key.o `test -f 'tse_generate_tpm_key.c' || echo '$(srcdir)/'`tse_generate_tpm_key.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Tpo $(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Po
+#	$(AM_V_CC)source='tse_generate_tpm_key.c' object='tse_generate_tpm_key-tse_generate_tpm_key.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-mount.ecryptfs.o `test -f 'mount.ecryptfs.c' || echo '$(srcdir)/'`mount.ecryptfs.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_generate_tpm_key_CFLAGS) $(CFLAGS) -c -o tse_generate_tpm_key-tse_generate_tpm_key.o `test -f 'tse_generate_tpm_key.c' || echo '$(srcdir)/'`tse_generate_tpm_key.c
 
-mount_ecryptfs-mount.ecryptfs.obj: mount.ecryptfs.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-mount.ecryptfs.obj -MD -MP -MF $(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Tpo -c -o mount_ecryptfs-mount.ecryptfs.obj `if test -f 'mount.ecryptfs.c'; then $(CYGPATH_W) 'mount.ecryptfs.c'; else $(CYGPATH_W) '$(srcdir)/mount.ecryptfs.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Tpo $(DEPDIR)/mount_ecryptfs-mount.ecryptfs.Po
-#	$(AM_V_CC)source='mount.ecryptfs.c' object='mount_ecryptfs-mount.ecryptfs.obj' libtool=no \
+tse_generate_tpm_key-tse_generate_tpm_key.obj: tse_generate_tpm_key.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_generate_tpm_key_CFLAGS) $(CFLAGS) -MT tse_generate_tpm_key-tse_generate_tpm_key.obj -MD -MP -MF $(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Tpo -c -o tse_generate_tpm_key-tse_generate_tpm_key.obj `if test -f 'tse_generate_tpm_key.c'; then $(CYGPATH_W) 'tse_generate_tpm_key.c'; else $(CYGPATH_W) '$(srcdir)/tse_generate_tpm_key.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Tpo $(DEPDIR)/tse_generate_tpm_key-tse_generate_tpm_key.Po
+#	$(AM_V_CC)source='tse_generate_tpm_key.c' object='tse_generate_tpm_key-tse_generate_tpm_key.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-mount.ecryptfs.obj `if test -f 'mount.ecryptfs.c'; then $(CYGPATH_W) 'mount.ecryptfs.c'; else $(CYGPATH_W) '$(srcdir)/mount.ecryptfs.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_generate_tpm_key_CFLAGS) $(CFLAGS) -c -o tse_generate_tpm_key-tse_generate_tpm_key.obj `if test -f 'tse_generate_tpm_key.c'; then $(CYGPATH_W) 'tse_generate_tpm_key.c'; else $(CYGPATH_W) '$(srcdir)/tse_generate_tpm_key.c'; fi`
 
-mount_ecryptfs-io.o: io.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-io.o -MD -MP -MF $(DEPDIR)/mount_ecryptfs-io.Tpo -c -o mount_ecryptfs-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-io.Tpo $(DEPDIR)/mount_ecryptfs-io.Po
-#	$(AM_V_CC)source='io.c' object='mount_ecryptfs-io.o' libtool=no \
+tse_manager-manager.o: manager.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -MT tse_manager-manager.o -MD -MP -MF $(DEPDIR)/tse_manager-manager.Tpo -c -o tse_manager-manager.o `test -f 'manager.c' || echo '$(srcdir)/'`manager.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_manager-manager.Tpo $(DEPDIR)/tse_manager-manager.Po
+#	$(AM_V_CC)source='manager.c' object='tse_manager-manager.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -c -o tse_manager-manager.o `test -f 'manager.c' || echo '$(srcdir)/'`manager.c
 
-mount_ecryptfs-io.obj: io.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-io.obj -MD -MP -MF $(DEPDIR)/mount_ecryptfs-io.Tpo -c -o mount_ecryptfs-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-io.Tpo $(DEPDIR)/mount_ecryptfs-io.Po
-#	$(AM_V_CC)source='io.c' object='mount_ecryptfs-io.obj' libtool=no \
+tse_manager-manager.obj: manager.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -MT tse_manager-manager.obj -MD -MP -MF $(DEPDIR)/tse_manager-manager.Tpo -c -o tse_manager-manager.obj `if test -f 'manager.c'; then $(CYGPATH_W) 'manager.c'; else $(CYGPATH_W) '$(srcdir)/manager.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_manager-manager.Tpo $(DEPDIR)/tse_manager-manager.Po
+#	$(AM_V_CC)source='manager.c' object='tse_manager-manager.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -c -o tse_manager-manager.obj `if test -f 'manager.c'; then $(CYGPATH_W) 'manager.c'; else $(CYGPATH_W) '$(srcdir)/manager.c'; fi`
 
-mount_ecryptfs-gen_key.o: gen_key.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-gen_key.o -MD -MP -MF $(DEPDIR)/mount_ecryptfs-gen_key.Tpo -c -o mount_ecryptfs-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-gen_key.Tpo $(DEPDIR)/mount_ecryptfs-gen_key.Po
-#	$(AM_V_CC)source='gen_key.c' object='mount_ecryptfs-gen_key.o' libtool=no \
+tse_manager-io.o: io.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -MT tse_manager-io.o -MD -MP -MF $(DEPDIR)/tse_manager-io.Tpo -c -o tse_manager-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_manager-io.Tpo $(DEPDIR)/tse_manager-io.Po
+#	$(AM_V_CC)source='io.c' object='tse_manager-io.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -c -o tse_manager-io.o `test -f 'io.c' || echo '$(srcdir)/'`io.c
 
-mount_ecryptfs-gen_key.obj: gen_key.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-gen_key.obj -MD -MP -MF $(DEPDIR)/mount_ecryptfs-gen_key.Tpo -c -o mount_ecryptfs-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-gen_key.Tpo $(DEPDIR)/mount_ecryptfs-gen_key.Po
-#	$(AM_V_CC)source='gen_key.c' object='mount_ecryptfs-gen_key.obj' libtool=no \
+tse_manager-io.obj: io.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -MT tse_manager-io.obj -MD -MP -MF $(DEPDIR)/tse_manager-io.Tpo -c -o tse_manager-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_manager-io.Tpo $(DEPDIR)/tse_manager-io.Po
+#	$(AM_V_CC)source='io.c' object='tse_manager-io.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -c -o tse_manager-io.obj `if test -f 'io.c'; then $(CYGPATH_W) 'io.c'; else $(CYGPATH_W) '$(srcdir)/io.c'; fi`
 
-mount_ecryptfs-plaintext_decision_graph.o: plaintext_decision_graph.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-plaintext_decision_graph.o -MD -MP -MF $(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Tpo -c -o mount_ecryptfs-plaintext_decision_graph.o `test -f 'plaintext_decision_graph.c' || echo '$(srcdir)/'`plaintext_decision_graph.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Tpo $(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Po
-#	$(AM_V_CC)source='plaintext_decision_graph.c' object='mount_ecryptfs-plaintext_decision_graph.o' libtool=no \
+tse_manager-gen_key.o: gen_key.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -MT tse_manager-gen_key.o -MD -MP -MF $(DEPDIR)/tse_manager-gen_key.Tpo -c -o tse_manager-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_manager-gen_key.Tpo $(DEPDIR)/tse_manager-gen_key.Po
+#	$(AM_V_CC)source='gen_key.c' object='tse_manager-gen_key.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-plaintext_decision_graph.o `test -f 'plaintext_decision_graph.c' || echo '$(srcdir)/'`plaintext_decision_graph.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -c -o tse_manager-gen_key.o `test -f 'gen_key.c' || echo '$(srcdir)/'`gen_key.c
 
-mount_ecryptfs-plaintext_decision_graph.obj: plaintext_decision_graph.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -MT mount_ecryptfs-plaintext_decision_graph.obj -MD -MP -MF $(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Tpo -c -o mount_ecryptfs-plaintext_decision_graph.obj `if test -f 'plaintext_decision_graph.c'; then $(CYGPATH_W) 'plaintext_decision_graph.c'; else $(CYGPATH_W) '$(srcdir)/plaintext_decision_graph.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Tpo $(DEPDIR)/mount_ecryptfs-plaintext_decision_graph.Po
-#	$(AM_V_CC)source='plaintext_decision_graph.c' object='mount_ecryptfs-plaintext_decision_graph.obj' libtool=no \
+tse_manager-gen_key.obj: gen_key.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -MT tse_manager-gen_key.obj -MD -MP -MF $(DEPDIR)/tse_manager-gen_key.Tpo -c -o tse_manager-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/tse_manager-gen_key.Tpo $(DEPDIR)/tse_manager-gen_key.Po
+#	$(AM_V_CC)source='gen_key.c' object='tse_manager-gen_key.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mount_ecryptfs_CFLAGS) $(CFLAGS) -c -o mount_ecryptfs-plaintext_decision_graph.obj `if test -f 'plaintext_decision_graph.c'; then $(CYGPATH_W) 'plaintext_decision_graph.c'; else $(CYGPATH_W) '$(srcdir)/plaintext_decision_graph.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tse_manager_CFLAGS) $(CFLAGS) -c -o tse_manager-gen_key.obj `if test -f 'gen_key.c'; then $(CYGPATH_W) 'gen_key.c'; else $(CYGPATH_W) '$(srcdir)/gen_key.c'; fi`
 
-umount_ecryptfs-umount.ecryptfs.o: umount.ecryptfs.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_ecryptfs_CFLAGS) $(CFLAGS) -MT umount_ecryptfs-umount.ecryptfs.o -MD -MP -MF $(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Tpo -c -o umount_ecryptfs-umount.ecryptfs.o `test -f 'umount.ecryptfs.c' || echo '$(srcdir)/'`umount.ecryptfs.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Tpo $(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Po
-#	$(AM_V_CC)source='umount.ecryptfs.c' object='umount_ecryptfs-umount.ecryptfs.o' libtool=no \
+umount_tse-umount.tse.o: umount.tse.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_tse_CFLAGS) $(CFLAGS) -MT umount_tse-umount.tse.o -MD -MP -MF $(DEPDIR)/umount_tse-umount.tse.Tpo -c -o umount_tse-umount.tse.o `test -f 'umount.tse.c' || echo '$(srcdir)/'`umount.tse.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/umount_tse-umount.tse.Tpo $(DEPDIR)/umount_tse-umount.tse.Po
+#	$(AM_V_CC)source='umount.tse.c' object='umount_tse-umount.tse.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_ecryptfs_CFLAGS) $(CFLAGS) -c -o umount_ecryptfs-umount.ecryptfs.o `test -f 'umount.ecryptfs.c' || echo '$(srcdir)/'`umount.ecryptfs.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_tse_CFLAGS) $(CFLAGS) -c -o umount_tse-umount.tse.o `test -f 'umount.tse.c' || echo '$(srcdir)/'`umount.tse.c
 
-umount_ecryptfs-umount.ecryptfs.obj: umount.ecryptfs.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_ecryptfs_CFLAGS) $(CFLAGS) -MT umount_ecryptfs-umount.ecryptfs.obj -MD -MP -MF $(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Tpo -c -o umount_ecryptfs-umount.ecryptfs.obj `if test -f 'umount.ecryptfs.c'; then $(CYGPATH_W) 'umount.ecryptfs.c'; else $(CYGPATH_W) '$(srcdir)/umount.ecryptfs.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Tpo $(DEPDIR)/umount_ecryptfs-umount.ecryptfs.Po
-#	$(AM_V_CC)source='umount.ecryptfs.c' object='umount_ecryptfs-umount.ecryptfs.obj' libtool=no \
+umount_tse-umount.tse.obj: umount.tse.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_tse_CFLAGS) $(CFLAGS) -MT umount_tse-umount.tse.obj -MD -MP -MF $(DEPDIR)/umount_tse-umount.tse.Tpo -c -o umount_tse-umount.tse.obj `if test -f 'umount.tse.c'; then $(CYGPATH_W) 'umount.tse.c'; else $(CYGPATH_W) '$(srcdir)/umount.tse.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/umount_tse-umount.tse.Tpo $(DEPDIR)/umount_tse-umount.tse.Po
+#	$(AM_V_CC)source='umount.tse.c' object='umount_tse-umount.tse.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_ecryptfs_CFLAGS) $(CFLAGS) -c -o umount_ecryptfs-umount.ecryptfs.obj `if test -f 'umount.ecryptfs.c'; then $(CYGPATH_W) 'umount.ecryptfs.c'; else $(CYGPATH_W) '$(srcdir)/umount.ecryptfs.c'; fi`
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(umount_tse_CFLAGS) $(CFLAGS) -c -o umount_tse-umount.tse.obj `if test -f 'umount.tse.c'; then $(CYGPATH_W) 'umount.tse.c'; else $(CYGPATH_W) '$(srcdir)/umount.tse.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1523,8 +1473,8 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 
 
 install-exec-hook:	install-rootsbinPROGRAMS
-	-rm -f "$(DESTDIR)/$(rootsbindir)/umount.ecryptfs_private"
-	$(LN_S) "mount.ecryptfs_private" "$(DESTDIR)/$(rootsbindir)/umount.ecryptfs_private"
+	-rm -f "$(DESTDIR)/$(rootsbindir)/umount.tse_private"
+	$(LN_S) "mount.tse_private" "$(DESTDIR)/$(rootsbindir)/umount.tse_private"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -27,17 +27,17 @@
 #include <termios.h>
 #include <string.h>
 #include <errno.h>
-#include "ecryptfs.h"
+#include "tse.h"
 #include "io.h"
 
 /**
  * TODO: Use decision graph here
  */
-int ecryptfs_generate_key(void)
+int tse_generate_key(void)
 {
 	return -EINVAL;
-/*	struct ecryptfs_ctx ctx;
-	struct ecryptfs_key_mod *key_mod = NULL;
+/*	struct tse_ctx ctx;
+	struct tse_key_mod *key_mod = NULL;
 	char *home;
 	char *directory;
 	char *file;
@@ -49,16 +49,16 @@ int ecryptfs_generate_key(void)
 	pw = getpwuid(id);
 	home = pw->pw_dir;
 	printf("\n");
-	printf("This is the eCryptfs key generation utility. At any time \n"
+	printf("This is the Tse key generation utility. At any time \n"
 	       "you may hit enter to selected a default option appearing in \n"
 	       "brackets.\n");
 	printf("\n");
-	if ((rc = ecryptfs_get_key_mod_list(&ctx))) {
-		fprintf(stderr, "Error: eCryptfs was unable to initialize the "
+	if ((rc = tse_get_key_mod_list(&ctx))) {
+		fprintf(stderr, "Error: Tse was unable to initialize the "
 				"PKI modules.\n");
 		return 0;
 	}
-	if (ecryptfs_select_key_mod(&key_mod, &ctx)) {
+	if (tse_select_key_mod(&key_mod, &ctx)) {
 		fprintf(stderr, "Error: Problem loading the selected PKI.\n");
 		return 0;
 	}
@@ -68,7 +68,7 @@ int ecryptfs_generate_key(void)
 		return 0;
 	}
 	printf("\nEnter the filename where the key should be written.\n"
-	       "[%s%s%s/key.pem]:", home, "/.ecryptfs/pki/",
+	       "[%s%s%s/key.pem]:", home, "/.tse/pki/",
 	       key_mod->alias);
 	get_string(file, MAX_PATH_SIZE, ECHO);
 	if (*file == '\0')
@@ -90,7 +90,7 @@ int ecryptfs_generate_key(void)
 			fprintf(stderr, "Error: unable to create the desired subdirectories\n");
 			goto out;
 		}
-		rc = asprintf(&directory, "%s/.ecryptfs/pki/%s/%s", home,
+		rc = asprintf(&directory, "%s/.tse/pki/%s/%s", home,
 			      selected_pki->pki_name, file);
 		if (rc == -1) {
 			fprintf(stderr, "Out of memory\n");
@@ -106,7 +106,7 @@ return rc; */
 }
 
 int
-create_subdirectory(char *file, char *home, struct ecryptfs_key_mod *key_mod)
+create_subdirectory(char *file, char *home, struct tse_key_mod *key_mod)
 {
 	char *substring;
 	char *directory;
@@ -116,7 +116,7 @@ create_subdirectory(char *file, char *home, struct ecryptfs_key_mod *key_mod)
 	while((substring = strstr(substring, "/")) != NULL) {
 		char temp = *(substring + 1);
 		*(substring + 1) = '\0';
-		if (asprintf(&directory, "%s/.ecryptfs/pki/%s/%s",
+		if (asprintf(&directory, "%s/.tse/pki/%s/%s",
 			     home, key_mod->alias, file) < 0) {
 			rc = errno;
 			fprintf(stderr, "Error: %m\n");
@@ -136,12 +136,12 @@ out:
 	return rc;
 }
 
-int create_default_dir(char *home, struct ecryptfs_key_mod *key_mod)
+int create_default_dir(char *home, struct tse_key_mod *key_mod)
 {
 	char *directory;
 	int rc = 0;
 
-	if (asprintf(&directory, "%s/.ecryptfs/", home) < 0) {
+	if (asprintf(&directory, "%s/.tse/", home) < 0) {
 		rc = errno;
 		fprintf(stderr, "Error: %m\n");
 		goto out;
@@ -152,7 +152,7 @@ int create_default_dir(char *home, struct ecryptfs_key_mod *key_mod)
 		goto out;
 	}
 	free(directory);
-	if (asprintf(&directory, "%s/.ecryptfs/pki/", home) < 0) {
+	if (asprintf(&directory, "%s/.tse/pki/", home) < 0) {
 		rc = errno;
 		fprintf(stderr, "Error: %m\n");
 		goto out;
@@ -163,7 +163,7 @@ int create_default_dir(char *home, struct ecryptfs_key_mod *key_mod)
 		goto out;
 	}
 	free(directory);
-	if (asprintf(&directory, "%s/.ecryptfs/pki/%s/", home,
+	if (asprintf(&directory, "%s/.tse/pki/%s/", home,
 		     key_mod->alias) < 0) {
 		rc = errno;
 		fprintf(stderr, "Error: %m\n");

@@ -60,7 +60,7 @@ fi
 truncate -s 0 $lower_test_file
 
 #
-# Now read the file, eCryptfs should fix the lower file
+# Now read the file, Tse should fix the lower file
 # and append the text without failing
 #
 cat $test_file > /dev/null 2>&1 

@@ -89,7 +89,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = ecryptfsd$(EXEEXT)
+bin_PROGRAMS = tsed$(EXEEXT)
 subdir = src/daemon
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_pkg_swig.m4 \
@@ -107,19 +107,18 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_ecryptfsd_OBJECTS = ecryptfsd-main.$(OBJEXT)
-ecryptfsd_OBJECTS = $(am_ecryptfsd_OBJECTS)
+am_tsed_OBJECTS = tsed-main.$(OBJEXT)
+tsed_OBJECTS = $(am_tsed_OBJECTS)
 am__DEPENDENCIES_1 =
-ecryptfsd_DEPENDENCIES =  \
-	$(top_builddir)/src/libecryptfs/libecryptfs.la \
+tsed_DEPENDENCIES = $(top_builddir)/src/libtse/libtse.la \
 	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-ecryptfsd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(ecryptfsd_CFLAGS) \
-	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+tsed_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(tsed_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -154,8 +153,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(ecryptfsd_SOURCES)
-DIST_SOURCES = $(ecryptfsd_SOURCES)
+SOURCES = $(tsed_SOURCES)
+DIST_SOURCES = $(tsed_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -192,8 +191,6 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
-CATALOGS = @CATALOGS@
-CATOBJEXT = @CATOBJEXT@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
@@ -202,7 +199,6 @@ CPPFLAGS = @CPPFLAGS@
 CRYPTO_CFLAGS = @CRYPTO_CFLAGS@
 CRYPTO_LIBS = @CRYPTO_LIBS@
 CYGPATH_W = @CYGPATH_W@
-DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
@@ -216,20 +212,15 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
-GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 GPGME_CFLAGS = @GPGME_CFLAGS@
 GPGME_LIBS = @GPGME_LIBS@
 GREP = @GREP@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
-INSTOBJEXT = @INSTOBJEXT@
-INTLLIBS = @INTLLIBS@
 INTLTOOL_EXTRACT = @INTLTOOL_EXTRACT@
 INTLTOOL_MERGE = @INTLTOOL_MERGE@
 INTLTOOL_PERL = @INTLTOOL_PERL@
@@ -244,12 +235,12 @@ LATEX = @LATEX@
 LATEX2HTML = @LATEX2HTML@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LIBECRYPTFS_LT_AGE = @LIBECRYPTFS_LT_AGE@
-LIBECRYPTFS_LT_CURRENT = @LIBECRYPTFS_LT_CURRENT@
-LIBECRYPTFS_LT_REVISION = @LIBECRYPTFS_LT_REVISION@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
+LIBTSE_LT_AGE = @LIBTSE_LT_AGE@
+LIBTSE_LT_CURRENT = @LIBTSE_LT_CURRENT@
+LIBTSE_LT_REVISION = @LIBTSE_LT_REVISION@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LOCALEDIR = @LOCALEDIR@
@@ -258,18 +249,12 @@ LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
-MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-MSGFMT_OPTS = @MSGFMT_OPTS@
 MSGMERGE = @MSGMERGE@
 NM = @NM@
 NMEDIT = @NMEDIT@
-NSS_CFLAGS = @NSS_CFLAGS@
-NSS_LIBS = @NSS_LIBS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
-OPENSSL_CFLAGS = @OPENSSL_CFLAGS@
-OPENSSL_LIBS = @OPENSSL_LIBS@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
@@ -282,16 +267,7 @@ PACKAGE_VERSION = @PACKAGE_VERSION@
 PAM_CFLAGS = @PAM_CFLAGS@
 PAM_LIBS = @PAM_LIBS@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKCS11_HELPER_CFLAGS = @PKCS11_HELPER_CFLAGS@
-PKCS11_HELPER_LIBS = @PKCS11_HELPER_LIBS@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 POD2MAN = @POD2MAN@
-POFILES = @POFILES@
-POSUB = @POSUB@
-PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
-PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
 PS2PDF = @PS2PDF@
 PYTHON = @PYTHON@
 PYTHON_CPPFLAGS = @PYTHON_CPPFLAGS@
@@ -315,7 +291,6 @@ SWIG_PYTHON_OPT = @SWIG_PYTHON_OPT@
 TAR = @TAR@
 TSPI_CFLAGS = @TSPI_CFLAGS@
 TSPI_LIBS = @TSPI_LIBS@
-USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
@@ -341,7 +316,6 @@ datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
-ecryptfskeymoddir = @ecryptfskeymoddir@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
@@ -373,7 +347,6 @@ psdir = @psdir@
 pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 rootsbindir = @rootsbindir@
-runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
@@ -386,10 +359,11 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+tsekeymoddir = @tsekeymoddir@
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
-ecryptfsd_SOURCES = main.c
-ecryptfsd_CFLAGS = $(AM_CFLAGS) $(LIBGCRYPT_CFLAGS) $(KEYUTILS_CFLAGS)
-ecryptfsd_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
+tsed_SOURCES = main.c
+tsed_CFLAGS = $(AM_CFLAGS) $(LIBGCRYPT_CFLAGS) $(KEYUTILS_CFLAGS)
+tsed_LDADD = $(top_builddir)/src/libtse/libtse.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
 all: all-am
 
 .SUFFIXES:
@@ -473,9 +447,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-ecryptfsd$(EXEEXT): $(ecryptfsd_OBJECTS) $(ecryptfsd_DEPENDENCIES) $(EXTRA_ecryptfsd_DEPENDENCIES) 
-	@rm -f ecryptfsd$(EXEEXT)
-	$(AM_V_CCLD)$(ecryptfsd_LINK) $(ecryptfsd_OBJECTS) $(ecryptfsd_LDADD) $(LIBS)
+tsed$(EXEEXT): $(tsed_OBJECTS) $(tsed_DEPENDENCIES) $(EXTRA_tsed_DEPENDENCIES) 
+	@rm -f tsed$(EXEEXT)
+	$(AM_V_CCLD)$(tsed_LINK) $(tsed_OBJECTS) $(tsed_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -483,7 +457,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ecryptfsd-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tsed-main.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -506,19 +480,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-ecryptfsd-main.o: main.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfsd_CFLAGS) $(CFLAGS) -MT ecryptfsd-main.o -MD -MP -MF $(DEPDIR)/ecryptfsd-main.Tpo -c -o ecryptfsd-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfsd-main.Tpo $(DEPDIR)/ecryptfsd-main.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='ecryptfsd-main.o' libtool=no @AMDEPBACKSLASH@
+tsed-main.o: main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tsed_CFLAGS) $(CFLAGS) -MT tsed-main.o -MD -MP -MF $(DEPDIR)/tsed-main.Tpo -c -o tsed-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tsed-main.Tpo $(DEPDIR)/tsed-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='tsed-main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfsd_CFLAGS) $(CFLAGS) -c -o ecryptfsd-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tsed_CFLAGS) $(CFLAGS) -c -o tsed-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
 
-ecryptfsd-main.obj: main.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfsd_CFLAGS) $(CFLAGS) -MT ecryptfsd-main.obj -MD -MP -MF $(DEPDIR)/ecryptfsd-main.Tpo -c -o ecryptfsd-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ecryptfsd-main.Tpo $(DEPDIR)/ecryptfsd-main.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='ecryptfsd-main.obj' libtool=no @AMDEPBACKSLASH@
+tsed-main.obj: main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tsed_CFLAGS) $(CFLAGS) -MT tsed-main.obj -MD -MP -MF $(DEPDIR)/tsed-main.Tpo -c -o tsed-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tsed-main.Tpo $(DEPDIR)/tsed-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='tsed-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ecryptfsd_CFLAGS) $(CFLAGS) -c -o ecryptfsd-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tsed_CFLAGS) $(CFLAGS) -c -o tsed-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

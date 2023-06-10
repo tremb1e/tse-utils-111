@@ -33,7 +33,7 @@ int main(void)
 	int miscdev;
 
        
-	miscdev = open("/dev/ecryptfs", O_WRONLY);
+	miscdev = open("/dev/tse", O_WRONLY);
 	if (miscdev < 0)
 		return 1;
 

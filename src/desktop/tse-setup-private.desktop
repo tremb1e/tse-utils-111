@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Setup Your Encrypted Private Directory
+_GenericName=Setup Your Encrypted Private Directory
+Exec=/usr/bin/tse-setup-private
+Terminal=true
+Type=Application
+Categories=Settings;Security;
+X-Ubuntu-Gettext-Domain=tse-utils

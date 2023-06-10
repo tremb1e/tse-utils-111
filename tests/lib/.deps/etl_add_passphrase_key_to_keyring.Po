@@ -11,7 +11,7 @@ etl_add_passphrase_key_to_keyring.o: etl_add_passphrase_key_to_keyring.c \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h ../../src/include/ecryptfs.h \
+ /usr/include/bits/stdio.h ../../src/include/tse.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/netdb.h \
  /usr/include/netinet/in.h /usr/include/sys/socket.h \
@@ -95,7 +95,7 @@ etl_add_passphrase_key_to_keyring.o: etl_add_passphrase_key_to_keyring.c \
 
 /usr/include/bits/stdio.h:
 
-../../src/include/ecryptfs.h:
+../../src/include/tse.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
 

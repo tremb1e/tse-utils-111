@@ -21,7 +21,7 @@ main directory and do the following:
      install itself there by invoking:
         % sh ./configure --prefix=/home/luser
 
-     If you are running a version of eCryptfs that ships as part of
+     If you are running a version of Tse that ships as part of
      kernel version 2.6.18-rc6-mm2 or earlier, you need to pass the
      --enable-old-auth-tok option to the ./configure script:
         % sh ./configure --prefix=/home/luser \
@@ -49,8 +49,8 @@ main directory and do the following:
      If any of these directories do not presently exist, they will be
      created on demand.
 
-     This step will attempt to install the ecryptfs.ko kernel module:
-        /lib/modules/`uname -r`/kernel/fs/ecryptfs/ecryptfs.ko
+     This step will attempt to install the tse.ko kernel module:
+        /lib/modules/`uname -r`/kernel/fs/tse/tse.ko
 
      If you are installing in your home directory make sure that 
      `/home/luser/bin' is in your path. If you're using the bash shell

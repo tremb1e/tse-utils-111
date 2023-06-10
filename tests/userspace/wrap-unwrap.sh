@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# wrap-unwrap.sh: Check for regressions in libecryptfs'
+# wrap-unwrap.sh: Check for regressions in libtse'
 # 		  wrapper functions
 # Author: Tyler Hicks <tyhicks@canonical.com>
 #

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# mmap-dir: check we cannot mmap an ecryptfs directory
+# mmap-dir: check we cannot mmap an tse directory
 # Author: Colin King <colin.king@canonical.com>
 #
 # Copyright (C) 2012 Canonical, Ltd.

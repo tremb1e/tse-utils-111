@@ -17,8 +17,8 @@
 # We have the following line for use by intltoolize:
 # INTLTOOL_MAKEFILE
 
-GETTEXT_PACKAGE = ecryptfs-utils
-PACKAGE = ecryptfs-utils
+GETTEXT_PACKAGE = tse-utils
+PACKAGE = tse-utils
 VERSION = 111
 
 SHELL = /bin/sh
@@ -35,7 +35,7 @@ datarootdir = ${prefix}/share
 libdir = ${exec_prefix}/lib
 localedir = ${datarootdir}/locale
 subdir = po
-install_sh = ${SHELL} /root/ecryptfs-utils-111/install-sh
+install_sh = ${SHELL} /root/tse-utils-111/install-sh
 # Automake >= 1.8 provides $(MKDIR_P).
 # Until it can be supposed, use the safe fallback:
 mkdir_p = $(install_sh) -d

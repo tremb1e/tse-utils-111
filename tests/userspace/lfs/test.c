@@ -20,14 +20,14 @@
 
 /*
  * This test is to ensure that off_t is the same size as off64_t in all
- * ecryptfs-utils builds. On 64 bit machines, this is the default. On 32 bit
+ * tse-utils builds. On 64 bit machines, this is the default. On 32 bit
  * machines, the build system must define special variables to enable what is
  * known as Large File Support (LFS).
  *
  * In configure.ac, we enable LFS by using the AC_SYS_LARGEFILE autoconf macro.
  * It defines _FILE_OFFSET_BITS=64, when needed by the target architecture, in
  * config.h. Also in configure.ac, we force all .c files to #include config.h
- * so the entire ecryptfs-utils build should always have LFS enabled.
+ * so the entire tse-utils build should always have LFS enabled.
  *
  * IMPORTANT: We intentionally do not include config.h in this file, because it
  * is expected that the build system automatically does it for us. This test

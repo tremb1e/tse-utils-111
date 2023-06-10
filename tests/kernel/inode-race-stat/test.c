@@ -24,7 +24,7 @@
  *
  *  "Only unlock and d_add() new inodes after the plaintext inode size has
  *   been read from the lower filesystem. This fixes a race condition that
- *   was sometimes seen during a multi-job kernel build in an eCryptfs mount."
+ *   was sometimes seen during a multi-job kernel build in an Tse mount."
  *
  *  Create file, drop inode cache, and stat file in multiple child processes to
  *  try and catch the inode size race.

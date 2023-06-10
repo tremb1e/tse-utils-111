@@ -41,8 +41,8 @@ test_dir=$(etl_create_test_dir) || exit
 dir="${test_dir}/foo"
 
 # This won't work for regular files because they have a special
-# ecryptfs_getattr() function which will mask the stale inode
-# attributes. eCryptfs directory inode don't have a special ->getattr()
+# tse_getattr() function which will mask the stale inode
+# attributes. Tse directory inode don't have a special ->getattr()
 mkdir --mode=700 $dir || exit
 setfacl -m u::rx $dir || exit
 st=$(stat -c %a $dir) || exit

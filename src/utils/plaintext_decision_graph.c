@@ -18,7 +18,7 @@
  * 02111-1307, USA.
  */
 
-#include "../include/ecryptfs.h"
+#include "../include/tse.h"
 #include "../include/decision_graph.h"
 
 struct param_node plaintext_arr[] = {

@@ -43,23 +43,23 @@ etl_lmount || exit
 etl_mount_i || exit
 test_dir=$(etl_create_test_dir) || exit
 
-# Test method: https://bugs.launchpad.net/ecryptfs/+bug/509180/comments/50
+# Test method: https://bugs.launchpad.net/tse/+bug/509180/comments/50
 # Create 1 byte test file
 echo "testing 1 2 3" > $test_dir/test_file
 old_sum=`md5sum $test_dir/test_file | cut -d ' ' -f 1`
-lower_file=`ls $ETL_MOUNT_SRC/ECRYPTFS*/*`
+lower_file=`ls $ETL_MOUNT_SRC/TSE*/*`
 
-if etl_is_mount_opt_set "ecryptfs_xattr_metadata" ; then
+if etl_is_mount_opt_set "tse_xattr_metadata" ; then
 	xattr_opt="-x"
 fi
 
-# Increment 9th byte so that eCryptfs marker fails validation
+# Increment 9th byte so that Tse marker fails validation
 ${test_script_dir}/lp-509180/test -i $xattr_opt $lower_file || exit
 etl_umount
 
 etl_mount_i || exit
 cat $test_dir/test_file &> /dev/null
-# Decrement 9th byte so that eCryptfs marker passes validation
+# Decrement 9th byte so that Tse marker passes validation
 ${test_script_dir}/lp-509180/test -d $xattr_opt $lower_file || exit
 new_sum=`md5sum $test_dir/test_file | cut -d ' ' -f 1`
 

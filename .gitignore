@@ -1,4 +1,4 @@
-#ecryptfs-utils
+#tse-utils
 *.lo
 *.la
 src/utils/*

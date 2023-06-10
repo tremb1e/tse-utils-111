@@ -3,21 +3,21 @@
  *
  * Copyright (C) IBM
  *
- * Modified by Tyler Hicks <tyhicks@canonical.com> to fit into the eCryptfs
+ * Modified by Tyler Hicks <tyhicks@canonical.com> to fit into the Tse
  * test modern framework.
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../src/include/ecryptfs.h"
+#include "../../src/include/tse.h"
 
 int main(int argc, char *argv[])
 {
-	char passphrase[ECRYPTFS_MAX_PASSWORD_LENGTH + 8];
+	char passphrase[TSE_MAX_PASSWORD_LENGTH + 8];
 	int passphrase_size;
-	char decrypted_passphrase[ECRYPTFS_MAX_PASSWORD_LENGTH + 1];
+	char decrypted_passphrase[TSE_MAX_PASSWORD_LENGTH + 1];
 	int decrypted_passphrase_size;
-	char salt[ECRYPTFS_SALT_SIZE + 1];
+	char salt[TSE_SALT_SIZE + 1];
 	char *path;
 	int i;
 	int rc = 0;
@@ -29,19 +29,19 @@ int main(int argc, char *argv[])
 	path = argv[1];
 
 	/* Sanity check */
-	from_hex(salt, ECRYPTFS_DEFAULT_SALT_HEX, ECRYPTFS_SALT_SIZE);
+	from_hex(salt, TSE_DEFAULT_SALT_HEX, TSE_SALT_SIZE);
 	memcpy(passphrase, "012345679abcdef0\0", 17);
 	passphrase_size = strlen(passphrase);
-	if ((rc = ecryptfs_wrap_passphrase(path, "testwrappw", salt,
+	if ((rc = tse_wrap_passphrase(path, "testwrappw", salt,
 					   passphrase))) {
-		fprintf(stderr, "ecryptfs_wrap_passphrase() returned "
+		fprintf(stderr, "tse_wrap_passphrase() returned "
 			"rc = [%d]\n", rc);
 		rc = 1;
 		goto out;
 	}
-	if ((rc = ecryptfs_unwrap_passphrase(decrypted_passphrase, path,
+	if ((rc = tse_unwrap_passphrase(decrypted_passphrase, path,
 					     "testwrappw", salt))) {
-		fprintf(stderr, "ecryptfs_unwrap_passphrase() returned "
+		fprintf(stderr, "tse_unwrap_passphrase() returned "
 			"rc = [%d]\n", rc);
 		rc = 1;
 		goto out;
@@ -60,21 +60,21 @@ int main(int argc, char *argv[])
 		goto out;
 	}
 	/* Comprehensive check */
-	from_hex(salt, ECRYPTFS_DEFAULT_SALT_HEX, ECRYPTFS_SALT_SIZE);
-	for (i = 0; i < ECRYPTFS_MAX_PASSWORD_LENGTH; i++) {
+	from_hex(salt, TSE_DEFAULT_SALT_HEX, TSE_SALT_SIZE);
+	for (i = 0; i < TSE_MAX_PASSWORD_LENGTH; i++) {
 		passphrase[i] = 'a' + i;
 		passphrase[i + 1] = '\0';
-		if ((rc = ecryptfs_wrap_passphrase(path, "testwrappw", salt,
+		if ((rc = tse_wrap_passphrase(path, "testwrappw", salt,
 						   passphrase))) {
-			fprintf(stderr, "ecryptfs_wrap_passphrase() returned "
+			fprintf(stderr, "tse_wrap_passphrase() returned "
 			       "rc = [%d]\n", rc);
 			rc = 1;
 			goto out;
 		}
-		if ((rc = ecryptfs_unwrap_passphrase(decrypted_passphrase,
+		if ((rc = tse_unwrap_passphrase(decrypted_passphrase,
 						     path,
 						     "testwrappw", salt))) {
-			fprintf(stderr, "ecryptfs_unwrap_passphrase() returned "
+			fprintf(stderr, "tse_unwrap_passphrase() returned "
 				"rc = [%d]\n", rc);
 			rc = 1;
 			goto out;
@@ -94,29 +94,29 @@ int main(int argc, char *argv[])
 		}
 	}
 	/* Failure check */
-	from_hex(salt, ECRYPTFS_DEFAULT_SALT_HEX, ECRYPTFS_SALT_SIZE);
+	from_hex(salt, TSE_DEFAULT_SALT_HEX, TSE_SALT_SIZE);
 	for (i = 0; i < 65; i++)
 		passphrase[i] = 'a' + i;
 	passphrase[66] = '\0';
 	passphrase_size = strlen(passphrase);
-	if ((rc = ecryptfs_wrap_passphrase(path, "testwrappw", salt,
+	if ((rc = tse_wrap_passphrase(path, "testwrappw", salt,
 					   passphrase)) == 0) {
-		fprintf(stderr, "ecryptfs_wrap_passphrase() returned rc = 0; "
+		fprintf(stderr, "tse_wrap_passphrase() returned rc = 0; "
 			"expected error result instead\n");
 		rc = 1;
 		goto out;
 	}
 
 	/* Ensure that an empty passphrase is rejected */
-	if ((rc = ecryptfs_wrap_passphrase(path, "testwrappw", salt, "")) == 0) {
-		fprintf(stderr, "ecryptfs_wrap_passphrase() wrapped an empty passphrase\n");
+	if ((rc = tse_wrap_passphrase(path, "testwrappw", salt, "")) == 0) {
+		fprintf(stderr, "tse_wrap_passphrase() wrapped an empty passphrase\n");
 		rc = 1;
 		goto out;
 	}
 
 	/* Ensure that an empty wrapping passphrase is rejected */
-	if ((rc = ecryptfs_wrap_passphrase(path, "", salt, "testpassphrase")) == 0) {
-		fprintf(stderr, "ecryptfs_wrap_passphrase() used an empty wrapping passphrase\n");
+	if ((rc = tse_wrap_passphrase(path, "", salt, "testpassphrase")) == 0) {
+		fprintf(stderr, "tse_wrap_passphrase() used an empty wrapping passphrase\n");
 		rc = 1;
 		goto out;
 	}

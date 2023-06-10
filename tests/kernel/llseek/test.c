@@ -3,7 +3,7 @@
  *
  * Copyright (C) IBM
  *
- * Modified by Tyler Hicks <tyhicks@canonical.com> to fit into the eCryptfs
+ * Modified by Tyler Hicks <tyhicks@canonical.com> to fit into the Tse
  * test modern framework.
  */
 #include <sys/types.h>

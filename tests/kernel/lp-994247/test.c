@@ -46,7 +46,7 @@ int main(void)
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = sigusr1_handler;
 
-	miscdev = open("/dev/ecryptfs", O_RDWR);
+	miscdev = open("/dev/tse", O_RDWR);
 	if (miscdev < 0)
 		return 1;
 

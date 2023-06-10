@@ -1,13 +1,13 @@
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
 
-eudatarootdir = $(datarootdir)/ecryptfs-utils
-dist_eudataroot_SCRIPTS = ecryptfs-record-passphrase
+eudatarootdir = $(datarootdir)/tse-utils
+dist_eudataroot_SCRIPTS = tse-record-passphrase
 
-desktopdir = $(datarootdir)/ecryptfs-utils
+desktopdir = $(datarootdir)/tse-utils
 
 desktop_in_files = \
-	ecryptfs-mount-private.desktop.in \
-	ecryptfs-setup-private.desktop.in
+	tse-mount-private.desktop.in \
+	tse-setup-private.desktop.in
 
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 

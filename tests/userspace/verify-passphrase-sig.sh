@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# verify_passphrase_sig.sh: Check for regressions in libecryptfs'
+# verify_passphrase_sig.sh: Check for regressions in libtse'
 # 			    generate_passphrase_sig()
 # Author: Tyler Hicks <tyhicks@canonical.com>
 #
@@ -25,7 +25,7 @@ rc=1
 
 pass="foo"
 salt="0011223344556677"
-# Expected values come from testing ecryptfs-utils version 30
+# Expected values come from testing tse-utils version 30
 expected_sig="253ca7e88811d184"
 expected_fekek="3f0cffa9389d2c396ad887c6ec657898e2e9e74cbb3cb1d25d410f58de2aa6b70dd81ccedaf8fad725346d8f751b8fc2c50ad69fba27d1d4fb735f207e76c6e9"
 

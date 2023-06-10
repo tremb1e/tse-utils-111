@@ -4,12 +4,12 @@ SUBDIRS = manpage
 
 dist_doc_DATA =
 dist_noinst_DATA =
-dist_html_DATA = ecryptfs-faq.html
+dist_html_DATA = tse-faq.html
 
 if BUILD_PKCS11_HELPER
-dist_doc_DATA += ecryptfs-pkcs11-helper-doc.txt
+dist_doc_DATA += tse-pkcs11-helper-doc.txt
 else
-dist_noinst_DATA += ecryptfs-pkcs11-helper-doc.txt
+dist_noinst_DATA += tse-pkcs11-helper-doc.txt
 endif
 
-dist_pkgdata_DATA = ecryptfs-mount-private.txt
+dist_pkgdata_DATA = tse-mount-private.txt

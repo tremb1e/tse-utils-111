@@ -36,10 +36,10 @@
 #define MMAP_LEN	(4096)
 
 /*
- *  https://bugs.launchpad.net/ecryptfs/+bug/400443
+ *  https://bugs.launchpad.net/tse/+bug/400443
  *
  *  mmap() on a directory should return -ENODEV, but bug LP: #400443
- *  ecryptfs returns a mmap'd address which causes SIGBUS on access.
+ *  tse returns a mmap'd address which causes SIGBUS on access.
  */
 int main(int argc, char **argv)
 {

@@ -1,5 +1,5 @@
 /**
- * Userspace daemon which responds to the eCryptfs kernel module's requests
+ * Userspace daemon which responds to the Tse kernel module's requests
  *
  * Copyright (C) 2004-2006 International Business Machines Corp.
  *   Author(s): Tyler Hicks <tyhicks@ou.edu>
@@ -35,7 +35,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/resource.h>
-#include "../include/ecryptfs.h"
+#include "../include/tse.h"
 
 static char *pidfile = NULL;
 static char *prompt_prog = NULL;
@@ -155,10 +155,10 @@ out:
 	return rc;
 }
 
-struct ecryptfs_messaging_ctx mctx;
+struct tse_messaging_ctx mctx;
 pthread_mutex_t mctx_mux;
 
-static void ecryptfsd_exit(struct ecryptfs_messaging_ctx *mctx, int retval)
+static void tsed_exit(struct tse_messaging_ctx *mctx, int retval)
 {
 	int rc = 0;
 
@@ -167,16 +167,16 @@ static void ecryptfsd_exit(struct ecryptfs_messaging_ctx *mctx, int retval)
 		free(pidfile);
  		pidfile = NULL;
 	}
-	rc = ecryptfs_send_message(mctx, NULL, ECRYPTFS_MSG_QUIT, 0, 0);
+	rc = tse_send_message(mctx, NULL, TSE_MSG_QUIT, 0, 0);
 	if (rc)
 		syslog(LOG_ERR, "%s: Error attempting to send quit message to "
 		       "kernel; rc = [%d]\n", __FUNCTION__, rc);
-	rc = ecryptfs_messaging_exit(mctx);
+	rc = tse_messaging_exit(mctx);
 	if (rc)
 		syslog(LOG_ERR, "%s: Error attempting to shut down messaging; "
 		       "rc = [%d]\n", __FUNCTION__, rc);
 
-	ecryptfs_syslog(LOG_INFO, "Closing eCryptfs userspace daemon\n");
+	tse_syslog(LOG_INFO, "Closing Tse userspace daemon\n");
 	exit(retval);
 }
 
@@ -231,7 +231,7 @@ void daemonize(void)
 void sigterm_handler(int sig)
 {
 	pthread_mutex_lock(&mctx_mux);
-	ecryptfsd_exit(&mctx, 0);
+	tsed_exit(&mctx, 0);
 	pthread_mutex_unlock(&mctx_mux);
 }
 
@@ -321,17 +321,17 @@ int main(int argc, char **argv)
 			break;
 		}
 	}
-	rc = ecryptfs_get_version(&version);
-	if (!rc && !(version & ECRYPTFS_VERSIONING_MISCDEV)) {
+	rc = tse_get_version(&version);
+	if (!rc && !(version & TSE_VERSIONING_MISCDEV)) {
 		rc = -EPROTONOSUPPORT;
 		syslog(LOG_ERR, "%s: Current kernel does not have support for "
-		       "/dev/ecryptfs; please use 2.6.26 or newer\n", __func__);
+		       "/dev/tse; please use 2.6.26 or newer\n", __func__);
 		exit(rc);
 	}
 	openlog(argv[0], LOG_PID | (foreground ? LOG_PERROR : 0), 0);
 	if (rc) {
 		syslog(LOG_WARNING, "%s: Unable to retrieve versioning "
-		       "info from kernel module; assuming /dev/ecryptfs is "
+		       "info from kernel module; assuming /dev/tse is "
 		       "available\n " , __FUNCTION__);
 	}
 	tty = ttyname(0); /* We may need the tty name later */
@@ -380,28 +380,28 @@ int main(int argc, char **argv)
  	cryptfs_get_ctx_opts()->prompt = prompt_callback;
 	pthread_mutex_init(&mctx_mux, NULL);
 	pthread_mutex_lock(&mctx_mux);
-	rc = ecryptfs_init_messaging(&mctx, ECRYPTFS_MESSAGING_TYPE_MISCDEV);
+	rc = tse_init_messaging(&mctx, TSE_MESSAGING_TYPE_MISCDEV);
 	if (rc) {
 		syslog(LOG_ERR, "%s: Failed to initialize messaging; rc = "
 		       "[%d]\n", __FUNCTION__, rc);
 		pthread_mutex_unlock(&mctx_mux);
 		goto daemon_out;
 	}
-	rc = ecryptfs_send_message(&mctx, NULL, ECRYPTFS_MSG_HELO, 0, 0);
+	rc = tse_send_message(&mctx, NULL, TSE_MSG_HELO, 0, 0);
 	if (rc) {
 		syslog(LOG_ERR, "%s: Error attempting to send message to "
-		       "eCryptfs kernel module via /dev/ecryptfs; rc = [%d]\n",
+		       "Tse kernel module via /dev/tse; rc = [%d]\n",
 		       __func__, rc);
 		pthread_mutex_unlock(&mctx_mux);
 		goto daemon_out;
 	}
-	mctx.state |= ECRYPTFS_MESSAGING_STATE_LISTENING;
+	mctx.state |= TSE_MESSAGING_STATE_LISTENING;
 	pthread_mutex_unlock(&mctx_mux);
-	rc = ecryptfs_run_daemon(&mctx);
+	rc = tse_run_daemon(&mctx);
 	pthread_mutex_lock(&mctx_mux);
-	mctx.state &= ~ECRYPTFS_MESSAGING_STATE_LISTENING;
+	mctx.state &= ~TSE_MESSAGING_STATE_LISTENING;
 	pthread_mutex_unlock(&mctx_mux);
 daemon_out:
-	ecryptfsd_exit(&mctx, rc);
+	tsed_exit(&mctx, rc);
 	return rc;
 }

@@ -25,7 +25,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "ecryptfs.h"
+#include "tse.h"
 
 #define ASSERT(EX)	                                                      \
 do {	                                                                      \
@@ -35,16 +35,16 @@ do {	                                                                      \
         }	                                                              \
 } while (0)
 
-struct ecryptfs_crypt_stat {
+struct tse_crypt_stat {
 	int header_extent_size;
 	int num_header_extents_at_front;
 	int extent_size;
 };
 
 void
-ecryptfs_extent_to_lwr_pg_idx_and_offset(unsigned long *lower_page_idx,
+tse_extent_to_lwr_pg_idx_and_offset(unsigned long *lower_page_idx,
 					 int *byte_offset,
-					 struct ecryptfs_crypt_stat *crypt_stat,
+					 struct tse_crypt_stat *crypt_stat,
 					 unsigned long extent_num,
 					 int page_size)
 {
@@ -76,7 +76,7 @@ struct translation_test_vector_element {
 	int byte_offset;
 };
 
-#define ECRYPTFS_EXTENT_SIZE 4096 /* Test vector only valid for 4096 */
+#define TSE_EXTENT_SIZE 4096 /* Test vector only valid for 4096 */
 
 struct translation_test_vector_element translation_test_vector[] = {
 	{4096,  8192, 1, 0, 2, 0},
@@ -99,14 +99,14 @@ struct translation_test_vector_element translation_test_vector[] = {
 
 int test_extent_translation(void)
 {
-	struct ecryptfs_crypt_stat crypt_stat;
+	struct tse_crypt_stat crypt_stat;
 	unsigned long lower_page_idx;
 	int byte_offset;
 	int rc = 0;
 	size_t i;
 
-	printf("Testing ecryptfs_extent_to_lwr_pg_idx_and_offset()... ");
-	crypt_stat.extent_size = ECRYPTFS_EXTENT_SIZE;
+	printf("Testing tse_extent_to_lwr_pg_idx_and_offset()... ");
+	crypt_stat.extent_size = TSE_EXTENT_SIZE;
 	for (i = 0;
 	     i < (sizeof(translation_test_vector)
 		  / sizeof(struct translation_test_vector_element));
@@ -115,7 +115,7 @@ int test_extent_translation(void)
 			translation_test_vector[i].header_extent_size;
 		crypt_stat.num_header_extents_at_front =
 		translation_test_vector[i].num_header_extents_at_front;
-		ecryptfs_extent_to_lwr_pg_idx_and_offset(
+		tse_extent_to_lwr_pg_idx_and_offset(
 			&lower_page_idx, &byte_offset, &crypt_stat,
 			translation_test_vector[i].extent_num,
 			translation_test_vector[i].page_size);
@@ -154,10 +154,10 @@ struct file {
 struct writeback_control {
 };
 
-struct ecryptfs_page_crypt_context {
+struct tse_page_crypt_context {
 	struct page *page;
-#define ECRYPTFS_PREPARE_COMMIT_MODE 0
-#define ECRYPTFS_WRITEPAGE_MODE      1
+#define TSE_PREPARE_COMMIT_MODE 0
+#define TSE_WRITEPAGE_MODE      1
 	int mode;
 	union {
 		struct file *lower_file;
@@ -165,14 +165,14 @@ struct ecryptfs_page_crypt_context {
 	} param;
 };
 
-void ecryptfs_unmap_and_release_lower_page(struct page *lower_page)
+void tse_unmap_and_release_lower_page(struct page *lower_page)
 {
 	printf("%s: Called w/ lower_page = [%p]\n", __FUNCTION__, lower_page);
 	free(lower_page);
 }
 
 int
-ecryptfs_commit_lower_page(struct page *lower_page, struct inode *lower_inode,
+tse_commit_lower_page(struct page *lower_page, struct inode *lower_inode,
 			   struct file *lower_file, int byte_offset,
 			   int region_size)
 {
@@ -182,11 +182,11 @@ ecryptfs_commit_lower_page(struct page *lower_page, struct inode *lower_inode,
 	       "lower_file = [%p], byte_offset = [%d], region_size = [%d]\n",
 	       __FUNCTION__,
 	       lower_page, lower_inode, lower_file, byte_offset, region_size);
-	ecryptfs_unmap_and_release_lower_page(lower_page);
+	tse_unmap_and_release_lower_page(lower_page);
 	return rc;
 }
 
-int ecryptfs_writepage_and_release_lower_page(struct page *lower_page,
+int tse_writepage_and_release_lower_page(struct page *lower_page,
 					      struct inode *lower_inode,
 					      struct writeback_control *wbc)
 {
@@ -195,20 +195,20 @@ int ecryptfs_writepage_and_release_lower_page(struct page *lower_page,
 	return 0;
 }
 
-int ecryptfs_write_out_page(struct ecryptfs_page_crypt_context *ctx,
+int tse_write_out_page(struct tse_page_crypt_context *ctx,
 			    struct page *lower_page, struct inode *lower_inode,
 			    int byte_offset_in_page, int bytes_to_write)
 {
 	int rc = 0;
 
-	rc = ecryptfs_commit_lower_page(lower_page, lower_inode,
+	rc = tse_commit_lower_page(lower_page, lower_inode,
 					NULL,
 					byte_offset_in_page,
 					bytes_to_write);
 	return rc;
 }
 
-int ecryptfs_get_lower_page(struct page **lower_page, struct inode *lower_inode,
+int tse_get_lower_page(struct page **lower_page, struct inode *lower_inode,
 			    struct file *lower_file,
 			    unsigned long lower_page_index, int byte_offset,
 			    int region_bytes)
@@ -224,7 +224,7 @@ int ecryptfs_get_lower_page(struct page **lower_page, struct inode *lower_inode,
 	return 0;
 }
 
-int ecryptfs_read_in_page(struct ecryptfs_page_crypt_context *ctx,
+int tse_read_in_page(struct tse_page_crypt_context *ctx,
 			  struct page **lower_page, struct inode *lower_inode,
 			  unsigned long lower_page_idx, int byte_offset_in_page,
 			  int page_cache_size)
@@ -236,7 +236,7 @@ int ecryptfs_read_in_page(struct ecryptfs_page_crypt_context *ctx,
 	       "= [%lu], byte_offset_in_page = [%d]\n", __FUNCTION__,
 	       lower_page, lower_inode,
 	       lower_page_idx, byte_offset_in_page);
-	rc = ecryptfs_get_lower_page(lower_page, lower_inode,
+	rc = tse_get_lower_page(lower_page, lower_inode,
 				     NULL,
 				     lower_page_idx,
 				     byte_offset_in_page,
@@ -245,7 +245,7 @@ int ecryptfs_read_in_page(struct ecryptfs_page_crypt_context *ctx,
 	return rc;
 }
 
-int ecryptfs_derive_iv(char *iv, struct ecryptfs_crypt_stat *crypt_stat,
+int tse_derive_iv(char *iv, struct tse_crypt_stat *crypt_stat,
 		       unsigned long offset)
 {
 	printf("%s: Called w/ offset = [%lu]\n", __FUNCTION__, offset);
@@ -253,7 +253,7 @@ int ecryptfs_derive_iv(char *iv, struct ecryptfs_crypt_stat *crypt_stat,
 }
 
 int
-ecryptfs_encrypt_page_offset(struct ecryptfs_crypt_stat *crypt_stat,
+tse_encrypt_page_offset(struct tse_crypt_stat *crypt_stat,
 			     struct page *dst_page, int dst_offset,
 			     struct page *src_page, int src_offset, int size,
 			     unsigned char *iv)
@@ -265,13 +265,13 @@ ecryptfs_encrypt_page_offset(struct ecryptfs_crypt_stat *crypt_stat,
 	return 0;
 }
 
-#define ECRYPTFS_MAX_IV_BYTES 16
+#define TSE_MAX_IV_BYTES 16
 
-int ecryptfs_encrypt_page(int page_cache_size, int extent_size,
+int tse_encrypt_page(int page_cache_size, int extent_size,
 			  struct page *page, int header_extent_size,
 			  int num_header_extents_at_front)
 {
-	char extent_iv[ECRYPTFS_MAX_IV_BYTES];
+	char extent_iv[TSE_MAX_IV_BYTES];
 	unsigned long base_extent;
 	unsigned long extent_offset = 0;
 	unsigned long lower_page_idx = 0;
@@ -279,18 +279,18 @@ int ecryptfs_encrypt_page(int page_cache_size, int extent_size,
 	unsigned int num_extents_per_page;
 	struct page *lower_page;
 	struct inode *lower_inode;
-	struct ecryptfs_crypt_stat *crypt_stat;
+	struct tse_crypt_stat *crypt_stat;
 	int rc = 0;
 	int lower_byte_offset = 0;
 	int orig_byte_offset = 0;
-#define ECRYPTFS_PAGE_STATE_UNREAD    0
-#define ECRYPTFS_PAGE_STATE_READ      1
-#define ECRYPTFS_PAGE_STATE_MODIFIED  2
-#define ECRYPTFS_PAGE_STATE_WRITTEN   3
+#define TSE_PAGE_STATE_UNREAD    0
+#define TSE_PAGE_STATE_READ      1
+#define TSE_PAGE_STATE_MODIFIED  2
+#define TSE_PAGE_STATE_WRITTEN   3
 	int page_state;
 
-	crypt_stat = (struct ecryptfs_crypt_stat *)malloc(
-		sizeof(struct ecryptfs_crypt_stat));
+	crypt_stat = (struct tse_crypt_stat *)malloc(
+		sizeof(struct tse_crypt_stat));
 	if (!crypt_stat) {
 		rc = 1;
 		goto out;
@@ -302,43 +302,43 @@ int ecryptfs_encrypt_page(int page_cache_size, int extent_size,
 	lower_inode = NULL;
 	num_extents_per_page = page_cache_size / crypt_stat->extent_size;
 	base_extent = (page->index * num_extents_per_page);
-	page_state = ECRYPTFS_PAGE_STATE_UNREAD;
+	page_state = TSE_PAGE_STATE_UNREAD;
 	while (extent_offset < num_extents_per_page) {
-		ecryptfs_extent_to_lwr_pg_idx_and_offset(
+		tse_extent_to_lwr_pg_idx_and_offset(
 			&lower_page_idx, &lower_byte_offset, crypt_stat,
 			(base_extent + extent_offset), page_cache_size);
 		if (prior_lower_page_idx != lower_page_idx
-		    && page_state == ECRYPTFS_PAGE_STATE_MODIFIED) {
-			rc = ecryptfs_write_out_page(NULL, lower_page,
+		    && page_state == TSE_PAGE_STATE_MODIFIED) {
+			rc = tse_write_out_page(NULL, lower_page,
 						     lower_inode,
 						     orig_byte_offset,
 						     (page_cache_size
 						      - orig_byte_offset));
-			page_state = ECRYPTFS_PAGE_STATE_WRITTEN;
+			page_state = TSE_PAGE_STATE_WRITTEN;
 		}
-		if (page_state == ECRYPTFS_PAGE_STATE_UNREAD
-		    || page_state == ECRYPTFS_PAGE_STATE_WRITTEN) {
-			rc = ecryptfs_read_in_page(NULL, &lower_page,
+		if (page_state == TSE_PAGE_STATE_UNREAD
+		    || page_state == TSE_PAGE_STATE_WRITTEN) {
+			rc = tse_read_in_page(NULL, &lower_page,
 						   lower_inode, lower_page_idx,
 						   lower_byte_offset,
 						   page_cache_size);
 			orig_byte_offset = lower_byte_offset;
 			prior_lower_page_idx = lower_page_idx;
-			page_state = ECRYPTFS_PAGE_STATE_READ;
+			page_state = TSE_PAGE_STATE_READ;
 		}
-		ASSERT(page_state == ECRYPTFS_PAGE_STATE_MODIFIED
-		       || page_state == ECRYPTFS_PAGE_STATE_READ);
-		rc = ecryptfs_derive_iv(extent_iv, crypt_stat,
+		ASSERT(page_state == TSE_PAGE_STATE_MODIFIED
+		       || page_state == TSE_PAGE_STATE_READ);
+		rc = tse_derive_iv(extent_iv, crypt_stat,
 					(base_extent + extent_offset));
-		rc = ecryptfs_encrypt_page_offset(
+		rc = tse_encrypt_page_offset(
 			crypt_stat, lower_page, lower_byte_offset, page,
 			(extent_offset * crypt_stat->extent_size),
 			crypt_stat->extent_size, (unsigned char *)extent_iv);
-		page_state = ECRYPTFS_PAGE_STATE_MODIFIED;
+		page_state = TSE_PAGE_STATE_MODIFIED;
 		extent_offset++;
 	}
 	ASSERT(orig_byte_offset == 0);
-	rc = ecryptfs_write_out_page(NULL, lower_page, lower_inode, 0,
+	rc = tse_write_out_page(NULL, lower_page, lower_inode, 0,
 				     (lower_byte_offset
 				      + crypt_stat->extent_size));
 out:
@@ -353,10 +353,10 @@ int test_encrypt(void)
 	struct page page;
 
 	page.index = 0;
-	/* int ecryptfs_encrypt_page(int page_cache_size, int extent_size,
+	/* int tse_encrypt_page(int page_cache_size, int extent_size,
 	   struct page *page, int header_extent_size,
 	   int num_header_extents_at_front) */
-	rc = ecryptfs_encrypt_page(16384, /* page_cache_size */
+	rc = tse_encrypt_page(16384, /* page_cache_size */
 				   4096, /* extent_size */
 				   &page,
 				   8192, /* header size */
@@ -365,7 +365,7 @@ int test_encrypt(void)
 }
 
 unsigned long
-upper_size_to_lower_size(struct ecryptfs_crypt_stat *crypt_stat,
+upper_size_to_lower_size(struct tse_crypt_stat *crypt_stat,
 			 unsigned long upper_size)
 {
 	unsigned long lower_size;
@@ -409,7 +409,7 @@ int test_upper_size_to_lower_size(void)
 {
 	int rc = 0;
 	unsigned long lower_size;
-	struct ecryptfs_crypt_stat crypt_stat;
+	struct tse_crypt_stat crypt_stat;
 	size_t i;
 
 	for (i = 0;
@@ -438,12 +438,12 @@ out:
 int test_nv_list_from_file(void)
 {
 	int rc = 0;
-	struct ecryptfs_name_val_pair nv_pair_head;
-	struct ecryptfs_name_val_pair *cursor;
+	struct tse_name_val_pair nv_pair_head;
+	struct tse_name_val_pair *cursor;
 	int fd;
 
 	nv_pair_head.next = NULL;
-	fd = open("ecryptfsrc", O_RDONLY);
+	fd = open("tserc", O_RDONLY);
 	if (fd == -1) {
 		rc = -EIO;
 		goto out;

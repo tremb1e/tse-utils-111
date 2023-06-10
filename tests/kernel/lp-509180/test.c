@@ -78,7 +78,7 @@ static int test_with_metadata_in_header(int fd, int flags)
 
 static int test_with_metadata_in_xattr(int fd, int flags)
 {
-	const char *name = "user.ecryptfs";
+	const char *name = "user.tse";
 	unsigned char *value = NULL;
 	ssize_t nread, size = 0;
 	int rc = TEST_ERROR;
@@ -128,7 +128,7 @@ out:
 
 
 /*
- *  https://bugs.launchpad.net/ecryptfs/+bug/509180
+ *  https://bugs.launchpad.net/tse/+bug/509180
  *  Increment/Decrement 9th byte in lower file
  */
 int main(int argc, char **argv)

@@ -20,13 +20,13 @@
  * 02111-1307, USA.
  */
 
-#include "ecryptfs.h"
+#include "tse.h"
 
 int main_menu(uint32_t version);
 int manager_menu(void);
 int read_passphrase_salt(char *pass, char *salt);
 int get_string_stdin(char **val, char *prompt, int echo);
-int ecryptfs_select_key_mod(struct ecryptfs_key_mod **key_mod,
-			    struct ecryptfs_ctx *ctx);
+int tse_select_key_mod(struct tse_key_mod **key_mod,
+			    struct tse_ctx *ctx);
 
 int mygetchar();

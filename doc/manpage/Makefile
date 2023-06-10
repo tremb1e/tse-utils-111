@@ -79,10 +79,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/ecryptfs-utils
-pkgincludedir = $(includedir)/ecryptfs-utils
-pkglibdir = $(libdir)/ecryptfs-utils
-pkglibexecdir = $(libexecdir)/ecryptfs-utils
+pkgdatadir = $(datadir)/tse-utils
+pkgincludedir = $(includedir)/tse-utils
+pkglibdir = $(libdir)/tse-utils
+pkglibexecdir = $(libexecdir)/tse-utils
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -169,18 +169,16 @@ MANS = $(dist_man_MANS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(dist_man_MANS) $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /root/ecryptfs-utils-111/missing aclocal-1.15
+ACLOCAL = ${SHELL} /root/tse-utils-111/missing aclocal-1.15
 ALL_LINGUAS = 
 AMTAR = $${TAR-tar}
 AM_CPPFLAGS = -include $(top_builddir)/config.h
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /root/ecryptfs-utils-111/missing autoconf
-AUTOHEADER = ${SHELL} /root/ecryptfs-utils-111/missing autoheader
-AUTOMAKE = ${SHELL} /root/ecryptfs-utils-111/missing automake-1.15
+AUTOCONF = ${SHELL} /root/tse-utils-111/missing autoconf
+AUTOHEADER = ${SHELL} /root/tse-utils-111/missing autoheader
+AUTOMAKE = ${SHELL} /root/tse-utils-111/missing automake-1.15
 AWK = gawk
-CATALOGS = 
-CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -189,7 +187,6 @@ CPPFLAGS =
 CRYPTO_CFLAGS = -I/usr/include/nss3 -I/usr/include/nspr4   -DENABLE_NSS
 CRYPTO_LIBS = -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4 -lpthread -ldl  
 CYGPATH_W = echo
-DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DLLTOOL = false
@@ -202,21 +199,16 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 EXEEXT = 
 FGREP = /usr/bin/grep -F
-GETTEXT_PACKAGE = ecryptfs-utils
-GMOFILES = 
+GETTEXT_PACKAGE = tse-utils
 GMSGFMT = /usr/bin/msgfmt
 GPGME_CFLAGS = 
 GPGME_LIBS = 
 GREP = /usr/bin/grep
-GTK_CFLAGS = 
-GTK_LIBS = 
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-INSTOBJEXT = .mo
-INTLLIBS = 
 INTLTOOL_EXTRACT = /usr/bin/intltool-extract
 INTLTOOL_MERGE = /usr/bin/intltool-merge
 INTLTOOL_PERL = /usr/bin/perl
@@ -231,54 +223,39 @@ LATEX =
 LATEX2HTML = 
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
-LIBECRYPTFS_LT_AGE = 0
-LIBECRYPTFS_LT_CURRENT = 1
-LIBECRYPTFS_LT_REVISION = 0
 LIBOBJS = 
 LIBS = -ldl 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIBTSE_LT_AGE = 0
+LIBTSE_LT_CURRENT = 1
+LIBTSE_LT_REVISION = 0
 LIPO = 
 LN_S = ln -s
 LOCALEDIR = ${prefix}/${datadir}/locale
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /root/ecryptfs-utils-111/missing makeinfo
+MAKEINFO = ${SHELL} /root/tse-utils-111/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
-MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
-MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
 NM = /usr/bin/nm -B
 NMEDIT = 
-NSS_CFLAGS = -I/usr/include/nss3 -I/usr/include/nspr4   -DENABLE_NSS
-NSS_LIBS = -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4 -lpthread -ldl  
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSL_CFLAGS =  
-OPENSSL_LIBS = -lcrypto  
 OTOOL = 
 OTOOL64 = 
-PACKAGE = ecryptfs-utils
+PACKAGE = tse-utils
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = ecryptfs-utils
-PACKAGE_STRING = ecryptfs-utils 111
-PACKAGE_TARNAME = ecryptfs-utils
+PACKAGE_NAME = tse-utils
+PACKAGE_STRING = tse-utils 111
+PACKAGE_TARNAME = tse-utils
 PACKAGE_URL = 
 PACKAGE_VERSION = 111
 PAM_CFLAGS = 
 PAM_LIBS = -lpam  -lpam_misc
 PATH_SEPARATOR = :
-PKCS11_HELPER_CFLAGS = 
-PKCS11_HELPER_LIBS = 
-PKG_CONFIG = /usr/bin/pkg-config
-PKG_CONFIG_LIBDIR = 
-PKG_CONFIG_PATH = 
 POD2MAN = /usr/bin/pod2man
-POFILES = 
-POSUB = po
-PO_IN_DATADIR_FALSE = 
-PO_IN_DATADIR_TRUE = 
 PS2PDF = /usr/bin/ps2pdf
 PYTHON = /usr/bin/python
 PYTHON_CPPFLAGS = -I/usr/include/python2.7 -I/usr/include/python2.7
@@ -302,13 +279,12 @@ SWIG_PYTHON_OPT = -python
 TAR = /usr/bin/tar
 TSPI_CFLAGS = 
 TSPI_LIBS = 
-USE_NLS = yes
 VERSION = 111
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /root/ecryptfs-utils-111/doc/manpage
-abs_srcdir = /root/ecryptfs-utils-111/doc/manpage
-abs_top_builddir = /root/ecryptfs-utils-111
-abs_top_srcdir = /root/ecryptfs-utils-111
+abs_builddir = /root/tse-utils-111/doc/manpage
+abs_srcdir = /root/tse-utils-111/doc/manpage
+abs_top_builddir = /root/tse-utils-111
+abs_top_srcdir = /root/tse-utils-111
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -328,7 +304,6 @@ datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
-ecryptfskeymoddir = $(libdir)/ecryptfs
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
 host_alias = 
@@ -338,7 +313,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /root/ecryptfs-utils-111/install-sh
+install_sh = ${SHELL} /root/tse-utils-111/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 libdir = ${exec_prefix}/lib
@@ -352,15 +327,14 @@ pamdir = /lib/security
 pamlibdir = 
 pdfdir = ${docdir}
 pkgconfigdir = $(libdir)/pkgconfig
-pkgpyexecdir = ${pyexecdir}/ecryptfs-utils
-pkgpythondir = ${pythondir}/ecryptfs-utils
+pkgpyexecdir = ${pyexecdir}/tse-utils
+pkgpythondir = ${pythondir}/tse-utils
 prefix = /usr
 program_transform_name = s,x,x,
 psdir = ${docdir}
 pyexecdir = ${exec_prefix}/lib64/python2.7/site-packages
 pythondir = ${prefix}/lib/python2.7/site-packages
 rootsbindir = /sbin
-runstatedir = ${localstatedir}/run
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
@@ -373,32 +347,33 @@ target_vendor = pc
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
+tsekeymoddir = $(libdir)/tse
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
 dist_man_MANS = \
-	ecryptfs.7 \
-	ecryptfs-add-passphrase.1 \
-	ecryptfsd.8 \
-	ecryptfs-find.1 \
-	ecryptfs-generate-tpm-key.1 \
-	ecryptfs-insert-wrapped-passphrase-into-keyring.1 \
-	ecryptfs-manager.8 \
-	ecryptfs-migrate-home.8 \
-	ecryptfs-mount-private.1 \
-	ecryptfs-recover-private.1 \
-	ecryptfs-rewrap-passphrase.1 \
-	ecryptfs-rewrite-file.1 \
-	ecryptfs-setup-private.1 \
-	ecryptfs-setup-swap.1 \
-	ecryptfs-stat.1 \
-	ecryptfs-umount-private.1 \
-	ecryptfs-unwrap-passphrase.1 \
-	ecryptfs-verify.1 \
-	ecryptfs-wrap-passphrase.1 \
-	mount.ecryptfs.8 \
-	umount.ecryptfs.8 \
-	mount.ecryptfs_private.1 \
-	pam_ecryptfs.8 \
-	umount.ecryptfs_private.1
+	tse.7 \
+	tse-add-passphrase.1 \
+	tsed.8 \
+	tse-find.1 \
+	tse-generate-tpm-key.1 \
+	tse-insert-wrapped-passphrase-into-keyring.1 \
+	tse-manager.8 \
+	tse-migrate-home.8 \
+	tse-mount-private.1 \
+	tse-recover-private.1 \
+	tse-rewrap-passphrase.1 \
+	tse-rewrite-file.1 \
+	tse-setup-private.1 \
+	tse-setup-swap.1 \
+	tse-stat.1 \
+	tse-umount-private.1 \
+	tse-unwrap-passphrase.1 \
+	tse-verify.1 \
+	tse-wrap-passphrase.1 \
+	mount.tse.8 \
+	umount.tse.8 \
+	mount.tse_private.1 \
+	pam_tse.8 \
+	umount.tse_private.1
 
 all: all-am
 

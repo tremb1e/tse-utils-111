@@ -17,8 +17,8 @@
 # We have the following line for use by intltoolize:
 # INTLTOOL_MAKEFILE
 
-GETTEXT_PACKAGE = ecryptfs-utils
-PACKAGE = ecryptfs-utils
+GETTEXT_PACKAGE = tse-utils
+PACKAGE = tse-utils
 VERSION = 111
 
 SHELL = /bin/sh
@@ -35,7 +35,7 @@ datarootdir = ${prefix}/share
 libdir = ${exec_prefix}/lib
 localedir = ${datarootdir}/locale
 subdir = po
-install_sh = ${SHELL} /root/ecryptfs-utils-111/install-sh
+install_sh = ${SHELL} /root/tse-utils-111/install-sh
 # Automake >= 1.8 provides $(MKDIR_P).
 # Until it can be supposed, use the safe fallback:
 mkdir_p = $(install_sh) -d
@@ -65,15 +65,15 @@ DISTFILES = Makefile.in.in POTFILES.in $(POFILES)
 EXTRA_DISTFILES = ChangeLog POTFILES.skip Makevars LINGUAS
 
 POTFILES = \
-	../src/desktop/ecryptfs-record-passphrase \
-	../src/desktop/ecryptfs-mount-private.desktop.in \
-	../src/desktop/ecryptfs-setup-private.desktop.in \
-	../src/utils/ecryptfs-mount-private \
-	../src/utils/ecryptfs-recover-private \
-	../src/utils/ecryptfs-rewrite-file \
-	../src/utils/ecryptfs-setup-private \
-	../src/utils/ecryptfs-setup-swap \
-	../src/utils/ecryptfs-umount-private
+	../src/desktop/tse-record-passphrase \
+	../src/desktop/tse-mount-private.desktop.in \
+	../src/desktop/tse-setup-private.desktop.in \
+	../src/utils/tse-mount-private \
+	../src/utils/tse-recover-private \
+	../src/utils/tse-rewrite-file \
+	../src/utils/tse-setup-private \
+	../src/utils/tse-setup-swap \
+	../src/utils/tse-umount-private
 
 CATALOGS=$(shell LINGUAS="$(USE_LINGUAS)"; for lang in $$LINGUAS; do printf "$$lang.gmo "; done)
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# read-dir: check we cannot read an ecryptfs directory
+# read-dir: check we cannot read an tse directory
 # https://bugs.launchpad.net/ubuntu/+source/linux/+bug/719691
 #
 # Author: Colin King <colin.king@canonical.com>

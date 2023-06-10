@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# namelen.sh: Test for validating namelen reported by eCryptfs
+# namelen.sh: Test for validating namelen reported by Tse
 # Author: Tyler Hicks <tyhicks@canonical.com>
 #
 # Copyright (C) 2014 Canonical Ltd.

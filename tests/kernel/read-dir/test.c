@@ -39,7 +39,7 @@
  *  https://bugs.launchpad.net/ubuntu/+source/linux/+bug/719691
  *
  *  read() on a directory should return EISDIR, but bug LP: #719691
- *  ecryptfs returns EINVAL in contradiction to SUSv2.
+ *  tse returns EINVAL in contradiction to SUSv2.
  */
 int main(int argc, char **argv)
 {

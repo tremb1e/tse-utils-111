@@ -1,5 +1,5 @@
 /**
- * Header file for eCryptfs decision graph
+ * Header file for Tse decision graph
  * 
  * Copyright (C) 2004-2006 International Business Machines Corp.
  *   Author(s): Michael A. Halcrow <mahalcro@us.ibm.com>
@@ -39,7 +39,7 @@ struct val_node {
         struct val_node *next;
 };
 
-struct ecryptfs_ctx;
+struct tse_ctx;
 
 /**
  * transition_node
@@ -53,7 +53,7 @@ struct ecryptfs_ctx;
  * @trans_func: The function to execute when this transition node is
  *              followed.
  *
- * See src/libecryptfs/decision_graph.c::do_transition()
+ * See src/libtse/decision_graph.c::do_transition()
  *
  * If @val is set to NULL on definition, then this transition node
  * will be followed by default, no matter what the parent param_node's
@@ -65,12 +65,12 @@ struct ecryptfs_ctx;
  * used as the next param_node.
  */
 struct transition_node {
-#define ECRYPTFS_TN_FLAG_REQ_FREE 0x00000001
+#define TSE_TN_FLAG_REQ_FREE 0x00000001
 	uint32_t flags;
         char *val;
         char *pretty_val;
         struct param_node *next_token;
-        int (*trans_func)(struct ecryptfs_ctx *, struct param_node *,
+        int (*trans_func)(struct tse_ctx *, struct param_node *,
 			  struct val_node **, void **);
 };
 
@@ -90,20 +90,20 @@ struct param_node {
         char *default_val;
         char *suggested_val;
         void (*display_opts)(struct param_node *);
-#define ECRYPTFS_PARAM_FLAG_ECHO_INPUT	   0x00000001
-#define ECRYPTFS_PARAM_FLAG_MASK_OUTPUT    0x00000002
-#define ECRYPTFS_ALLOW_IMPLICIT_TRANSITION 0x00000004
-#define ECRYPTFS_PARAM_FLAG_NO_VALUE       0x00000008
+#define TSE_PARAM_FLAG_ECHO_INPUT	   0x00000001
+#define TSE_PARAM_FLAG_MASK_OUTPUT    0x00000002
+#define TSE_ALLOW_IMPLICIT_TRANSITION 0x00000004
+#define TSE_PARAM_FLAG_NO_VALUE       0x00000008
 #define DISPLAY_TRANSITION_NODE_VALS       0x00000010
 #define VERIFY_VALUE			   0x00000020
 #define STDIN_REQUIRED			   0x00000040
 #define PARAMETER_SET			   0x00000080
-#define ECRYPTFS_PARAM_FLAG_LOCK_MEM       0x00000100
-#define ECRYPTFS_PARAM_FORCE_DISPLAY_NODES 0x00000200
-#define ECRYPTFS_DISPLAY_PRETTY_VALS       0x00000400
-#define ECRYPTFS_NO_AUTO_TRANSITION        0x00000800
-#define ECRYPTFS_IMPLICIT_OVERRIDE_DEFAULT 0x00001000
-#define ECRYPTFS_NONEMPTY_VALUE_REQUIRED   0x00002000
+#define TSE_PARAM_FLAG_LOCK_MEM       0x00000100
+#define TSE_PARAM_FORCE_DISPLAY_NODES 0x00000200
+#define TSE_DISPLAY_PRETTY_VALS       0x00000400
+#define TSE_NO_AUTO_TRANSITION        0x00000800
+#define TSE_IMPLICIT_OVERRIDE_DEFAULT 0x00001000
+#define TSE_NONEMPTY_VALUE_REQUIRED   0x00002000
         uint32_t flags;
         int num_transitions;
 #define MAX_NUM_TRANSITIONS 64
@@ -119,23 +119,23 @@ struct prompt_elem {
 
 int add_transition_node_to_param_node(struct param_node *param_node,
 				      struct transition_node *trans_node);
-void ecryptfs_dump_param_node(FILE *file_stream,
+void tse_dump_param_node(FILE *file_stream,
 			      struct param_node *param_node, int depth,
 			      int recursive);
-void ecryptfs_dump_transition_node(FILE *file_stream,
+void tse_dump_transition_node(FILE *file_stream,
 				   struct transition_node *trans_node,
 				   int depth, int recursive);
-void ecryptfs_dump_decision_graph(FILE *file_stream,
+void tse_dump_decision_graph(FILE *file_stream,
 				  struct param_node *param_node, int depth);
-int ecryptfs_set_exit_param_on_graph(struct param_node *param_node,
+int tse_set_exit_param_on_graph(struct param_node *param_node,
 				     struct param_node *exit_param_node);
 
-struct ecryptfs_name_val_pair;
+struct tse_name_val_pair;
 
-int ecryptfs_insert_params_in_subgraph(struct ecryptfs_name_val_pair *nvp,
+int tse_insert_params_in_subgraph(struct tse_name_val_pair *nvp,
 				       struct transition_node *trans_node);
-int eval_param_tree(struct ecryptfs_ctx *ctx, struct param_node *node,
-		    struct ecryptfs_name_val_pair *nvp_head,
+int eval_param_tree(struct tse_ctx *ctx, struct param_node *node,
+		    struct tse_name_val_pair *nvp_head,
 		    struct val_node **val_stack_head);
 
 #endif

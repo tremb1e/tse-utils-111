@@ -77,7 +77,7 @@ lp_870326_test_SOURCES = lp-870326/test.c
 lp_994247_test_SOURCES = lp-994247/test.c
 
 miscdev_bad_count_test_SOURCES = miscdev-bad-count/test.c
-miscdev_bad_count_test_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
+miscdev_bad_count_test_LDADD = $(top_builddir)/src/libtse/libtse.la
 
 mmap_bmap_test_SOURCES = mmap-bmap/test.c
 

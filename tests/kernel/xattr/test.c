@@ -26,7 +26,7 @@
 #include <errno.h>
 #include <sys/xattr.h>
 
-#define XATTR_METADATA_NAME	"user.ecryptfs"
+#define XATTR_METADATA_NAME	"user.tse"
 
 static const char *names[]  = {
 	"user.test1",

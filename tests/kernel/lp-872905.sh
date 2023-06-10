@@ -70,9 +70,9 @@ fi
 # If xattr metadata is enabled, the expected lower file size is 0.
 # 
 sz=$(stat -c%s $lower_test_file)
-if ! etl_is_mount_opt_set "ecryptfs_xattr_metadata" && [ $sz -ne 0 ]; then
+if ! etl_is_mount_opt_set "tse_xattr_metadata" && [ $sz -ne 0 ]; then
 	rc=0
-elif etl_is_mount_opt_set "ecryptfs_xattr_metadata" && [ $sz -eq 0 ]; then
+elif etl_is_mount_opt_set "tse_xattr_metadata" && [ $sz -eq 0 ]; then
 	rc=0
 fi
 

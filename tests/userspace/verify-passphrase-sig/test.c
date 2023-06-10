@@ -23,9 +23,9 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-#include "../../src/include/ecryptfs.h"
+#include "../../src/include/tse.h"
 
-#define ECRYPTFS_MAX_KEY_HEX_BYTES (ECRYPTFS_MAX_KEY_BYTES * 2)
+#define TSE_MAX_KEY_HEX_BYTES (TSE_MAX_KEY_BYTES * 2)
 
 void usage(const char *name)
 {
@@ -35,31 +35,31 @@ void usage(const char *name)
 
 int main(int argc, char *argv[])
 {
-	char sig_hex[ECRYPTFS_PASSWORD_SIG_SIZE + 1];
-	char fekek[ECRYPTFS_MAX_KEY_BYTES + 1];
-	char fekek_hex[ECRYPTFS_MAX_KEY_HEX_BYTES + 1];
-	char salt[ECRYPTFS_SALT_SIZE + 1];
+	char sig_hex[TSE_PASSWORD_SIG_SIZE + 1];
+	char fekek[TSE_MAX_KEY_BYTES + 1];
+	char fekek_hex[TSE_MAX_KEY_HEX_BYTES + 1];
+	char salt[TSE_SALT_SIZE + 1];
 	int rc;
 
 	if (argc != 5 ||
-	    strlen(argv[2]) != ECRYPTFS_SALT_SIZE_HEX ||
-	    strlen(argv[3]) != ECRYPTFS_PASSWORD_SIG_SIZE ||
-	    strlen(argv[4]) != ECRYPTFS_MAX_KEY_HEX_BYTES) {
+	    strlen(argv[2]) != TSE_SALT_SIZE_HEX ||
+	    strlen(argv[3]) != TSE_PASSWORD_SIG_SIZE ||
+	    strlen(argv[4]) != TSE_MAX_KEY_HEX_BYTES) {
 		usage(argv[0]);
 		return EINVAL;
 	}
 
-	memset(sig_hex, 0, ECRYPTFS_PASSWORD_SIG_SIZE + 1);
-	memset(fekek, 0, ECRYPTFS_MAX_KEY_BYTES + 1);
-	memset(fekek_hex, 0, ECRYPTFS_MAX_KEY_HEX_BYTES + 1);
-	memset(salt, 0, ECRYPTFS_SALT_SIZE + 1);
-	from_hex(salt, argv[2], ECRYPTFS_SALT_SIZE);
+	memset(sig_hex, 0, TSE_PASSWORD_SIG_SIZE + 1);
+	memset(fekek, 0, TSE_MAX_KEY_BYTES + 1);
+	memset(fekek_hex, 0, TSE_MAX_KEY_HEX_BYTES + 1);
+	memset(salt, 0, TSE_SALT_SIZE + 1);
+	from_hex(salt, argv[2], TSE_SALT_SIZE);
 
 	rc = generate_passphrase_sig(sig_hex, fekek, salt, argv[1]);
 	if (rc)
 		return rc;
 
-	to_hex(fekek_hex, fekek, ECRYPTFS_MAX_KEY_BYTES);
+	to_hex(fekek_hex, fekek, TSE_MAX_KEY_BYTES);
 	if (strcmp(sig_hex, argv[3]) ||
 	    strcmp(fekek_hex, argv[4])) {
 		return EINVAL;

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# etl_funcs.sh: eCryptfs test library (etl) helper functions
+# etl_funcs.sh: Tse test library (etl) helper functions
 # Author: Tyler Hicks <tyhicks@canonical.com>
 #
 # Copyright (C) 2012 Canonical Ltd.
@@ -32,8 +32,8 @@ default_lmount_opts="rw,relatime"
 default_ext2_opts="user_xattr,acl"
 default_ext3_opts="user_xattr,acl,commit=600,barrier=1,data=ordered"
 default_btrfs_opts="nodatacow"
-default_mount_opts="rw,relatime,ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_sig=\${ETL_FEKEK_SIG}"
-default_fne_mount_opts="${default_mount_opts},ecryptfs_fnek_sig=\${ETL_FNEK_SIG}"
+default_mount_opts="rw,relatime,tse_cipher=aes,tse_key_bytes=16,tse_sig=\${ETL_FEKEK_SIG}"
+default_fne_mount_opts="${default_mount_opts},tse_fnek_sig=\${ETL_FNEK_SIG}"
 
 
 #
@@ -288,19 +288,19 @@ etl_remove_disk()
 }
 
 #
-# etl_load_ecryptfs
+# etl_load_tse
 #
-# Ensures that the eCryptfs kernel code is either loaded, if a module, or
+# Ensures that the Tse kernel code is either loaded, if a module, or
 # compiled in.
 #
-# If your test only needs an eCryptfs mount, don't call this function. The mount
+# If your test only needs an Tse mount, don't call this function. The mount
 # process will autoload the module for you. If you need access to something like
-# /dev/ecryptfs, but don't need an eCryptfs mount, this function is for you.
+# /dev/tse, but don't need an Tse mount, this function is for you.
 #
-etl_load_ecryptfs()
+etl_load_tse()
 {
-	if ! grep -q ecryptfs /proc/filesystems; then
-		modprobe ecryptfs
+	if ! grep -q tse /proc/filesystems; then
+		modprobe tse
 		return $?
 	fi
 
@@ -482,11 +482,11 @@ etl_is_mount_opt_set()
 #
 # etl_mount_i
 #
-# Performs an eCryptfs mount, bypassing the eCryptfs mount helper.
+# Performs an Tse mount, bypassing the Tse mount helper.
 #
-# If you're fine with the default eCryptfs mount options, or have constructed
+# If you're fine with the default Tse mount options, or have constructed
 # your own mount options, and have already added the appropriate keys to the
-# kernel keyring, this is the easiest way to do an eCryptfs mount.
+# kernel keyring, this is the easiest way to do an Tse mount.
 #
 etl_mount_i()
 {
@@ -496,15 +496,15 @@ etl_mount_i()
 
 	_etl_init_mount_opts
 
-	mount -it ecryptfs -o "$ETL_MOUNT_OPTS" \
+	mount -it tse -o "$ETL_MOUNT_OPTS" \
 		"$ETL_MOUNT_SRC" "$ETL_MOUNT_DST"
 }
 
 #
 # etl_umount_i
 #
-# Unmounts the eCryptfs mount point specified by ETL_MOUNT_DST. Note that the
-# eCryptfs umount helper will not be called.
+# Unmounts the Tse mount point specified by ETL_MOUNT_DST. Note that the
+# Tse umount helper will not be called.
 #
 etl_umount_i()
 {
@@ -523,8 +523,8 @@ etl_umount_i()
 #
 # etl_umount
 #
-# Unmounts the eCryptfs mount point specified by ETL_MOUNT_DST. Note that the
-# eCryptfs umount helper will be called.
+# Unmounts the Tse mount point specified by ETL_MOUNT_DST. Note that the
+# Tse umount helper will be called.
 #
 etl_umount()
 {
@@ -543,7 +543,7 @@ etl_umount()
 #
 # etl_create_test_dir
 #
-# Creates a directory for carrying out tests inside of the eCryptfs mount point
+# Creates a directory for carrying out tests inside of the Tse mount point
 # (ETL_MOUNT_DST).
 #
 # Upon success, the newly created directory's name is echoed to stdout.
@@ -595,7 +595,7 @@ etl_remove_test_dir()
 #
 # etl_find_lower_path UPPER_PATH [LOWER_MOUNT]
 #
-# Given a path to an eCryptfs inode, finds a path to the lower inode. Searches
+# Given a path to an Tse inode, finds a path to the lower inode. Searches
 # for the lower inode in $ETL_LMOUNT_DST, unless LOWER_MOUNT is specified. Be
 # careful using this with an inode with multiple hard links, as only one lower
 # path will be returned.

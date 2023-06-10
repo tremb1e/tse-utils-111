@@ -147,7 +147,7 @@ int hang_check(int option, const char *filename)
 		switch (ret) {
 		case 0:
 			/* Timed out on select, no signal from child! */
-			fprintf(stderr, "Timed out after %d seconds doing %s - possible eCryptfs hang\n",
+			fprintf(stderr, "Timed out after %d seconds doing %s - possible Tse hang\n",
 				TIMEOUT, options[option > TRUNCATE ? UNKNOWN : option]);
 			/* Vainly attempt to kill child */
 			kill(pid, SIGINT);

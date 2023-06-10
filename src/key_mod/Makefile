@@ -70,10 +70,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/ecryptfs-utils
-pkgincludedir = $(includedir)/ecryptfs-utils
-pkglibdir = $(libdir)/ecryptfs-utils
-pkglibexecdir = $(libexecdir)/ecryptfs-utils
+pkgdatadir = $(datadir)/tse-utils
+pkgincludedir = $(includedir)/tse-utils
+pkglibdir = $(libdir)/tse-utils
+pkglibexecdir = $(libexecdir)/tse-utils
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -89,10 +89,10 @@ POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
 target_triplet = x86_64-pc-linux-gnu
-am__append_1 = libecryptfs_key_mod_openssl.la
-#am__append_2 = libecryptfs_key_mod_pkcs11_helper.la
-#am__append_3 = libecryptfs_key_mod_tspi.la
-#am__append_4 = libecryptfs_key_mod_gpg.la
+am__append_1 = libtse_key_mod_openssl.la
+#am__append_2 = libtse_key_mod_pkcs11_helper.la
+#am__append_3 = libtse_key_mod_tspi.la
+#am__append_4 = libtse_key_mod_gpg.la
 subdir = src/key_mod
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_pkg_swig.m4 \
@@ -135,66 +135,64 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(ecryptfskeymoddir)"
-LTLIBRARIES = $(ecryptfskeymod_LTLIBRARIES)
+am__installdirs = "$(DESTDIR)$(tsekeymoddir)"
+LTLIBRARIES = $(tsekeymod_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-libecryptfs_key_mod_gpg_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am_libecryptfs_key_mod_gpg_la_OBJECTS =  \
-	libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.lo
-libecryptfs_key_mod_gpg_la_OBJECTS =  \
-	$(am_libecryptfs_key_mod_gpg_la_OBJECTS)
+libtse_key_mod_gpg_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_libtse_key_mod_gpg_la_OBJECTS =  \
+	libtse_key_mod_gpg_la-tse_key_mod_gpg.lo
+libtse_key_mod_gpg_la_OBJECTS = $(am_libtse_key_mod_gpg_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-libecryptfs_key_mod_gpg_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+libtse_key_mod_gpg_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(libecryptfs_key_mod_gpg_la_CFLAGS) $(CFLAGS) \
-	$(libecryptfs_key_mod_gpg_la_LDFLAGS) $(LDFLAGS) -o $@
-#am_libecryptfs_key_mod_gpg_la_rpath = -rpath \
-#	$(ecryptfskeymoddir)
-libecryptfs_key_mod_openssl_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am_libecryptfs_key_mod_openssl_la_OBJECTS =  \
-	libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.lo
-libecryptfs_key_mod_openssl_la_OBJECTS =  \
-	$(am_libecryptfs_key_mod_openssl_la_OBJECTS)
-libecryptfs_key_mod_openssl_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(libtse_key_mod_gpg_la_CFLAGS) $(CFLAGS) \
+	$(libtse_key_mod_gpg_la_LDFLAGS) $(LDFLAGS) -o $@
+#am_libtse_key_mod_gpg_la_rpath = -rpath \
+#	$(tsekeymoddir)
+libtse_key_mod_openssl_la_DEPENDENCIES =
+am_libtse_key_mod_openssl_la_OBJECTS =  \
+	libtse_key_mod_openssl_la-tse_key_mod_openssl.lo
+libtse_key_mod_openssl_la_OBJECTS =  \
+	$(am_libtse_key_mod_openssl_la_OBJECTS)
+libtse_key_mod_openssl_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(libecryptfs_key_mod_openssl_la_CFLAGS) $(CFLAGS) \
-	$(libecryptfs_key_mod_openssl_la_LDFLAGS) $(LDFLAGS) -o $@
-am_libecryptfs_key_mod_openssl_la_rpath = -rpath \
-	$(ecryptfskeymoddir)
-libecryptfs_key_mod_passphrase_la_DEPENDENCIES =
-am_libecryptfs_key_mod_passphrase_la_OBJECTS = libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.lo
-libecryptfs_key_mod_passphrase_la_OBJECTS =  \
-	$(am_libecryptfs_key_mod_passphrase_la_OBJECTS)
-libecryptfs_key_mod_passphrase_la_LINK = $(LIBTOOL) $(AM_V_lt) \
-	--tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
-	$(CCLD) $(libecryptfs_key_mod_passphrase_la_CFLAGS) $(CFLAGS) \
-	$(libecryptfs_key_mod_passphrase_la_LDFLAGS) $(LDFLAGS) -o $@
-libecryptfs_key_mod_pkcs11_helper_la_DEPENDENCIES =  \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
-am_libecryptfs_key_mod_pkcs11_helper_la_OBJECTS = libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.lo
-libecryptfs_key_mod_pkcs11_helper_la_OBJECTS =  \
-	$(am_libecryptfs_key_mod_pkcs11_helper_la_OBJECTS)
-libecryptfs_key_mod_pkcs11_helper_la_LINK = $(LIBTOOL) $(AM_V_lt) \
-	--tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
-	$(CCLD) $(libecryptfs_key_mod_pkcs11_helper_la_CFLAGS) \
-	$(CFLAGS) $(libecryptfs_key_mod_pkcs11_helper_la_LDFLAGS) \
-	$(LDFLAGS) -o $@
-#am_libecryptfs_key_mod_pkcs11_helper_la_rpath =  \
-#	-rpath $(ecryptfskeymoddir)
-libecryptfs_key_mod_tspi_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am_libecryptfs_key_mod_tspi_la_OBJECTS =  \
-	libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.lo
-libecryptfs_key_mod_tspi_la_OBJECTS =  \
-	$(am_libecryptfs_key_mod_tspi_la_OBJECTS)
-libecryptfs_key_mod_tspi_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(libtse_key_mod_openssl_la_CFLAGS) $(CFLAGS) \
+	$(libtse_key_mod_openssl_la_LDFLAGS) $(LDFLAGS) -o $@
+am_libtse_key_mod_openssl_la_rpath = -rpath \
+	$(tsekeymoddir)
+libtse_key_mod_passphrase_la_DEPENDENCIES =
+am_libtse_key_mod_passphrase_la_OBJECTS =  \
+	libtse_key_mod_passphrase_la-tse_key_mod_passphrase.lo
+libtse_key_mod_passphrase_la_OBJECTS =  \
+	$(am_libtse_key_mod_passphrase_la_OBJECTS)
+libtse_key_mod_passphrase_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(libecryptfs_key_mod_tspi_la_CFLAGS) $(CFLAGS) \
-	$(libecryptfs_key_mod_tspi_la_LDFLAGS) $(LDFLAGS) -o $@
-#am_libecryptfs_key_mod_tspi_la_rpath = -rpath \
-#	$(ecryptfskeymoddir)
+	$(libtse_key_mod_passphrase_la_CFLAGS) $(CFLAGS) \
+	$(libtse_key_mod_passphrase_la_LDFLAGS) $(LDFLAGS) -o $@
+libtse_key_mod_pkcs11_helper_la_DEPENDENCIES =
+am_libtse_key_mod_pkcs11_helper_la_OBJECTS =  \
+	libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.lo
+libtse_key_mod_pkcs11_helper_la_OBJECTS =  \
+	$(am_libtse_key_mod_pkcs11_helper_la_OBJECTS)
+libtse_key_mod_pkcs11_helper_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libtse_key_mod_pkcs11_helper_la_CFLAGS) $(CFLAGS) \
+	$(libtse_key_mod_pkcs11_helper_la_LDFLAGS) $(LDFLAGS) -o $@
+#am_libtse_key_mod_pkcs11_helper_la_rpath =  \
+#	-rpath $(tsekeymoddir)
+libtse_key_mod_tspi_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_libtse_key_mod_tspi_la_OBJECTS =  \
+	libtse_key_mod_tspi_la-tse_key_mod_tspi.lo
+libtse_key_mod_tspi_la_OBJECTS = $(am_libtse_key_mod_tspi_la_OBJECTS)
+libtse_key_mod_tspi_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libtse_key_mod_tspi_la_CFLAGS) $(CFLAGS) \
+	$(libtse_key_mod_tspi_la_LDFLAGS) $(LDFLAGS) -o $@
+#am_libtse_key_mod_tspi_la_rpath = -rpath \
+#	$(tsekeymoddir)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -229,16 +227,16 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libecryptfs_key_mod_gpg_la_SOURCES) \
-	$(libecryptfs_key_mod_openssl_la_SOURCES) \
-	$(libecryptfs_key_mod_passphrase_la_SOURCES) \
-	$(libecryptfs_key_mod_pkcs11_helper_la_SOURCES) \
-	$(libecryptfs_key_mod_tspi_la_SOURCES)
-DIST_SOURCES = $(libecryptfs_key_mod_gpg_la_SOURCES) \
-	$(libecryptfs_key_mod_openssl_la_SOURCES) \
-	$(libecryptfs_key_mod_passphrase_la_SOURCES) \
-	$(libecryptfs_key_mod_pkcs11_helper_la_SOURCES) \
-	$(libecryptfs_key_mod_tspi_la_SOURCES)
+SOURCES = $(libtse_key_mod_gpg_la_SOURCES) \
+	$(libtse_key_mod_openssl_la_SOURCES) \
+	$(libtse_key_mod_passphrase_la_SOURCES) \
+	$(libtse_key_mod_pkcs11_helper_la_SOURCES) \
+	$(libtse_key_mod_tspi_la_SOURCES)
+DIST_SOURCES = $(libtse_key_mod_gpg_la_SOURCES) \
+	$(libtse_key_mod_openssl_la_SOURCES) \
+	$(libtse_key_mod_passphrase_la_SOURCES) \
+	$(libtse_key_mod_pkcs11_helper_la_SOURCES) \
+	$(libtse_key_mod_tspi_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -265,18 +263,16 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /root/ecryptfs-utils-111/missing aclocal-1.15
+ACLOCAL = ${SHELL} /root/tse-utils-111/missing aclocal-1.15
 ALL_LINGUAS = 
 AMTAR = $${TAR-tar}
 AM_CPPFLAGS = -include $(top_builddir)/config.h
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /root/ecryptfs-utils-111/missing autoconf
-AUTOHEADER = ${SHELL} /root/ecryptfs-utils-111/missing autoheader
-AUTOMAKE = ${SHELL} /root/ecryptfs-utils-111/missing automake-1.15
+AUTOCONF = ${SHELL} /root/tse-utils-111/missing autoconf
+AUTOHEADER = ${SHELL} /root/tse-utils-111/missing autoheader
+AUTOMAKE = ${SHELL} /root/tse-utils-111/missing automake-1.15
 AWK = gawk
-CATALOGS = 
-CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -285,7 +281,6 @@ CPPFLAGS =
 CRYPTO_CFLAGS = -I/usr/include/nss3 -I/usr/include/nspr4   -DENABLE_NSS
 CRYPTO_LIBS = -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4 -lpthread -ldl  
 CYGPATH_W = echo
-DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DLLTOOL = false
@@ -298,21 +293,16 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 EXEEXT = 
 FGREP = /usr/bin/grep -F
-GETTEXT_PACKAGE = ecryptfs-utils
-GMOFILES = 
+GETTEXT_PACKAGE = tse-utils
 GMSGFMT = /usr/bin/msgfmt
 GPGME_CFLAGS = 
 GPGME_LIBS = 
 GREP = /usr/bin/grep
-GTK_CFLAGS = 
-GTK_LIBS = 
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-INSTOBJEXT = .mo
-INTLLIBS = 
 INTLTOOL_EXTRACT = /usr/bin/intltool-extract
 INTLTOOL_MERGE = /usr/bin/intltool-merge
 INTLTOOL_PERL = /usr/bin/perl
@@ -327,54 +317,39 @@ LATEX =
 LATEX2HTML = 
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
-LIBECRYPTFS_LT_AGE = 0
-LIBECRYPTFS_LT_CURRENT = 1
-LIBECRYPTFS_LT_REVISION = 0
 LIBOBJS = 
 LIBS = -ldl 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIBTSE_LT_AGE = 0
+LIBTSE_LT_CURRENT = 1
+LIBTSE_LT_REVISION = 0
 LIPO = 
 LN_S = ln -s
 LOCALEDIR = ${prefix}/${datadir}/locale
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /root/ecryptfs-utils-111/missing makeinfo
+MAKEINFO = ${SHELL} /root/tse-utils-111/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
-MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
-MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
 NM = /usr/bin/nm -B
 NMEDIT = 
-NSS_CFLAGS = -I/usr/include/nss3 -I/usr/include/nspr4   -DENABLE_NSS
-NSS_LIBS = -lssl3 -lsmime3 -lnss3 -lnssutil3 -lplds4 -lplc4 -lnspr4 -lpthread -ldl  
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSL_CFLAGS =  
-OPENSSL_LIBS = -lcrypto  
 OTOOL = 
 OTOOL64 = 
-PACKAGE = ecryptfs-utils
+PACKAGE = tse-utils
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = ecryptfs-utils
-PACKAGE_STRING = ecryptfs-utils 111
-PACKAGE_TARNAME = ecryptfs-utils
+PACKAGE_NAME = tse-utils
+PACKAGE_STRING = tse-utils 111
+PACKAGE_TARNAME = tse-utils
 PACKAGE_URL = 
 PACKAGE_VERSION = 111
 PAM_CFLAGS = 
 PAM_LIBS = -lpam  -lpam_misc
 PATH_SEPARATOR = :
-PKCS11_HELPER_CFLAGS = 
-PKCS11_HELPER_LIBS = 
-PKG_CONFIG = /usr/bin/pkg-config
-PKG_CONFIG_LIBDIR = 
-PKG_CONFIG_PATH = 
 POD2MAN = /usr/bin/pod2man
-POFILES = 
-POSUB = po
-PO_IN_DATADIR_FALSE = 
-PO_IN_DATADIR_TRUE = 
 PS2PDF = /usr/bin/ps2pdf
 PYTHON = /usr/bin/python
 PYTHON_CPPFLAGS = -I/usr/include/python2.7 -I/usr/include/python2.7
@@ -398,13 +373,12 @@ SWIG_PYTHON_OPT = -python
 TAR = /usr/bin/tar
 TSPI_CFLAGS = 
 TSPI_LIBS = 
-USE_NLS = yes
 VERSION = 111
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /root/ecryptfs-utils-111/src/key_mod
-abs_srcdir = /root/ecryptfs-utils-111/src/key_mod
-abs_top_builddir = /root/ecryptfs-utils-111
-abs_top_srcdir = /root/ecryptfs-utils-111
+abs_builddir = /root/tse-utils-111/src/key_mod
+abs_srcdir = /root/tse-utils-111/src/key_mod
+abs_top_builddir = /root/tse-utils-111
+abs_top_srcdir = /root/tse-utils-111
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -424,7 +398,6 @@ datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
-ecryptfskeymoddir = $(libdir)/ecryptfs
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
 host_alias = 
@@ -434,7 +407,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /root/ecryptfs-utils-111/install-sh
+install_sh = ${SHELL} /root/tse-utils-111/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 libdir = ${exec_prefix}/lib
@@ -448,15 +421,14 @@ pamdir = /lib/security
 pamlibdir = 
 pdfdir = ${docdir}
 pkgconfigdir = $(libdir)/pkgconfig
-pkgpyexecdir = ${pyexecdir}/ecryptfs-utils
-pkgpythondir = ${pythondir}/ecryptfs-utils
+pkgpyexecdir = ${pyexecdir}/tse-utils
+pkgpythondir = ${pythondir}/tse-utils
 prefix = /usr
 program_transform_name = s,x,x,
 psdir = ${docdir}
 pyexecdir = ${exec_prefix}/lib64/python2.7/site-packages
 pythondir = ${prefix}/lib/python2.7/site-packages
 rootsbindir = /sbin
-runstatedir = ${localstatedir}/run
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
@@ -469,30 +441,30 @@ target_vendor = pc
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
+tsekeymoddir = $(libdir)/tse
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
-ecryptfskeymod_LTLIBRARIES = libecryptfs_key_mod_passphrase.la \
-	$(am__append_1) $(am__append_2) $(am__append_3) \
-	$(am__append_4)
-libecryptfs_key_mod_openssl_la_SOURCES = ecryptfs_key_mod_openssl.c
-libecryptfs_key_mod_openssl_la_CFLAGS = $(AM_CFLAGS) $(OPENSSL_CFLAGS)
-libecryptfs_key_mod_openssl_la_LIBADD = $(OPENSSL_LIBS)
-libecryptfs_key_mod_openssl_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
-libecryptfs_key_mod_pkcs11_helper_la_SOURCES = ecryptfs_key_mod_pkcs11_helper.c
-libecryptfs_key_mod_pkcs11_helper_la_CFLAGS = $(AM_CFLAGS) $(PKCS11_HELPER_CFLAGS) $(OPENSSL_CFLAGS)
-libecryptfs_key_mod_pkcs11_helper_la_LIBADD = $(PKCS11_HELPER_LIBS) $(OPENSSL_LIBS)
-libecryptfs_key_mod_pkcs11_helper_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
-libecryptfs_key_mod_tspi_la_SOURCES = ecryptfs_key_mod_tspi.c
-libecryptfs_key_mod_tspi_la_CFLAGS = $(AM_CFLAGS) $(TSPI_CFLAGS)
-libecryptfs_key_mod_tspi_la_LIBADD = $(TSPI_LIBS)
-libecryptfs_key_mod_tspi_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
-libecryptfs_key_mod_gpg_la_SOURCES = ecryptfs_key_mod_gpg.c
-libecryptfs_key_mod_gpg_la_CFLAGS = $(AM_CFLAGS) $(GPGME_CFLAGS)
-libecryptfs_key_mod_gpg_la_LIBADD = $(GPGME_LIBS)
-libecryptfs_key_mod_gpg_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
-libecryptfs_key_mod_passphrase_la_SOURCES = ecryptfs_key_mod_passphrase.c
-libecryptfs_key_mod_passphrase_la_CFLAGS = $(AM_CFLAGS) $(LIBGCRYPT_CFLAGS)
-libecryptfs_key_mod_passphrase_la_LIBADD = $(LIBGCRYPT_LIBS)
-libecryptfs_key_mod_passphrase_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
+tsekeymod_LTLIBRARIES = libtse_key_mod_passphrase.la $(am__append_1) \
+	$(am__append_2) $(am__append_3) $(am__append_4)
+libtse_key_mod_openssl_la_SOURCES = tse_key_mod_openssl.c
+libtse_key_mod_openssl_la_CFLAGS = $(AM_CFLAGS) $(OPENSSL_CFLAGS)
+libtse_key_mod_openssl_la_LIBADD = $(OPENSSL_LIBS)
+libtse_key_mod_openssl_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
+libtse_key_mod_pkcs11_helper_la_SOURCES = tse_key_mod_pkcs11_helper.c
+libtse_key_mod_pkcs11_helper_la_CFLAGS = $(AM_CFLAGS) $(PKCS11_HELPER_CFLAGS) $(OPENSSL_CFLAGS)
+libtse_key_mod_pkcs11_helper_la_LIBADD = $(PKCS11_HELPER_LIBS) $(OPENSSL_LIBS)
+libtse_key_mod_pkcs11_helper_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
+libtse_key_mod_tspi_la_SOURCES = tse_key_mod_tspi.c
+libtse_key_mod_tspi_la_CFLAGS = $(AM_CFLAGS) $(TSPI_CFLAGS)
+libtse_key_mod_tspi_la_LIBADD = $(TSPI_LIBS)
+libtse_key_mod_tspi_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
+libtse_key_mod_gpg_la_SOURCES = tse_key_mod_gpg.c
+libtse_key_mod_gpg_la_CFLAGS = $(AM_CFLAGS) $(GPGME_CFLAGS)
+libtse_key_mod_gpg_la_LIBADD = $(GPGME_LIBS)
+libtse_key_mod_gpg_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
+libtse_key_mod_passphrase_la_SOURCES = tse_key_mod_passphrase.c
+libtse_key_mod_passphrase_la_CFLAGS = $(AM_CFLAGS) $(LIBGCRYPT_CFLAGS)
+libtse_key_mod_passphrase_la_LIBADD = $(LIBGCRYPT_LIBS)
+libtse_key_mod_passphrase_la_LDFLAGS = $(AM_LDFLAGS) -module -avoid-version -shared
 all: all-am
 
 .SUFFIXES:
@@ -527,33 +499,33 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
-install-ecryptfskeymodLTLIBRARIES: $(ecryptfskeymod_LTLIBRARIES)
+install-tsekeymodLTLIBRARIES: $(tsekeymod_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
-	@list='$(ecryptfskeymod_LTLIBRARIES)'; test -n "$(ecryptfskeymoddir)" || list=; \
+	@list='$(tsekeymod_LTLIBRARIES)'; test -n "$(tsekeymoddir)" || list=; \
 	list2=; for p in $$list; do \
 	  if test -f $$p; then \
 	    list2="$$list2 $$p"; \
 	  else :; fi; \
 	done; \
 	test -z "$$list2" || { \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(ecryptfskeymoddir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(ecryptfskeymoddir)" || exit 1; \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(ecryptfskeymoddir)'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(ecryptfskeymoddir)"; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(tsekeymoddir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(tsekeymoddir)" || exit 1; \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(tsekeymoddir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(tsekeymoddir)"; \
 	}
 
-uninstall-ecryptfskeymodLTLIBRARIES:
+uninstall-tsekeymodLTLIBRARIES:
 	@$(NORMAL_UNINSTALL)
-	@list='$(ecryptfskeymod_LTLIBRARIES)'; test -n "$(ecryptfskeymoddir)" || list=; \
+	@list='$(tsekeymod_LTLIBRARIES)'; test -n "$(tsekeymoddir)" || list=; \
 	for p in $$list; do \
 	  $(am__strip_dir) \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(ecryptfskeymoddir)/$$f'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(ecryptfskeymoddir)/$$f"; \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(tsekeymoddir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(tsekeymoddir)/$$f"; \
 	done
 
-clean-ecryptfskeymodLTLIBRARIES:
-	-test -z "$(ecryptfskeymod_LTLIBRARIES)" || rm -f $(ecryptfskeymod_LTLIBRARIES)
-	@list='$(ecryptfskeymod_LTLIBRARIES)'; \
+clean-tsekeymodLTLIBRARIES:
+	-test -z "$(tsekeymod_LTLIBRARIES)" || rm -f $(tsekeymod_LTLIBRARIES)
+	@list='$(tsekeymod_LTLIBRARIES)'; \
 	locs=`for p in $$list; do echo $$p; done | \
 	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
 	      sort -u`; \
@@ -562,20 +534,20 @@ clean-ecryptfskeymodLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
-libecryptfs_key_mod_gpg.la: $(libecryptfs_key_mod_gpg_la_OBJECTS) $(libecryptfs_key_mod_gpg_la_DEPENDENCIES) $(EXTRA_libecryptfs_key_mod_gpg_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libecryptfs_key_mod_gpg_la_LINK) $(am_libecryptfs_key_mod_gpg_la_rpath) $(libecryptfs_key_mod_gpg_la_OBJECTS) $(libecryptfs_key_mod_gpg_la_LIBADD) $(LIBS)
+libtse_key_mod_gpg.la: $(libtse_key_mod_gpg_la_OBJECTS) $(libtse_key_mod_gpg_la_DEPENDENCIES) $(EXTRA_libtse_key_mod_gpg_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libtse_key_mod_gpg_la_LINK) $(am_libtse_key_mod_gpg_la_rpath) $(libtse_key_mod_gpg_la_OBJECTS) $(libtse_key_mod_gpg_la_LIBADD) $(LIBS)
 
-libecryptfs_key_mod_openssl.la: $(libecryptfs_key_mod_openssl_la_OBJECTS) $(libecryptfs_key_mod_openssl_la_DEPENDENCIES) $(EXTRA_libecryptfs_key_mod_openssl_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libecryptfs_key_mod_openssl_la_LINK) $(am_libecryptfs_key_mod_openssl_la_rpath) $(libecryptfs_key_mod_openssl_la_OBJECTS) $(libecryptfs_key_mod_openssl_la_LIBADD) $(LIBS)
+libtse_key_mod_openssl.la: $(libtse_key_mod_openssl_la_OBJECTS) $(libtse_key_mod_openssl_la_DEPENDENCIES) $(EXTRA_libtse_key_mod_openssl_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libtse_key_mod_openssl_la_LINK) $(am_libtse_key_mod_openssl_la_rpath) $(libtse_key_mod_openssl_la_OBJECTS) $(libtse_key_mod_openssl_la_LIBADD) $(LIBS)
 
-libecryptfs_key_mod_passphrase.la: $(libecryptfs_key_mod_passphrase_la_OBJECTS) $(libecryptfs_key_mod_passphrase_la_DEPENDENCIES) $(EXTRA_libecryptfs_key_mod_passphrase_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libecryptfs_key_mod_passphrase_la_LINK) -rpath $(ecryptfskeymoddir) $(libecryptfs_key_mod_passphrase_la_OBJECTS) $(libecryptfs_key_mod_passphrase_la_LIBADD) $(LIBS)
+libtse_key_mod_passphrase.la: $(libtse_key_mod_passphrase_la_OBJECTS) $(libtse_key_mod_passphrase_la_DEPENDENCIES) $(EXTRA_libtse_key_mod_passphrase_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libtse_key_mod_passphrase_la_LINK) -rpath $(tsekeymoddir) $(libtse_key_mod_passphrase_la_OBJECTS) $(libtse_key_mod_passphrase_la_LIBADD) $(LIBS)
 
-libecryptfs_key_mod_pkcs11_helper.la: $(libecryptfs_key_mod_pkcs11_helper_la_OBJECTS) $(libecryptfs_key_mod_pkcs11_helper_la_DEPENDENCIES) $(EXTRA_libecryptfs_key_mod_pkcs11_helper_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libecryptfs_key_mod_pkcs11_helper_la_LINK) $(am_libecryptfs_key_mod_pkcs11_helper_la_rpath) $(libecryptfs_key_mod_pkcs11_helper_la_OBJECTS) $(libecryptfs_key_mod_pkcs11_helper_la_LIBADD) $(LIBS)
+libtse_key_mod_pkcs11_helper.la: $(libtse_key_mod_pkcs11_helper_la_OBJECTS) $(libtse_key_mod_pkcs11_helper_la_DEPENDENCIES) $(EXTRA_libtse_key_mod_pkcs11_helper_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libtse_key_mod_pkcs11_helper_la_LINK) $(am_libtse_key_mod_pkcs11_helper_la_rpath) $(libtse_key_mod_pkcs11_helper_la_OBJECTS) $(libtse_key_mod_pkcs11_helper_la_LIBADD) $(LIBS)
 
-libecryptfs_key_mod_tspi.la: $(libecryptfs_key_mod_tspi_la_OBJECTS) $(libecryptfs_key_mod_tspi_la_DEPENDENCIES) $(EXTRA_libecryptfs_key_mod_tspi_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libecryptfs_key_mod_tspi_la_LINK) $(am_libecryptfs_key_mod_tspi_la_rpath) $(libecryptfs_key_mod_tspi_la_OBJECTS) $(libecryptfs_key_mod_tspi_la_LIBADD) $(LIBS)
+libtse_key_mod_tspi.la: $(libtse_key_mod_tspi_la_OBJECTS) $(libtse_key_mod_tspi_la_DEPENDENCIES) $(EXTRA_libtse_key_mod_tspi_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libtse_key_mod_tspi_la_LINK) $(am_libtse_key_mod_tspi_la_rpath) $(libtse_key_mod_tspi_la_OBJECTS) $(libtse_key_mod_tspi_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -583,11 +555,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.Plo
-include ./$(DEPDIR)/libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.Plo
-include ./$(DEPDIR)/libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.Plo
-include ./$(DEPDIR)/libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.Plo
-include ./$(DEPDIR)/libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.Plo
+include ./$(DEPDIR)/libtse_key_mod_gpg_la-tse_key_mod_gpg.Plo
+include ./$(DEPDIR)/libtse_key_mod_openssl_la-tse_key_mod_openssl.Plo
+include ./$(DEPDIR)/libtse_key_mod_passphrase_la-tse_key_mod_passphrase.Plo
+include ./$(DEPDIR)/libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.Plo
+include ./$(DEPDIR)/libtse_key_mod_tspi_la-tse_key_mod_tspi.Plo
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -610,40 +582,40 @@ include ./$(DEPDIR)/libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.Plo
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(LTCOMPILE) -c -o $@ $<
 
-libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.lo: ecryptfs_key_mod_gpg.c
-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_gpg_la_CFLAGS) $(CFLAGS) -MT libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.lo -MD -MP -MF $(DEPDIR)/libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.Tpo -c -o libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.lo `test -f 'ecryptfs_key_mod_gpg.c' || echo '$(srcdir)/'`ecryptfs_key_mod_gpg.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.Tpo $(DEPDIR)/libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.Plo
-#	$(AM_V_CC)source='ecryptfs_key_mod_gpg.c' object='libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.lo' libtool=yes \
+libtse_key_mod_gpg_la-tse_key_mod_gpg.lo: tse_key_mod_gpg.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_gpg_la_CFLAGS) $(CFLAGS) -MT libtse_key_mod_gpg_la-tse_key_mod_gpg.lo -MD -MP -MF $(DEPDIR)/libtse_key_mod_gpg_la-tse_key_mod_gpg.Tpo -c -o libtse_key_mod_gpg_la-tse_key_mod_gpg.lo `test -f 'tse_key_mod_gpg.c' || echo '$(srcdir)/'`tse_key_mod_gpg.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libtse_key_mod_gpg_la-tse_key_mod_gpg.Tpo $(DEPDIR)/libtse_key_mod_gpg_la-tse_key_mod_gpg.Plo
+#	$(AM_V_CC)source='tse_key_mod_gpg.c' object='libtse_key_mod_gpg_la-tse_key_mod_gpg.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_gpg_la_CFLAGS) $(CFLAGS) -c -o libecryptfs_key_mod_gpg_la-ecryptfs_key_mod_gpg.lo `test -f 'ecryptfs_key_mod_gpg.c' || echo '$(srcdir)/'`ecryptfs_key_mod_gpg.c
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_gpg_la_CFLAGS) $(CFLAGS) -c -o libtse_key_mod_gpg_la-tse_key_mod_gpg.lo `test -f 'tse_key_mod_gpg.c' || echo '$(srcdir)/'`tse_key_mod_gpg.c
 
-libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.lo: ecryptfs_key_mod_openssl.c
-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_openssl_la_CFLAGS) $(CFLAGS) -MT libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.lo -MD -MP -MF $(DEPDIR)/libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.Tpo -c -o libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.lo `test -f 'ecryptfs_key_mod_openssl.c' || echo '$(srcdir)/'`ecryptfs_key_mod_openssl.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.Tpo $(DEPDIR)/libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.Plo
-#	$(AM_V_CC)source='ecryptfs_key_mod_openssl.c' object='libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.lo' libtool=yes \
+libtse_key_mod_openssl_la-tse_key_mod_openssl.lo: tse_key_mod_openssl.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_openssl_la_CFLAGS) $(CFLAGS) -MT libtse_key_mod_openssl_la-tse_key_mod_openssl.lo -MD -MP -MF $(DEPDIR)/libtse_key_mod_openssl_la-tse_key_mod_openssl.Tpo -c -o libtse_key_mod_openssl_la-tse_key_mod_openssl.lo `test -f 'tse_key_mod_openssl.c' || echo '$(srcdir)/'`tse_key_mod_openssl.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libtse_key_mod_openssl_la-tse_key_mod_openssl.Tpo $(DEPDIR)/libtse_key_mod_openssl_la-tse_key_mod_openssl.Plo
+#	$(AM_V_CC)source='tse_key_mod_openssl.c' object='libtse_key_mod_openssl_la-tse_key_mod_openssl.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_openssl_la_CFLAGS) $(CFLAGS) -c -o libecryptfs_key_mod_openssl_la-ecryptfs_key_mod_openssl.lo `test -f 'ecryptfs_key_mod_openssl.c' || echo '$(srcdir)/'`ecryptfs_key_mod_openssl.c
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_openssl_la_CFLAGS) $(CFLAGS) -c -o libtse_key_mod_openssl_la-tse_key_mod_openssl.lo `test -f 'tse_key_mod_openssl.c' || echo '$(srcdir)/'`tse_key_mod_openssl.c
 
-libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.lo: ecryptfs_key_mod_passphrase.c
-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_passphrase_la_CFLAGS) $(CFLAGS) -MT libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.lo -MD -MP -MF $(DEPDIR)/libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.Tpo -c -o libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.lo `test -f 'ecryptfs_key_mod_passphrase.c' || echo '$(srcdir)/'`ecryptfs_key_mod_passphrase.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.Tpo $(DEPDIR)/libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.Plo
-#	$(AM_V_CC)source='ecryptfs_key_mod_passphrase.c' object='libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.lo' libtool=yes \
+libtse_key_mod_passphrase_la-tse_key_mod_passphrase.lo: tse_key_mod_passphrase.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_passphrase_la_CFLAGS) $(CFLAGS) -MT libtse_key_mod_passphrase_la-tse_key_mod_passphrase.lo -MD -MP -MF $(DEPDIR)/libtse_key_mod_passphrase_la-tse_key_mod_passphrase.Tpo -c -o libtse_key_mod_passphrase_la-tse_key_mod_passphrase.lo `test -f 'tse_key_mod_passphrase.c' || echo '$(srcdir)/'`tse_key_mod_passphrase.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libtse_key_mod_passphrase_la-tse_key_mod_passphrase.Tpo $(DEPDIR)/libtse_key_mod_passphrase_la-tse_key_mod_passphrase.Plo
+#	$(AM_V_CC)source='tse_key_mod_passphrase.c' object='libtse_key_mod_passphrase_la-tse_key_mod_passphrase.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_passphrase_la_CFLAGS) $(CFLAGS) -c -o libecryptfs_key_mod_passphrase_la-ecryptfs_key_mod_passphrase.lo `test -f 'ecryptfs_key_mod_passphrase.c' || echo '$(srcdir)/'`ecryptfs_key_mod_passphrase.c
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_passphrase_la_CFLAGS) $(CFLAGS) -c -o libtse_key_mod_passphrase_la-tse_key_mod_passphrase.lo `test -f 'tse_key_mod_passphrase.c' || echo '$(srcdir)/'`tse_key_mod_passphrase.c
 
-libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.lo: ecryptfs_key_mod_pkcs11_helper.c
-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_pkcs11_helper_la_CFLAGS) $(CFLAGS) -MT libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.lo -MD -MP -MF $(DEPDIR)/libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.Tpo -c -o libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.lo `test -f 'ecryptfs_key_mod_pkcs11_helper.c' || echo '$(srcdir)/'`ecryptfs_key_mod_pkcs11_helper.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.Tpo $(DEPDIR)/libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.Plo
-#	$(AM_V_CC)source='ecryptfs_key_mod_pkcs11_helper.c' object='libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.lo' libtool=yes \
+libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.lo: tse_key_mod_pkcs11_helper.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_pkcs11_helper_la_CFLAGS) $(CFLAGS) -MT libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.lo -MD -MP -MF $(DEPDIR)/libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.Tpo -c -o libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.lo `test -f 'tse_key_mod_pkcs11_helper.c' || echo '$(srcdir)/'`tse_key_mod_pkcs11_helper.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.Tpo $(DEPDIR)/libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.Plo
+#	$(AM_V_CC)source='tse_key_mod_pkcs11_helper.c' object='libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_pkcs11_helper_la_CFLAGS) $(CFLAGS) -c -o libecryptfs_key_mod_pkcs11_helper_la-ecryptfs_key_mod_pkcs11_helper.lo `test -f 'ecryptfs_key_mod_pkcs11_helper.c' || echo '$(srcdir)/'`ecryptfs_key_mod_pkcs11_helper.c
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_pkcs11_helper_la_CFLAGS) $(CFLAGS) -c -o libtse_key_mod_pkcs11_helper_la-tse_key_mod_pkcs11_helper.lo `test -f 'tse_key_mod_pkcs11_helper.c' || echo '$(srcdir)/'`tse_key_mod_pkcs11_helper.c
 
-libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.lo: ecryptfs_key_mod_tspi.c
-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_tspi_la_CFLAGS) $(CFLAGS) -MT libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.lo -MD -MP -MF $(DEPDIR)/libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.Tpo -c -o libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.lo `test -f 'ecryptfs_key_mod_tspi.c' || echo '$(srcdir)/'`ecryptfs_key_mod_tspi.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.Tpo $(DEPDIR)/libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.Plo
-#	$(AM_V_CC)source='ecryptfs_key_mod_tspi.c' object='libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.lo' libtool=yes \
+libtse_key_mod_tspi_la-tse_key_mod_tspi.lo: tse_key_mod_tspi.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_tspi_la_CFLAGS) $(CFLAGS) -MT libtse_key_mod_tspi_la-tse_key_mod_tspi.lo -MD -MP -MF $(DEPDIR)/libtse_key_mod_tspi_la-tse_key_mod_tspi.Tpo -c -o libtse_key_mod_tspi_la-tse_key_mod_tspi.lo `test -f 'tse_key_mod_tspi.c' || echo '$(srcdir)/'`tse_key_mod_tspi.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libtse_key_mod_tspi_la-tse_key_mod_tspi.Tpo $(DEPDIR)/libtse_key_mod_tspi_la-tse_key_mod_tspi.Plo
+#	$(AM_V_CC)source='tse_key_mod_tspi.c' object='libtse_key_mod_tspi_la-tse_key_mod_tspi.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libecryptfs_key_mod_tspi_la_CFLAGS) $(CFLAGS) -c -o libecryptfs_key_mod_tspi_la-ecryptfs_key_mod_tspi.lo `test -f 'ecryptfs_key_mod_tspi.c' || echo '$(srcdir)/'`ecryptfs_key_mod_tspi.c
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtse_key_mod_tspi_la_CFLAGS) $(CFLAGS) -c -o libtse_key_mod_tspi_la-tse_key_mod_tspi.lo `test -f 'tse_key_mod_tspi.c' || echo '$(srcdir)/'`tse_key_mod_tspi.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -737,7 +709,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES)
 installdirs:
-	for dir in "$(DESTDIR)$(ecryptfskeymoddir)"; do \
+	for dir in "$(DESTDIR)$(tsekeymoddir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -773,7 +745,7 @@ maintainer-clean-generic:
 	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
-clean-am: clean-ecryptfskeymodLTLIBRARIES clean-generic clean-libtool \
+clean-am: clean-generic clean-libtool clean-tsekeymodLTLIBRARIES \
 	mostlyclean-am
 
 distclean: distclean-am
@@ -794,7 +766,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-ecryptfskeymodLTLIBRARIES
+install-data-am: install-tsekeymodLTLIBRARIES
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-am
@@ -841,38 +813,37 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-ecryptfskeymodLTLIBRARIES uninstall-local
+uninstall-am: uninstall-local uninstall-tsekeymodLTLIBRARIES
 
 .MAKE: install-am install-data-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am check check-am clean \
-	clean-ecryptfskeymodLTLIBRARIES clean-generic clean-libtool \
-	cscopelist-am ctags ctags-am distclean distclean-compile \
-	distclean-generic distclean-libtool distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-data-hook install-dvi \
-	install-dvi-am install-ecryptfskeymodLTLIBRARIES install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am \
-	uninstall-ecryptfskeymodLTLIBRARIES uninstall-local
+.PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
+	clean-libtool clean-tsekeymodLTLIBRARIES cscopelist-am ctags \
+	ctags-am distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-data-hook install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	install-tsekeymodLTLIBRARIES installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am uninstall-local uninstall-tsekeymodLTLIBRARIES
 
 .PRECIOUS: Makefile
 
 
 # Needed until libtool-2
-install-data-hook:	install-ecryptfskeymodLTLIBRARIES
-	for f in `echo "$(ecryptfskeymod_LTLIBRARIES)" | $(SED) 's/\.la//g'`; do \
-		rm -f "$(DESTDIR)$(ecryptfskeymoddir)/$$f.la"; \
-		rm -f "$(DESTDIR)$(ecryptfskeymoddir)/$$f.a"; \
+install-data-hook:	install-tsekeymodLTLIBRARIES
+	for f in `echo "$(tsekeymod_LTLIBRARIES)" | $(SED) 's/\.la//g'`; do \
+		rm -f "$(DESTDIR)$(tsekeymoddir)/$$f.la"; \
+		rm -f "$(DESTDIR)$(tsekeymoddir)/$$f.a"; \
 	done
 uninstall-local:
-	for f in `echo "$(ecryptfskeymod_LTLIBRARIES)" | $(SED) 's/\.la//g'`; do \
-		rm -f "$(DESTDIR)$(ecryptfskeymoddir)/$$f.so"; \
+	for f in `echo "$(tsekeymod_LTLIBRARIES)" | $(SED) 's/\.la//g'`; do \
+		rm -f "$(DESTDIR)$(tsekeymoddir)/$$f.so"; \
 	done
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

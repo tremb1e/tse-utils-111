@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# eCryptfs test suite harness
+# Tse test suite harness
 # Author: Tyler Hicks <tyhicks@canonical.com>
 #
 # Copyright (C) 2012 Canonical, Ltd.
@@ -25,7 +25,7 @@
 #
 # This would run kernel tests in the destructive category, as defined in
 # kernel/tests.rc. /dev/vdb would be the block device containing the lower
-# filesystem, which would be mounted at /lower. The eCryptfs mount point would
+# filesystem, which would be mounted at /lower. The Tse mount point would
 # be /upper.
 #
 
@@ -86,11 +86,11 @@ run_tests()
 
 run_kernel_tests_on_existing_device()
 {
-	echo "Running eCryptfs filesystem tests"
+	echo "Running Tse filesystem tests"
 
 	run_tests "${run_tests_dir}/kernel" "$ktests"
 	if [ $? -ne 0 ]; then
-		echo "Failed to run eCryptfs filesystem tests" 1>&2
+		echo "Failed to run Tse filesystem tests" 1>&2
 		rc=1
 		exit
 	fi
@@ -104,7 +104,7 @@ run_kernel_tests_on_created_disk_image()
 {
 	lower_fses=$(echo $lower_fses | tr ',' ' ')
 	for lower_fs in $lower_fses; do
-		echo "Running eCryptfs filesystem tests on $lower_fs"
+		echo "Running Tse filesystem tests on $lower_fs"
 
 		if [ "$blocks" -gt 0 ]; then
 			export ETL_LFS=$lower_fs
@@ -119,7 +119,7 @@ run_kernel_tests_on_created_disk_image()
 
 		run_tests "${run_tests_dir}/kernel" "$ktests"
 		if [ $? -ne 0 ]; then
-			echo "Failed to run eCryptfs filesystem tests on"\
+			echo "Failed to run Tse filesystem tests on"\
 			     "$lower_fs" 1>&2
 			rc=1
 			exit
@@ -138,7 +138,7 @@ usage()
 	echo "  or:  $(basename $0) [options] -U -c categories"
 	echo "  or:  $(basename $0) [options] -K -U -c categories -b blocks"
 	echo
-	echo "eCryptfs test harness"
+	echo "Tse test harness"
 	echo
 	echo "  -b blocks	number of 1K blocks used when creating backing "
 	echo "		disk for lower filesystem (not compatible "
@@ -330,7 +330,7 @@ if $userspace ; then
 		done
 	fi
 
-	echo "Running eCryptfs userspace tests"
+	echo "Running Tse userspace tests"
 
 	run_tests "${run_tests_dir}/userspace" "$utests"
 	if [ $? -ne 0 ]; then

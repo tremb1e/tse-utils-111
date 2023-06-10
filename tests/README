@@ -1,4 +1,4 @@
-eCryptfs Test Suite
+Tse Test Suite
 
 Follow these steps when adding a new test:
 
@@ -51,7 +51,7 @@ Follow these steps when adding a new test:
     ---
 
  4) Now you can start writing the test. You'll probably need to set up a basic
-    eCryptfs mount. You can do that by pasting in these sequence of helper
+    Tse mount. You can do that by pasting in these sequence of helper
     functions after the "# TEST" line in your new test case:
 
     ---
@@ -67,8 +67,8 @@ Follow these steps when adding a new test:
     available and feel free to add any new functions if you feel like they would
     benefit multiple test cases.
 
- 5) At this point, we have a lower filesystem mounted, an eCryptfs filesystem
-    mounted on top of it, and a test directory created inside of the eCryptfs
+ 5) At this point, we have a lower filesystem mounted, an Tse filesystem
+    mounted on top of it, and a test directory created inside of the Tse
     mount. We'll need to properly tear all of that down when the test case
     exits, so update the test_cleanup() function accordingly:
 

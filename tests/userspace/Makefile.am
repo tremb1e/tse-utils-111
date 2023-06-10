@@ -20,13 +20,13 @@ endif
 lfs_test_SOURCES = lfs/test.c
 
 verify_passphrase_sig_test_SOURCES = verify-passphrase-sig/test.c
-verify_passphrase_sig_test_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
+verify_passphrase_sig_test_LDADD = $(top_builddir)/src/libtse/libtse.la
 
 wrap_unwrap_test_SOURCES = wrap-unwrap/test.c
-wrap_unwrap_test_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
+wrap_unwrap_test_LDADD = $(top_builddir)/src/libtse/libtse.la
 
 v1_to_v2_wrapped_passphrase_test_SOURCES = v1-to-v2-wrapped-passphrase/test.c
-v1_to_v2_wrapped_passphrase_test_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
+v1_to_v2_wrapped_passphrase_test_LDADD = $(top_builddir)/src/libtse/libtse.la
 
 TESTS = lfs.sh verify-passphrase-sig.sh wrap-unwrap.sh v1-to-v2-wrapped-passphrase.sh
 

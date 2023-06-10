@@ -1,6 +1,6 @@
 /**
- * etl_add_passphrase_key_to_keyring: C bindings for libecryptfs's
- * 			ecryptfs_add_passphrase_key_to_keyring() function
+ * etl_add_passphrase_key_to_keyring: C bindings for libtse's
+ * 			tse_add_passphrase_key_to_keyring() function
  * Author: Tyler Hicks <tyhicks@canonical.com>
  *
  * Copyright (C) 2012 Canonical, Ltd.
@@ -23,12 +23,12 @@
 
 #include <errno.h>
 #include <stdio.h>
-#include "../../src/include/ecryptfs.h"
+#include "../../src/include/tse.h"
 
 int main(int argc, char *argv[])
 {
-	char auth_tok_sig_hex[ECRYPTFS_SIG_SIZE_HEX + 1];
-	char salt[ECRYPTFS_SALT_SIZE + 1];
+	char auth_tok_sig_hex[TSE_SIG_SIZE_HEX + 1];
+	char salt[TSE_SALT_SIZE + 1];
 	int rc;
 
 	if (argc != 3) {
@@ -36,12 +36,12 @@ int main(int argc, char *argv[])
 		return EINVAL;
 	}
 
-	rc = ecryptfs_validate_keyring();
+	rc = tse_validate_keyring();
 	if (rc)
 		return errno;
 
-	from_hex(salt, argv[2], ECRYPTFS_SALT_SIZE);
-	rc = ecryptfs_add_passphrase_key_to_keyring(auth_tok_sig_hex, argv[1],
+	from_hex(salt, argv[2], TSE_SALT_SIZE);
+	rc = tse_add_passphrase_key_to_keyring(auth_tok_sig_hex, argv[1],
 						    salt);
 	/* If the key is already added to the keyring, 1 is returned */
 	if (rc == 1)

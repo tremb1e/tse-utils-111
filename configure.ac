@@ -10,40 +10,40 @@
 
 
 AC_PREREQ(2.59)
-AC_INIT([ecryptfs-utils],[111])
+AC_INIT([tse-utils],[111])
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([${PACKAGE_NAME}], [${PACKAGE_VERSION}])
-AC_CONFIG_SRCDIR([src/libecryptfs])
+AC_CONFIG_SRCDIR([src/libtse])
 AC_CONFIG_HEADERS([config.h])
 AC_SUBST(AM_CPPFLAGS, '-include $(top_builddir)/config.h')
 AC_CONFIG_MACRO_DIR([m4])
 
 AC_DISABLE_STATIC
 
-# libecryptfs versioning instructions
+# libtse versioning instructions
 #
 # Update the version information only once per public release of
-# ecryptfs-utils. More frequent updates are unnecessary, and only guarantee
+# tse-utils. More frequent updates are unnecessary, and only guarantee
 # that the current interface number gets larger faster.
 #
 # 1. If the library source code has changed at all since the last update, then
-#    increment LIBECRYPTFS_LT_REVISION.
+#    increment LIBTSE_LT_REVISION.
 # 2. If any interfaces have been added, removed, or changed since the last
-#    update, increment LIBECRYPTFS_LT_CURRENT, and set LIBECRYPTFS_LT_REVISION to 0.
+#    update, increment LIBTSE_LT_CURRENT, and set LIBTSE_LT_REVISION to 0.
 # 3. If any interfaces have been added since the last public release, then
-#    increment LIBECRYPTFS_LT_AGE.
+#    increment LIBTSE_LT_AGE.
 # 4. If any interfaces have been removed or changed since the last public
-#    release, then set LIBECRYPTFS_LT_AGE to 0. 
+#    release, then set LIBTSE_LT_AGE to 0. 
 #
 # For more details:
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
-LIBECRYPTFS_LT_CURRENT="1"
-LIBECRYPTFS_LT_REVISION="0"
-LIBECRYPTFS_LT_AGE="0"
-AC_SUBST([LIBECRYPTFS_LT_CURRENT])
-AC_SUBST([LIBECRYPTFS_LT_REVISION])
-AC_SUBST([LIBECRYPTFS_LT_AGE])
+LIBTSE_LT_CURRENT="1"
+LIBTSE_LT_REVISION="0"
+LIBTSE_LT_AGE="0"
+AC_SUBST([LIBTSE_LT_CURRENT])
+AC_SUBST([LIBTSE_LT_REVISION])
+AC_SUBST([LIBTSE_LT_AGE])
 
 AC_ARG_ENABLE(
 	[nss],
@@ -54,7 +54,7 @@ AC_ARG_ENABLE(
 
 AC_ARG_ENABLE(
 	[pywrap],
-	[AS_HELP_STRING([--disable-pywrap],[Disable build of libecryptfs Python wrappers])],
+	[AS_HELP_STRING([--disable-pywrap],[Disable build of libtse Python wrappers])],
 	,
 	[enable_pywrap="detect"]
 )
@@ -155,18 +155,18 @@ AC_ARG_WITH(
 )
 
 AC_ARG_WITH(
-	[ecryptfskeymoddir],
-	[AS_HELP_STRING([--with-ecryptfskeymoddir=PATH],[Specify the directory where key modules are stored])],
+	[tsekeymoddir],
+	[AS_HELP_STRING([--with-tsekeymoddir=PATH],[Specify the directory where key modules are stored])],
 	[
-		ecryptfskeymoddir="${withval}"
-		full_ecryptfskeymoddir="${ecryptfskeymoddir}"
+		tsekeymoddir="${withval}"
+		full_tsekeymoddir="${tsekeymoddir}"
 	],
 	[
-		full_ecryptfskeymoddir=`eval eval eval eval eval echo "${libdir}/ecryptfs" | sed "s#NONE#${prefix}#" | sed "s#NONE#${ac_default_prefix}#"`
-		ecryptfskeymoddir="\$(libdir)/ecryptfs"
+		full_tsekeymoddir=`eval eval eval eval eval echo "${libdir}/tse" | sed "s#NONE#${prefix}#" | sed "s#NONE#${ac_default_prefix}#"`
+		tsekeymoddir="\$(libdir)/tse"
 	]
 )
-AC_DEFINE_UNQUOTED([ECRYPTFS_DEFAULT_KEY_MOD_DIR], ["$full_ecryptfskeymoddir"], "Location of key modules")
+AC_DEFINE_UNQUOTED([TSE_DEFAULT_KEY_MOD_DIR], ["$full_tsekeymoddir"], "Location of key modules")
 
 AC_GNU_SOURCE
 
@@ -212,7 +212,7 @@ if test -z "${KEYUTILS_LIBS}"; then
 		[keyutils],
 		[keyctl_search],
 		[KEYUTILS_LIBS="-lkeyutils"],
-		[AC_MSG_ERROR([eCryptfs userspace tools require Keyutils version 1.0 or higher.
+		[AC_MSG_ERROR([Tse userspace tools require Keyutils version 1.0 or higher.
 You might find the package at:
 http://people.redhat.com/~dhowells/keyutils/
 ])
@@ -364,7 +364,7 @@ else
 	rootsbindir="\$(sbindir)"
 fi
 
-GETTEXT_PACKAGE=ecryptfs-utils
+GETTEXT_PACKAGE=tse-utils
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",
                    [the gettext translation domain])
@@ -384,7 +384,7 @@ AC_SUBST([pamdir])
 AC_SUBST([pamlibdir])
 AC_SUBST([pkgconfigdir])
 AC_SUBST([rootsbindir])
-AC_SUBST([ecryptfskeymoddir])
+AC_SUBST([tsekeymoddir])
 AC_SUBST([GPGME_CFLAGS])
 AC_SUBST([GPGME_LIBS])
 AC_SUBST([CRYPTO_CFLAGS])
@@ -422,18 +422,18 @@ AC_CONFIG_FILES([
 	Makefile
 	doc/Makefile
 	src/Makefile
-	src/libecryptfs/Makefile
+	src/libtse/Makefile
 	src/utils/Makefile
 	src/key_mod/Makefile
 	src/daemon/Makefile
 	src/desktop/Makefile
-	src/desktop/ecryptfs-mount-private.desktop
-	src/desktop/ecryptfs-setup-private.desktop
+	src/desktop/tse-mount-private.desktop
+	src/desktop/tse-setup-private.desktop
 	src/include/Makefile
 	doc/manpage/Makefile
-	src/pam_ecryptfs/Makefile
-	src/libecryptfs/libecryptfs.pc
-	src/libecryptfs-swig/Makefile
+	src/pam_tse/Makefile
+	src/libtse/libtse.pc
+	src/libtse-swig/Makefile
     	tests/Makefile
 	tests/lib/Makefile
 	tests/kernel/Makefile
